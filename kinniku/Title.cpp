@@ -66,7 +66,7 @@ GameSceneResultCode    CTitle::move() {
 
 				bDone = true;
 
-				GameData::kaisuu = 0;
+				
 				m_bFlag = true;
 
 			}
