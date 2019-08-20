@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\kinniku"
+    "\\kinniku",
+    "\\x64\\Debug"
   ],
-  "SelectedNode": "\\kinniku\\kinniku.cpp",
+  "SelectedNode": "\\kinniku\\Selecter.cpp",
   "PreviewInSolutionExplorer": false
 }
