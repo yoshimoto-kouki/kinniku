@@ -149,8 +149,10 @@
   <ItemGroup>
     <ClInclude Include="ddsfunctions.h" />
     <ClInclude Include="GameData.h" />
+    <ClInclude Include="GameOver.h" />
     <ClInclude Include="IGameScene.h" />
     <ClInclude Include="kinniku.h" />
+    <ClInclude Include="PlayGame.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Selecter.h" />
     <ClInclude Include="stdafx.h" />
@@ -162,8 +164,10 @@
   <ItemGroup>
     <ClCompile Include="ddsfunctions.cpp" />
     <ClCompile Include="GameData.cpp" />
+    <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="IGameScene.cpp" />
     <ClCompile Include="kinniku.cpp" />
+    <ClCompile Include="PlayGame.cpp" />
     <ClCompile Include="Selecter.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

@@ -3,6 +3,8 @@
 #include <dwrite.h>
 #include "Selecter.h"
 #include<stdio.h>
+#include "PlayGame.h"
+#include "GameOver.h"
 #include "Title.h"
 
 #include "GameData.h"
@@ -76,7 +78,7 @@ void CSelector::doAnim() {
 		if (rc == GAMESCENE_DEFAULT)
 			break;
 		SAFE_DELETE(m_pScene);
-	//	m_pScene = new CStage(this);
+		m_pScene = new CStage(this);
 		m_eGamePhase = GAMEPHASE_GAME;
 	case    GAMEPHASE_GAME:
 		if (m_pScene != NULL) {
@@ -85,7 +87,7 @@ void CSelector::doAnim() {
 		if (rc == GAMESCENE_DEFAULT)
 			break;
 		SAFE_DELETE(m_pScene);
-	//	m_pScene = new CGameOver(this);
+		m_pScene = new CGameOver(this);
 		m_eGamePhase = GAMEPHASE_GAMEOVER;
 		break;
 	case    GAMEPHASE_GAMEOVER:
