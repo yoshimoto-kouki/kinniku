@@ -35,6 +35,7 @@ __int64     g_i64OldTimer;
 #define FPS   30
 #define INTERVAL   (1.0/FPS)
 
+BOOL    g_bActive = false;
 DWORD    g_dwCount = 0;   //  カウント値
 
 CSelector *g_pSystem = NULL;
@@ -152,21 +153,24 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 			DispatchMessage(&msg);
 		}
 		else {
-			++g_dwCount;
 			double   t;
 			::QueryPerformanceCounter((LARGE_INTEGER*)&i64Tmp);
-			t = (i64Tmp - g_i64OldTimer) * g_dblDenominator;
-			g_i64OldTimer = i64Tmp;
-			g_dblFrame += t;
+			if (!g_bActive) {
+				g_i64OldTimer = i64Tmp;
+			}
+			else {
+				t = (i64Tmp - g_i64OldTimer) * g_dblDenominator;
+				g_i64OldTimer = i64Tmp;
+				g_dblFrame += t;
+				if (g_dblFrame >= INTERVAL) {
+					int   c = (int)(g_dblFrame / INTERVAL);
+					g_dblFrame -= INTERVAL * c;
+					if (g_pSystem)
+						g_pSystem->doAnim();
 
-			if (g_dblFrame >= INTERVAL) {
-				int   c = (int)(g_dblFrame / INTERVAL);
-				g_dblFrame -= INTERVAL * c;
-				if (g_pSystem)
-					g_pSystem->doAnim();
-
-				++g_dwCount;
-				InvalidateRect(hWnd, NULL, false);  //  書き換えの実行
+					++g_dwCount;
+					InvalidateRect(hWnd, NULL, false);  //  書き換えの実行
+				}
 			}
 		}
 	}
@@ -186,7 +190,12 @@ eExit:
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message) {
+
+	case WM_ACTIVATEAPP:
+		g_bActive = (wParam != 0);
+		return DefWindowProc(hWnd, message, wParam, lParam);
 	case WM_PAINT:
+
 		if (g_pRenderTarget) {
 			static D2D1::ColorF bg = D2D1::ColorF(36 / 255.0f, 120 / 255.0f, 120 / 255.0f);
 

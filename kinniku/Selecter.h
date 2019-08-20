@@ -43,6 +43,7 @@ protected:
 	ID2D1RenderTarget   *m_pRenderTarget;
 	IDWriteTextFormat   *m_pTextFormat;
 	ID2D1SolidColorBrush *m_pWhiteBrush;
+	ID2D1SolidColorBrush *pBrush;
 	INT          m_iCount;
 	INT          m_iWait;
 	INT          m_iCurrent;
