@@ -68,7 +68,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 	hWnd =
 		CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, wcex.lpszClassName, _T("Windows05"),
 			WS_VISIBLE | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX,
-			CW_USEDEFAULT, 0, 852, 480, NULL, NULL, hInstance, NULL);
+			CW_USEDEFAULT, 0, 1920, 1080, NULL, NULL, hInstance, NULL);
 
 	if (!hWnd) {
 		MessageBox(NULL, _T("Couldn't create a window.\n"), _T("initialization failure"), MB_OK);
@@ -80,8 +80,8 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 	GetWindowRect(hWnd, &bounds);
 	GetClientRect(hWnd, &client);
 	MoveWindow(hWnd, bounds.left, bounds.top,
-		852 * 2 - client.right,
-		480 * 2 - client.bottom,
+		1920 * 2 - client.right,
+		1080 * 2 - client.bottom,
 		false);
 
 	ShowWindow(hWnd, nCmdShow);

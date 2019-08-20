@@ -115,8 +115,8 @@ void    CTitle::draw(ID2D1RenderTarget *pRenderTarget) {
 
 	screenSize = pRenderTarget->GetSize();
 	textureSize = m_pImage->GetSize();
-	rc.left = 230;
-	rc.top = 290;
+	rc.left = 70+(screenSize.width - textureSize.width) / 2;
+	rc.top = 190+(screenSize.height - textureSize.height) / 2;
 	rc.right = rc.left + textureSize.width;
 	rc.bottom = rc.top + textureSize.height;
 
