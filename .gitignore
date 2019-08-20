@@ -3,3 +3,11 @@
 ################################################################################
 
 /.vs/kinniku/v15/Browse.VC.opendb
+#
+*.suo
+*.user
+*.userosscache
+*.sln.docstaters
+#Directory
+Debug/
+.vs/
