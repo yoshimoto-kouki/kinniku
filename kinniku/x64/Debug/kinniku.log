@@ -1,5 +1,3 @@
-﻿  PlayGame.cpp
-c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\playgame.cpp(106): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
-  Selecter.cpp
-  コードを生成中...
-  kinniku.vcxproj -> C:\Users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\x64\Debug\kinniku.exe
+﻿  Selecter.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\selecter.cpp(122): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+  kinniku.vcxproj -> C:\Users\rtamura\source\repos\kinniku\x64\Debug\kinniku.exe

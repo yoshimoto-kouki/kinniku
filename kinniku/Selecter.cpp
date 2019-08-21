@@ -6,6 +6,7 @@
 #include "PlayGame.h"
 #include "GameOver.h"
 #include "Title.h"
+#include <directxmath.h>
 
 #include "GameData.h"
 #pragma comment(lib,"dwrite.lib")  //!< 文字表示に使用
@@ -18,7 +19,7 @@ CSelector::CSelector(ID2D1RenderTarget *pRenderTarget)
 	m_eGamePhase = GamePhase::GAMEPHASE_INIT;
 	m_pScene = NULL;
 	m_pWhiteBrush = NULL;
-
+	pBrush = NULL;
 	//  Direct Write 初期化
 	{
 		HRESULT hr;
@@ -41,22 +42,31 @@ CSelector::CSelector(ID2D1RenderTarget *pRenderTarget)
 			&m_pTextFormat
 		);
 
+
 		SAFE_RELEASE(pFactory);
 	}
 	//  塗りつぶし用ブラシの生成
 	if (FAILED(m_pRenderTarget->CreateSolidColorBrush(
 		D2D1::ColorF(D2D1::ColorF::White),
 		&m_pWhiteBrush
-
 	))) {
 		SAFE_RELEASE(m_pWhiteBrush);
 	}
+	//  画面分割用ブラシの生成-----------
+	if (FAILED(m_pRenderTarget->CreateSolidColorBrush(
+		D2D1::ColorF(D2D1::ColorF::Yellow),
+		&pBrush
+	))) {
+		SAFE_RELEASE(pBrush);
+	}
+	//-----------------------------------
 }
 
 CSelector::~CSelector(void)
 {
 	SAFE_DELETE(m_pScene);
 	SAFE_RELEASE(m_pWhiteBrush);
+	SAFE_RELEASE(pBrush);
 	SAFE_RELEASE(m_pRenderTarget);
 	SAFE_RELEASE(m_pTextFormat);
 }
@@ -102,16 +112,24 @@ void CSelector::doAnim() {
 	
 }
 
+
 void CSelector::doDraw(ID2D1RenderTarget *pRenderTarget) {
+	D2D1_SIZE_F size;
+	size = pRenderTarget->GetSize();
+		//画面分割7割-----------------------
+	if (m_eGamePhase == GAMEPHASE_GAME) {
+		D2D1_RECT_F rec;
+		rec.left = size.width*0.7;
+		rec.right = 0;
+		rec.top = size.height;
+		rec.bottom = 0;
+		pRenderTarget->FillRectangle(&rec, pBrush);
+	}
+	//----------------------------------
 	TCHAR    str[256];
-
-
 	if (m_pScene != NULL) {
 		m_pScene->draw(pRenderTarget);
 	}
-	D2D1_SIZE_F size;
-	size = pRenderTarget->GetSize();
-
 
 	_stprintf_s(str, _countof(str), _T("KINNIKU"));
 	D2D1_RECT_F     src;
@@ -121,7 +139,6 @@ void CSelector::doDraw(ID2D1RenderTarget *pRenderTarget) {
 	src.bottom = 0;
 	if (m_pWhiteBrush) {
 		pRenderTarget->DrawText(str, (DWORD)_tcslen(str), m_pTextFormat, &src, m_pWhiteBrush);//名前
-
 		//pRenderTarget->DrawText(mozi, (DWORD)_tcslen(mozi), m_pTextFormat, &rc, m_pWhiteBrush);
 	}
 

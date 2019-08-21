@@ -91,16 +91,13 @@ GameSceneResultCode    CStage::move() {
 	mFrame = (mFrame + 1) % ANIM_FRAME;
 	return GameSceneResultCode::GAMESCENE_DEFAULT;
 }
+
 void    CStage::draw(ID2D1RenderTarget *pRenderTarget) {
 	D2D1_RECT_F rc, src;
 	D2D1_SIZE_F screenSize, textureSize;
 	screenSize = pRenderTarget->GetSize();
 	textureSize = m_pImage->GetSize();
-
 	float tx, range = 192.0f;
-
-
-
 	tx = 0;
 	if (mFrame > ANIM_FRAME - 16) {
 		tx = (mFrame - (ANIM_FRAME - 16)) >> 1;    //  ‚Ì‚±‚è 16ƒtƒŒ[ƒ€‚ğ‚Q‚ÅŠ„‚é
@@ -110,17 +107,11 @@ void    CStage::draw(ID2D1RenderTarget *pRenderTarget) {
 			if (tx < 0)
 				tx = 0;
 		}
-
 	}
-
-
 	rc.left = 0 + mX;
 	rc.top = 0 + mX;
 	rc.right = rc.left + 64 + mX;
 	rc.bottom = rc.top + 64 + mX;
-
-
-
 
 	src.left = tx;
 	src.top = 0;
