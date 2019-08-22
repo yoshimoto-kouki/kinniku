@@ -7,12 +7,13 @@
 #include "GameData.h"
 #include  <windows.h>
 #include  <mmsystem.h>
+ 
 #pragma comment(lib,"winmm.lib")
 
 
 CStage::CStage(CSelector *pSystem)
 {
-	ID2D1RenderTarget *pTarget;
+	ID2D1RenderTarget *pTarget,*pTarget2;
 	m_iFadeTimer = 0;
 	m_ePhase = StagePhase::STAGE_INIT;
 	m_pImage = NULL;
@@ -34,7 +35,55 @@ CStage::CStage(CSelector *pSystem)
 		pTarget->Release();
 		pTarget = NULL;
 	}
+	m_bFlag = true;
+	pTarget2 = pSystem->GetRenderTaget();
+	if (pTarget2) {
+		CTextureLoader::CreateD2D1BitmapFromFile(pTarget2, _T("res\\tama.png"), &m_pImage2);
+		pTarget2->CreateSolidColorBrush(D2D1::ColorF(0.0f, 0.0f, 0.0f), &m_pBlack);
+		pTarget2->Release();
+		pTarget2 = NULL;
+	}
 }
+class PLAYER {
+private:
+	//x座標,y座標
+	double x, y;
+
+	//画像幅
+	int width, height;
+
+	//グラフィックハンドル格納用配列
+	int gh[12];
+
+
+	//移動係数
+	float move;
+
+	//横方向と縦方向のカウント数。
+	int xcount, ycount;
+	//添字用変数
+	int ix, iy, result;
+
+	//生きてるかどうかのフラグ
+	bool life;
+
+	//弾
+	SHOT shot[PSHOT_NUM];
+
+	//カウント
+	int count;
+
+private:
+	void Move();
+	void Draw();
+	void Shot();
+
+public:
+	PLAYER();
+	void All();
+
+};
+
 
 
 CStage::~CStage()
@@ -47,27 +96,31 @@ GameSceneResultCode    CStage::move() {
 	case STAGE_INIT:
 		m_iTimer = 0;
 		m_ePhase = STAGE_RUN;
+		
 	case STAGE_RUN:
 	{
 		bool bDone = false;
 		++m_iTimer;
 
 		if (GetAsyncKeyState(VK_SPACE)) {
-			if (!m_bFlag) {
-				mX += 2;
-				sndPlaySound(L"test.wav", SND_ASYNC);
-
-				renda++;
-				m_bFlag = true;
-
+			if (!GameData::shot) {
+				
+				GameData::shot = true;
+				GameData::tamax = 430;
+				GameData::tamay = 700;
 
 			}
+			break;
 		}
-		else {
+		/*else {
 			m_bFlag = false;
+		}*/
+		if (GameData::shot) {
+			GameData::tamay -= 16;
+			if (GameData::tamay = 0)m_bFlag = false;
 		}
 
-		if (m_iTimer > 300) {
+ 		if (m_iTimer > 300) {
 
 			bDone = true;
 		}
@@ -93,7 +146,7 @@ GameSceneResultCode    CStage::move() {
 }
 
 void    CStage::draw(ID2D1RenderTarget *pRenderTarget) {
-	D2D1_RECT_F rc, src;
+	D2D1_RECT_F rc, src,tama;
 	D2D1_SIZE_F screenSize, textureSize;
 	screenSize = pRenderTarget->GetSize();
 	textureSize = m_pImage->GetSize();
@@ -113,13 +166,27 @@ void    CStage::draw(ID2D1RenderTarget *pRenderTarget) {
 	rc.right = rc.left + 64 ;
 	rc.bottom = rc.top + 64 ;
 
+
 	src.left = tx;
 	src.top = 0;
 	src.right = src.left + 64;
 	src.bottom = src.top + 64;
 
+	tama.left = 430;
+	tama.top = 700;
+	tama.right = rc.left + 64;
+	tama.bottom = rc.top + 64;
+	if (GameData::shot) {
+		tama.left = GameData::tamax;
+		tama.top = GameData::tamay;
+		tama.right = rc.left + 64;
+		tama.bottom = rc.top + 64;
+	}
 
 	pRenderTarget->DrawBitmap(m_pImage, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, src);
+	pRenderTarget->DrawBitmap(m_pImage2, tama, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR);
+
+
 	switch (m_ePhase) {
 	case STAGE_FADE:
 	case STAGE_DONE:

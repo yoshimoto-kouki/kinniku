@@ -32,6 +32,6 @@ c:\users\rtamura\source\repos\kinniku\kinniku\kinniku.cpp(185): warning C4244: '
   kinniku.vcxproj -> C:\Users\rtamura\source\repos\kinniku\x64\Debug\kinniku.exe
 =======
 ﻿  PlayGame.cpp
-c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\playgame.cpp(103): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\playgame.cpp(156): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
   kinniku.vcxproj -> C:\Users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\x64\Debug\kinniku.exe
 >>>>>>> origin/master
