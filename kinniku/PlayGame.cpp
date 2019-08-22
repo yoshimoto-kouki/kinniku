@@ -7,17 +7,20 @@
 #include "GameData.h"
 #include  <windows.h>
 #include  <mmsystem.h>
+#include "ScoreUI.h"
+#include "BG.h"
  
 #pragma comment(lib,"winmm.lib")
 
 
 CStage::CStage(CSelector *pSystem)
 {
-	ID2D1RenderTarget *pTarget,*pTarget2;
+	ID2D1RenderTarget *pTarget,*pTarget2,*pRenderTarget;
 	m_iFadeTimer = 0;
+	m_pSystem = pSystem;
+	pRenderTarget = m_pSystem->GetRenderTaget();
 	m_ePhase = StagePhase::STAGE_INIT;
 	m_pImage = NULL;
-	m_pSystem = pSystem;
 	m_pBlack = NULL;
 	mX = 0;
 	mY = 100;
@@ -25,7 +28,11 @@ CStage::CStage(CSelector *pSystem)
 	mTimer = 0;
 	renda = 0;
 	int count = 0;
-
+	m_pBG = new CBG(pRenderTarget);//背景
+	m_pScore = new CScoreUI(pRenderTarget);//UI
+	if (m_pScore) {//スコア用
+		m_pScore->SetScore(0);
+	}
 
 	m_bFlag = true;
 	pTarget = pSystem->GetRenderTaget();
@@ -43,6 +50,7 @@ CStage::CStage(CSelector *pSystem)
 		pTarget2->Release();
 		pTarget2 = NULL;
 	}
+	SAFE_RELEASE(pRenderTarget);
 }
 class PLAYER {
 private:
@@ -89,8 +97,12 @@ public:
 CStage::~CStage()
 {
 	SAFE_RELEASE(m_pImage);
+	SAFE_DELETE(m_pBG);
+	SAFE_DELETE(m_pScore);
 }
-
+/*********
+アニメーション処理
+***********/
 GameSceneResultCode    CStage::move() {
 	switch (m_ePhase) {
 	case STAGE_INIT:
@@ -108,7 +120,10 @@ GameSceneResultCode    CStage::move() {
 				GameData::shot = true;
 				GameData::tamax = 430;
 				GameData::tamay = 700;
-
+				//**得点加算用***************
+				if (m_pScore)
+					m_pScore->AddScore(5);
+				//**************************
 			}
 			break;
 		}
@@ -131,6 +146,10 @@ GameSceneResultCode    CStage::move() {
 			;
 			m_ePhase = STAGE_FADE;
 		}
+		//------------------------------------------------
+		if (m_pScore) //スコア用
+			m_pScore->move();    //  一応呼んでおく
+		//------------------------------------------------
 		break;
 	}
 	case STAGE_FADE:
@@ -144,7 +163,9 @@ GameSceneResultCode    CStage::move() {
 	mFrame = (mFrame + 1) % ANIM_FRAME;
 	return GameSceneResultCode::GAMESCENE_DEFAULT;
 }
-
+/****************
+レンタリング(描画)
+****************/
 void    CStage::draw(ID2D1RenderTarget *pRenderTarget) {
 	D2D1_RECT_F rc, src,tama;
 	D2D1_SIZE_F screenSize, textureSize;
@@ -182,7 +203,12 @@ void    CStage::draw(ID2D1RenderTarget *pRenderTarget) {
 		tama.right = rc.left + 64;
 		tama.bottom = rc.top + 64;
 	}
-
+	//-------------------------------------------
+	if (m_pBG)//背景用
+		m_pBG->draw(pRenderTarget);
+	if (m_pScore)//スコア用
+		m_pScore->draw(pRenderTarget, 1100.0f, 10.0f, 32.0f);
+	//----------------------------------------------
 	pRenderTarget->DrawBitmap(m_pImage, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, src);
 	pRenderTarget->DrawBitmap(m_pImage2, tama, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR);
 

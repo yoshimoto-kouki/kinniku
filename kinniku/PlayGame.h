@@ -11,6 +11,8 @@ enum StagePhase {
 	STAGE_DONE = 3
 };
 class CSelector;
+class CScoreUI;
+class CBG;
 struct ID2D1Bitmap;
 struct ID2D1SolidColorBrush;
  
@@ -26,6 +28,7 @@ int gh;//グラフィックハンドル
 	
 int width, height;//画像の幅と高さ
 };
+
 class CStage : public IGameScene
 {
 public:
@@ -38,6 +41,8 @@ public:
 	void SetPos(int x, int y);
 protected:
 	CSelector *m_pSystem;
+	CScoreUI *m_pScore;//UI
+	CBG			*m_pBG;//BG
 	StagePhase m_ePhase;
 	ID2D1Bitmap *m_pImage2;
 	ID2D1Bitmap *m_pImage;
