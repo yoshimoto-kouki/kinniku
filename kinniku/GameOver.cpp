@@ -68,7 +68,7 @@ GameSceneResultCode    CGameOver::move() {
 	}
 	case GAMEOVER_FADE:
 		m_iFadeTimer++;
-		if (m_iFadeTimer < 30)
+		if (m_iFadeTimer < 40)
 			break;
 		m_ePhase = GAMEOVER_DONE;
 	case GAMEOVER_DONE:
