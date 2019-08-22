@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  GameData.cpp
   GameOver.cpp
 c:\users\rtamura\source\repos\kinniku\kinniku\gameover.cpp(81): warning C4101: 'prc': ローカル変数は 1 度も使われていません。
@@ -29,3 +30,8 @@ c:\users\rtamura\source\repos\kinniku\kinniku\kinniku.cpp(185): warning C4244: '
   コードを生成中...
   LINK : 前回のインクリメンタル リンクで C:\Users\rtamura\source\repos\kinniku\x64\Debug\kinniku.exe が見つからなかったか、ビルドされませんでした。フル リンクを行います。
   kinniku.vcxproj -> C:\Users\rtamura\source\repos\kinniku\x64\Debug\kinniku.exe
+=======
+﻿  PlayGame.cpp
+c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\playgame.cpp(103): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+  kinniku.vcxproj -> C:\Users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\x64\Debug\kinniku.exe
+>>>>>>> origin/master

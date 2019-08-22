@@ -108,10 +108,10 @@ void    CStage::draw(ID2D1RenderTarget *pRenderTarget) {
 				tx = 0;
 		}
 	}
-	rc.left = 0 + mX;
-	rc.top = 0 + mX;
-	rc.right = rc.left + 64 + mX;
-	rc.bottom = rc.top + 64 + mX;
+	rc.left = 400;
+	rc.top = 750;
+	rc.right = rc.left + 64 ;
+	rc.bottom = rc.top + 64 ;
 
 	src.left = tx;
 	src.top = 0;
