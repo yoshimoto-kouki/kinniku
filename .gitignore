@@ -8,6 +8,8 @@
 *.user
 *.userosscache
 *.sln.docstaters
+*.sqlite
 #Directory
 Debug/
 .vs/
+v15/
