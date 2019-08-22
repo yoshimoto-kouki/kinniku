@@ -10,6 +10,6 @@
 *.sln.docstaters
 *.sqlite
 #Directory
-Debug/
-.vs/
-v15/
+*.Debug/
+*.vs/
+*.v15/
