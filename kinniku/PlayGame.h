@@ -2,6 +2,11 @@
 #ifndef __IGAMESCENE_H__
 #include "IGameScene.h"
 #endif
+#ifndef __IGAMEOBJECT_H__
+#include "IGameObject.h"
+#endif
+
+#include "Selecter.h"
 #define PSHOT_NUM  20
 
 enum StagePhase {
@@ -13,50 +18,44 @@ enum StagePhase {
 class CSelector;
 class CScoreUI;
 class CBG;
+class CPlayer;
 struct ID2D1Bitmap;
 struct ID2D1SolidColorBrush;
  
-struct SHOT {
-	
-bool flag;//弾が発射中かどうか
-	
-double x;//x座標
-	
-double y;//y座標
-	
-int gh;//グラフィックハンドル
-	
-int width, height;//画像の幅と高さ
-};
+namespace std {
+	template<class _Ty> class allocator;
+	template <class _Ty, class _Alloc = allocator<_Ty>>class list;
+}
 
 class CStage : public IGameScene
 {
 public:
-	CStage(CSelector *pSystem);
-	virtual ~CStage();
-	
-	virtual GameSceneResultCode    move() override;
-	virtual void    draw(ID2D1RenderTarget *pRenderTarget) override;
-	void Draw(ID2D1RenderTarget *pTarget);
-	void SetPos(int x, int y);
+	CStage(CSelector *pv);
+	virtual ~CStage(void);
+	virtual GameSceneResultCode  move() override; //  シーンのアニメート
+	virtual void draw(ID2D1RenderTarget *pRenderTarget) override; //  シーンの描画
+	virtual void reset();
+	virtual void AddTama(IGameObject *pObj);//tama
+	virtual CPlayer *GetPlayer();
+	ID2D1RenderTarget *GetRenderTarget();
 protected:
-	CSelector *m_pSystem;
+	CSelector * m_pSystem;
+	//BOOL        m_bGameOver;
 	CScoreUI *m_pScore;//UI
 	CBG			*m_pBG;//BG
-	StagePhase m_ePhase;
-	ID2D1Bitmap *m_pImage2;
-	ID2D1Bitmap *m_pImage;
-	ID2D1SolidColorBrush *m_pBlack;
+	CPlayer     *m_pPlayer;//player
+
+	StagePhase m_ePhase;//シーン用
+	ID2D1SolidColorBrush *m_pBlack;//フェードアウト用?
 	INT     m_iTimer = 0;
 	INT		m_iFadeTimer;
 	
-	INT renda;
 	INT	m_bFlag = true;
-	float mX, mY;
-	INT mPhase;//状態変数
 	INT mTimer;//タイマー
 	INT mFrame;//アニメーションフレーム
 	static const int ANIM_FRAME = 60;
 
+	std::list<IGameObject*> *m_pTamas;//tama
 };
+
 

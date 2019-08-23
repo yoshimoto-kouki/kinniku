@@ -114,14 +114,14 @@ void CSelector::doAnim() {
 
 
 void CSelector::doDraw(ID2D1RenderTarget *pRenderTarget) {
-	D2D1_SIZE_F size;
-	size = pRenderTarget->GetSize();
+	D2D1_SIZE_F Ssize;
+	Ssize = pRenderTarget->GetSize();
 		//‰æ–Ê•ªŠ„7Š„-----------------------
 	if (m_eGamePhase == GAMEPHASE_GAME) {
 		D2D1_RECT_F rec;
-		rec.left = size.width*0.7;
+		rec.left = Ssize.width*0.7;
 		rec.right = 0;
-		rec.top = size.height;
+		rec.top = Ssize.height;
 		rec.bottom = 0;
 		pRenderTarget->FillRectangle(&rec, pBrush);
 	}
@@ -133,9 +133,9 @@ void CSelector::doDraw(ID2D1RenderTarget *pRenderTarget) {
 
 	_stprintf_s(str, _countof(str), _T("KINNIKU"));
 	D2D1_RECT_F     src;
-	src.left = size.width;
+	src.left = Ssize.width;
 	src.right = 0;
-	src.top = size.height;
+	src.top = Ssize.height;
 	src.bottom = 0;
 	if (m_pWhiteBrush) {
 		pRenderTarget->DrawText(str, (DWORD)_tcslen(str), m_pTextFormat, &src, m_pWhiteBrush);//–¼‘O

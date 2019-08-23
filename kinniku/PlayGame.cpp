@@ -1,39 +1,39 @@
 #include "stdafx.h"
 #include <d2d1.h>
+#include <list>
 #include <dwrite.h>
-#include "PlayGame.h"
+#include "PlayGame.h"//Stage
 #include "TextureLoader.h"
-#include "Selecter.h"
 #include "GameData.h"
 #include  <windows.h>
 #include  <mmsystem.h>
 #include "ScoreUI.h"
 #include "BG.h"
+#include "Player.h"
+#include "tama.h"
  
 #pragma comment(lib,"winmm.lib")
 
 
 CStage::CStage(CSelector *pSystem)
 {
-	ID2D1RenderTarget *pTarget,*pTarget2,*pRenderTarget;
 	m_iFadeTimer = 0;
-	m_pSystem = pSystem;
-	pRenderTarget = m_pSystem->GetRenderTaget();
-	m_ePhase = StagePhase::STAGE_INIT;
-	m_pImage = NULL;
 	m_pBlack = NULL;
-	mX = 0;
-	mY = 100;
-	mPhase = 0;
-	mTimer = 0;
-	renda = 0;
-	int count = 0;
-	m_pBG = new CBG(pRenderTarget);//背景
-	m_pScore = new CScoreUI(pRenderTarget);//UI
-	if (m_pScore) {//スコア用
-		m_pScore->SetScore(0);
-	}
+	m_pSystem = pSystem;
+	ID2D1RenderTarget *pRenderTarget;
+	pRenderTarget = m_pSystem->GetRenderTaget();
+	if (pRenderTarget) {
+		m_pBG = new CBG(pRenderTarget);//背景
+		m_pScore = new CScoreUI(pRenderTarget);//UI
+		m_pPlayer = new CPlayer(this);
 
+		if (m_pScore) {//スコア用
+			m_pScore->SetScore(0);
+		}
+		CTama::Restore(pRenderTarget);//tama用
+		m_pTamas = new std::list<IGameObject*>();
+	}
+	/*
 	m_bFlag = true;
 	pTarget = pSystem->GetRenderTaget();
 	if (pTarget) {
@@ -50,8 +50,10 @@ CStage::CStage(CSelector *pSystem)
 		pTarget2->Release();
 		pTarget2 = NULL;
 	}
+	*/
 	SAFE_RELEASE(pRenderTarget);
 }
+/*
 class PLAYER {
 private:
 	//x座標,y座標
@@ -91,15 +93,31 @@ public:
 	void All();
 
 };
-
+*/
 
 
 CStage::~CStage()
 {
-	SAFE_RELEASE(m_pImage);
-	SAFE_DELETE(m_pBG);
-	SAFE_DELETE(m_pScore);
+	//  全ショットの強制削除
+	if (m_pTamas) {
+		std::list<IGameObject*>::iterator it = m_pTamas->begin();
+		while (it != m_pTamas->end()) {
+			SAFE_DELETE(*it);
+			it = m_pTamas->erase(it);
+		}
+		delete m_pTamas;
+		m_pTamas = NULL;
+	}
+	CTama::Finalize();
+	SAFE_DELETE(m_pBG);//BG
+	SAFE_DELETE(m_pScore);//UI
+	SAFE_DELETE(m_pPlayer);//player
+	CTextureLoader::Destroy();//TextureLoder解放
 }
+/*********
+リセット
+**********/
+void CStage::reset() {}
 /*********
 アニメーション処理
 ***********/
@@ -113,42 +131,37 @@ GameSceneResultCode    CStage::move() {
 	{
 		bool bDone = false;
 		++m_iTimer;
-
-		if (GetAsyncKeyState(VK_SPACE)) {
-			if (!GameData::shot) {
-				
-				GameData::shot = true;
-				GameData::tamax = 430;
-				GameData::tamay = 700;
-				//**得点加算用***************
-				if (m_pScore)
-					m_pScore->AddScore(5);
-				//**************************
-			}
-			break;
-		}
-		/*else {
-			m_bFlag = false;
-		}*/
-		if (GameData::shot) {
-			GameData::tamay -= 16;
-			if (GameData::tamay = 0)m_bFlag = false;
-		}
-
- 		if (m_iTimer > 300) {
-
+		if (m_iTimer > 300)
 			bDone = true;
-		}
-
 		if (bDone) {
 			m_iFadeTimer = 0;
-			renda = CSelector::a;
-			;
 			m_ePhase = STAGE_FADE;
 		}
 		//------------------------------------------------
 		if (m_pScore) //スコア用
 			m_pScore->move();    //  一応呼んでおく
+
+		if (m_pTamas) {//  ショットの処理
+			std::list<IGameObject*>::iterator it = m_pTamas->begin();
+			while (it != m_pTamas->end()) {
+				if ((*it)->move()) {
+					++it;
+				}
+				else {
+					SAFE_DELETE(*it);
+					it = m_pTamas->erase(it);
+				}
+			}
+		}
+		if (m_pPlayer)//Player
+			m_pPlayer->move();
+		//**得点加算用***************
+		if (GameData::TreeConplete) {
+			GameData::TreeConplete = false;
+			if (m_pScore)
+				m_pScore->AddScore(5);
+		}
+		//**************************
 		//------------------------------------------------
 		break;
 	}
@@ -167,52 +180,30 @@ GameSceneResultCode    CStage::move() {
 レンタリング(描画)
 ****************/
 void    CStage::draw(ID2D1RenderTarget *pRenderTarget) {
-	D2D1_RECT_F rc, src,tama;
-	D2D1_SIZE_F screenSize, textureSize;
-	screenSize = pRenderTarget->GetSize();
-	textureSize = m_pImage->GetSize();
-	float tx, range = 192.0f;
-	tx = 0;
-	if (mFrame > ANIM_FRAME - 16) {
-		tx = (mFrame - (ANIM_FRAME - 16)) >> 1;    //  のこり 16フレームを２で割る
-		tx *= 64.0f;
-		if (tx > range) {
-			tx = (range * 2.0f) - tx;
-			if (tx < 0)
-				tx = 0;
-		}
-	}
-	rc.left = 400;
-	rc.top = 750;
-	rc.right = rc.left + 64 ;
-	rc.bottom = rc.top + 64 ;
-
-
-	src.left = tx;
-	src.top = 0;
-	src.right = src.left + 64;
-	src.bottom = src.top + 64;
-
-	tama.left = 430;
-	tama.top = 700;
-	tama.right = rc.left + 64;
-	tama.bottom = rc.top + 64;
-	if (GameData::shot) {
-		tama.left = GameData::tamax;
-		tama.top = GameData::tamay;
-		tama.right = rc.left + 64;
-		tama.bottom = rc.top + 64;
-	}
 	//-------------------------------------------
 	if (m_pBG)//背景用
 		m_pBG->draw(pRenderTarget);
 	if (m_pScore)//スコア用
 		m_pScore->draw(pRenderTarget, 1100.0f, 10.0f, 32.0f);
+	if (m_pPlayer)//player
+		m_pPlayer->draw(pRenderTarget);
+	if (m_pTamas) {//  ショットの処理
+		std::list<IGameObject*>::iterator it = m_pTamas->begin();
+		while (it != m_pTamas->end()) {
+			(*it++)->draw(pRenderTarget);
+		}
+	}
 	//----------------------------------------------
-	pRenderTarget->DrawBitmap(m_pImage, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, src);
-	pRenderTarget->DrawBitmap(m_pImage2, tama, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR);
-
-
+	
+	D2D1_RECT_F rc, src;
+	D2D1_SIZE_F screenSize, textureSize;
+	screenSize = pRenderTarget->GetSize();
+	
+	rc.left = 0;
+	rc.top = 0;
+	rc.right = rc.left + screenSize.width;
+	rc.bottom = rc.top + screenSize.height;
+	
 	switch (m_ePhase) {
 	case STAGE_FADE:
 	case STAGE_DONE:
@@ -226,8 +217,41 @@ void    CStage::draw(ID2D1RenderTarget *pRenderTarget) {
 		src.right = src.left + 64;
 		src.bottom = src.top + 64;
 
+		//ここどうなってるのか聞く
 		m_pBlack->SetOpacity(m_iFadeTimer / 30.0f);
 		pRenderTarget->FillRectangle(rc, m_pBlack);
 	}
 
+}
+/***********************************************
+*@method
+*   ID2D1RenderTarget を取得して返す、
+*    このメソッドでRenderTarget を受け取ったら
+*   使用終了後かならずRelease すること
+*@return ID2D1RenderTarget オブジェクト
+**********************************************/
+ID2D1RenderTarget *CStage::GetRenderTarget() {
+	ID2D1RenderTarget *result = NULL;
+	if (m_pSystem) {
+		result = m_pSystem->GetRenderTaget();
+	}
+	return result;
+}
+/***********************************************
+*@method
+*    生成されたショットをリンクリストに登録する
+*@param in pObj  新しい弾のオブジェクト
+************************************************/
+void CStage::AddTama(IGameObject *pObj) {
+	if (m_pTamas) {
+		m_pTamas->push_back(pObj);
+	}
+}
+/***********************************************
+*@method
+*    プレイヤーのインスタンスを返す
+*@return  CPlayer オブジェクト
+************************************************/
+CPlayer *CStage::GetPlayer() {
+	return m_pPlayer;
 }

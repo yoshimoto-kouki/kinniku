@@ -6,7 +6,8 @@ public:
 	static float tamay;
 	static bool shot;
 
-
+	//このフラグで得点加算。複数種必要な場合はbool->intにすること
+	static bool TreeConplete;
 
 };
 
