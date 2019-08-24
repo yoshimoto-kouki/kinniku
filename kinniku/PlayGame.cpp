@@ -33,67 +33,9 @@ CStage::CStage(CSelector *pSystem)
 		CTama::Restore(pRenderTarget);//tama用
 		m_pTamas = new std::list<IGameObject*>();
 	}
-	/*
-	m_bFlag = true;
-	pTarget = pSystem->GetRenderTaget();
-	if (pTarget) {
-		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\smile2.tga"), &m_pImage);
-		pTarget->CreateSolidColorBrush(D2D1::ColorF(0.0f, 0.0f, 0.0f), &m_pBlack);
-		pTarget->Release();
-		pTarget = NULL;
-	}
-	m_bFlag = true;
-	pTarget2 = pSystem->GetRenderTaget();
-	if (pTarget2) {
-		CTextureLoader::CreateD2D1BitmapFromFile(pTarget2, _T("res\\tama.png"), &m_pImage2);
-		pTarget2->CreateSolidColorBrush(D2D1::ColorF(0.0f, 0.0f, 0.0f), &m_pBlack);
-		pTarget2->Release();
-		pTarget2 = NULL;
-	}
-	*/
 	SAFE_RELEASE(pRenderTarget);
 }
-/*
-class PLAYER {
-private:
-	//x座標,y座標
-	double x, y;
 
-	//画像幅
-	int width, height;
-
-	//グラフィックハンドル格納用配列
-	int gh[12];
-
-
-	//移動係数
-	float move;
-
-	//横方向と縦方向のカウント数。
-	int xcount, ycount;
-	//添字用変数
-	int ix, iy, result;
-
-	//生きてるかどうかのフラグ
-	bool life;
-
-	//弾
-	SHOT shot[PSHOT_NUM];
-
-	//カウント
-	int count;
-
-private:
-	void Move();
-	void Draw();
-	void Shot();
-
-public:
-	PLAYER();
-	void All();
-
-};
-*/
 
 
 CStage::~CStage()
