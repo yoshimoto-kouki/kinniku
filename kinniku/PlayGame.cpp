@@ -17,6 +17,7 @@
 
 CStage::CStage(CSelector *pSystem)
 {
+	ID2D1RenderTarget *pTarget;
 	m_iFadeTimer = 0;
 	m_pBlack = NULL;
 	m_pSystem = pSystem;
@@ -26,7 +27,14 @@ CStage::CStage(CSelector *pSystem)
 		m_pBG = new CBG(pRenderTarget);//背景
 		m_pScore = new CScoreUI(pRenderTarget);//UI
 		m_pPlayer = new CPlayer(this);
-
+		pTarget = pSystem->GetRenderTaget();
+		
+		
+		if (pTarget) { //ここの部分がないとフェードアウトしない
+			pTarget->CreateSolidColorBrush(D2D1::ColorF(0.0f, 0.0f, 0.0f), &m_pBlack);
+			pTarget->Release();
+			pTarget = NULL;
+		}
 		if (m_pScore) {//スコア用
 			m_pScore->SetScore(0);
 		}
@@ -159,7 +167,7 @@ void    CStage::draw(ID2D1RenderTarget *pRenderTarget) {
 		src.right = src.left + 64;
 		src.bottom = src.top + 64;
 
-		//ここどうなってるのか聞く
+		//ここどうなってるのか聞く 　←解決しました。pTargetがなかったのでm_pBlockになにも入ってなかったのが原因です
 		m_pBlack->SetOpacity(m_iFadeTimer / 30.0f);
 		pRenderTarget->FillRectangle(rc, m_pBlack);
 	}

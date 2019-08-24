@@ -1,3 +1,3 @@
-﻿  Player.cpp
-c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\player.cpp(97): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+﻿  PlayGame.cpp
+c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\playgame.cpp(147): warning C4101: 'textureSize': ローカル変数は 1 度も使われていません。
   kinniku.vcxproj -> C:\Users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\x64\Debug\kinniku.exe

@@ -47,6 +47,7 @@ protected:
 
 	StagePhase m_ePhase;//シーン用
 	ID2D1SolidColorBrush *m_pBlack;//フェードアウト用?
+	ID2D1SolidColorBrush *m_pBlack2;//フェードアウト用?
 	INT     m_iTimer = 0;
 	INT		m_iFadeTimer;
 	
