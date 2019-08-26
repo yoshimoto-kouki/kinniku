@@ -148,6 +148,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BG.h" />
+    <ClInclude Include="Boots.h" />
+    <ClInclude Include="Candycane.h" />
     <ClInclude Include="ddsfunctions.h" />
     <ClInclude Include="GameData.h" />
     <ClInclude Include="GameOver.h" />
@@ -155,6 +157,7 @@
     <ClInclude Include="IGameScene.h" />
     <ClInclude Include="ItemSet.h" />
     <ClInclude Include="kinniku.h" />
+    <ClInclude Include="Ornament.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayGame.h" />
     <ClInclude Include="Resource.h" />
@@ -170,6 +173,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BG.cpp" />
+    <ClCompile Include="Boots.cpp" />
+    <ClCompile Include="Candycane.cpp" />
     <ClCompile Include="ddsfunctions.cpp" />
     <ClCompile Include="GameData.cpp" />
     <ClCompile Include="GameOver.cpp" />
@@ -177,6 +182,7 @@
     <ClCompile Include="IGameScene.cpp" />
     <ClCompile Include="ItemSet.cpp" />
     <ClCompile Include="kinniku.cpp" />
+    <ClCompile Include="Ornament.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayGame.cpp" />
     <ClCompile Include="ScoreUI.cpp" />

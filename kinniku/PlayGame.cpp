@@ -99,7 +99,7 @@ GameSceneResultCode    CStage::move() {
 	{
 		bool bDone = false;
 		++m_iTimer;
-		if (m_iTimer > 3000)//ゲーム終了条件
+		if (m_iTimer > 500)//ゲーム終了条件
 			bDone = true;
 		if (bDone) {
 			m_iFadeTimer = 0;

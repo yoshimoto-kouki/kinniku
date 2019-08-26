@@ -47,10 +47,10 @@ bool CPlayer::move() {
 	if (GetAsyncKeyState(VK_RIGHT))
 		m_fX += 10.0f;
 	
-	if (m_fX > 1050)//right
-		m_fX = 1050;
-	if (m_fX < 30)//left
-		m_fX = 30;
+	if (m_fX > 1015)//right
+		m_fX = 1015;
+	if (m_fX < -5)//left
+		m_fX = -5;
 	/*********************************************
 	if (GetAsyncKeyState(VK_SPACE)) {
 		if (!GameData::shot) {
