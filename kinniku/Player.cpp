@@ -16,8 +16,8 @@ CPlayer::CPlayer(CStage *pStage)
 	m_pBitmapP = NULL;
 	
 	m_bTama = true;
-	m_fX = 0.f;
-	m_fY = 0.f;
+	m_fX = 510.f;
+	m_fY = 700.f;
 	m_pStage = pStage;
 	//  CSelector ‚ªŠ—L‚µ‚Ä‚¢‚éID2D1RenderTarget ‚ðA
 	//  CStage ‚©‚ç‚Ü‚½ŽØ‚è‚·‚é
@@ -46,12 +46,11 @@ bool CPlayer::move() {
 		m_fX -= 10.0f;
 	if (GetAsyncKeyState(VK_RIGHT))
 		m_fX += 10.0f;
-	m_fY = 0;
-
-	if (m_fX > 540)
-		m_fX = 540;
-	if (m_fX < -480)
-		m_fX = -480;
+	
+	if (m_fX > 1050)//right
+		m_fX = 1050;
+	if (m_fX < 30)//left
+		m_fX = 30;
 	/*********************************************
 	if (GetAsyncKeyState(VK_SPACE)) {
 		if (!GameData::shot) {
@@ -94,8 +93,10 @@ void CPlayer::draw(ID2D1RenderTarget *pRenderTarget) {
 		return;
 	size = m_pBitmapP->GetSize();
 	Ssize = pRenderTarget->GetSize();
-	rc.left = Ssize.width * 0.35 - size.width + m_fX;
-	rc.top = Ssize.height - size.height - 30;
+//	rc.left = Ssize.width * 0.35 - size.width + m_fX;
+//	rc.top = Ssize.height - size.height - 30;
+	rc.left = m_fX;
+	rc.top = m_fY;
 	rc.right = rc.left + size.width;
 	rc.bottom = rc.top + size.height;
 	pRenderTarget->DrawBitmap(m_pBitmapP, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);

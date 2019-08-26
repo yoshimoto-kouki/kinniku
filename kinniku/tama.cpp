@@ -3,7 +3,6 @@
 #include "tama.h"
 #include "TextureLoader.h"
 
-CStage *CTama::m_pParent = NULL;
 ID2D1Bitmap *CTama::m_pBitmap = NULL;
 
 CTama::CTama(CStage *pStage, float x, float y)
@@ -13,32 +12,33 @@ CTama::CTama(CStage *pStage, float x, float y)
 	m_fY = y;
 	m_fVX = 0;
 	m_fVY = -3.0f;
+	m_bDamage = false;
 }
 
 CTama::~CTama()
 {
-	SAFE_RELEASE(m_pBitmap);
 }
 
 
 bool CTama::move() {
 	m_fY += m_fVY;
-	if (m_fY < -1000)
+	if (m_fY < -1000)//画面上部へ向かって-yして飛んでいくため
 		return    false;
+	if (m_bDamage)
+		return false;
 	return    true;
 }
 
 void CTama::draw(ID2D1RenderTarget *pRenderTarget) {
 	D2D1_RECT_F rc;
-	D2D1_SIZE_F size, Ssize;
-	if (m_pBitmap == NULL)
-		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\shot.png"), &m_pBitmap);
-	size = m_pBitmap->GetSize();
+	D2D1_SIZE_F Ssize;
 	Ssize = pRenderTarget->GetSize();
-	rc.left = Ssize.width * 0.35 - size.width + m_fX;
-	rc.top = Ssize.height - size.height - 30 + m_fY;
-	rc.right = rc.left + size.width;
-	rc.bottom = rc.top + size.height;
+//	rc.left = Ssize.width * 0.35 - 25 + m_fX;
+//	rc.top = Ssize.height - 34 - 30 + m_fY;
+	rc.left = m_fX;
+	rc.top = m_fY;
+	rc.right = rc.left + 25;
+	rc.bottom = rc.top + 34;
 	pRenderTarget->DrawBitmap(m_pBitmap, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 }
 
@@ -52,7 +52,19 @@ void CTama::draw(ID2D1RenderTarget *pRenderTarget) {
 *@return true : 当たり / false : あたってない
 ************************************************************/
 bool CTama::collide(float x, float y, float w, float h) {
-	return false;
+	float left = m_fX;
+	float top = m_fY;
+	float right = m_fX + 25; //左上＋画像幅
+	float bottom = m_fY + 34;//左上＋画像高
+	if (top > (y + h))
+		return false;
+	if (bottom < y)
+		return false;
+	if (left > (x + w))
+		return false;
+	if (right < x)
+		return false;
+	return true;
 }
 /************************************************************
 *@method
@@ -61,21 +73,24 @@ bool CTama::collide(float x, float y, float w, float h) {
 *@return true : 当たり / false : あたってない
 ************************************************************/
 bool CTama::collide(IGameObject *pObj) {
-	return false;
+	float l = m_fX;
+	float t = m_fY;
+	return pObj->collide(l, t, 25,34 );//数値は画像幅高
 }
 
 
-//void CTama::damage(float amount) {}
+void CTama::hit(float amount) {
+	m_bDamage = true;
+}
 
 /*********************************************************
 *@fn
 *  共有メディアデータの生成
-*  シーン開始時などに呼び出すようにする
+*  シーン開始時などに呼び出すようにする->したかった・・・
 *********************************************************/
 void CTama::Restore(ID2D1RenderTarget *pRT){
 	SAFE_RELEASE(m_pBitmap);
 	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\shot.png"), &m_pBitmap);
-//	m_pParent = pStage;
 }
 
 /*********************************************************

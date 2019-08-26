@@ -19,6 +19,7 @@ class CSelector;
 class CScoreUI;
 class CBG;
 class CPlayer;
+class CItemSet;
 struct ID2D1Bitmap;
 struct ID2D1SolidColorBrush;
  
@@ -26,6 +27,7 @@ namespace std {
 	template<class _Ty> class allocator;
 	template <class _Ty, class _Alloc = allocator<_Ty>>class list;
 }
+
 
 class CStage : public IGameScene
 {
@@ -44,6 +46,7 @@ protected:
 	CScoreUI *m_pScore;//UI
 	CBG			*m_pBG;//BG
 	CPlayer     *m_pPlayer;//player
+	CItemSet	*m_pItemSet;//星とかの降るアイテム用
 
 	StagePhase m_ePhase;//シーン用
 	ID2D1SolidColorBrush *m_pBlack;//フェードアウト用?
@@ -56,6 +59,7 @@ protected:
 	INT mFrame;//アニメーションフレーム
 	static const int ANIM_FRAME = 60;
 
+	std::list<IGameObject*> *m_pItems;
 	std::list<IGameObject*> *m_pTamas;//tama
 };
 

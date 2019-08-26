@@ -15,7 +15,7 @@ public:
 	virtual bool collide(IGameObject *Obj) {
 		return false;
 	}
-//	virtual void damage(float amount) {};
+	virtual void hit(float amount) {};
 };
 
 
