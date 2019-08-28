@@ -13,9 +13,11 @@ public:
 	virtual void Finalize();
 	virtual IGameObject *GetItemToSet(int timing);
 	virtual void Reset();
+	virtual IGameObject *ItemAdd(int rand,int type);
 protected:
 	CStage * m_pParent;
 	int m_iIndex;
+	int m_iTiming;
 	static SHORT m_pSetData[];
 	static size_t m_szSetDataSize;
 };

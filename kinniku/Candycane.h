@@ -17,6 +17,7 @@ public:
 	virtual bool collide(float x, float y, float w, float h) override;
 	virtual bool collide(IGameObject *pObj) override;
 	virtual void hit(float amount) override;
+	virtual bool make()override;
 	static void Restore(ID2D1RenderTarget *pRT);
 	static void Finalize();
 protected:
@@ -24,7 +25,6 @@ protected:
 	static ID2D1Bitmap *m_pTexture;
 	float m_fX;
 	float m_fY;
-	float m_fVX;
 	float m_fVY;
 	BOOL  m_bDamage;
 };

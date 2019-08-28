@@ -15,10 +15,8 @@ ID2D1Bitmap *COrnament::m_pTexture = NULL;
 ***************************************************/
 COrnament::COrnament(CStage *pStage, float x, float y)
 {
-	m_pParent = pStage;
 	m_fX = x;
 	m_fY = y;
-	m_fVX = 0;
 	m_fVY = 1.5f;
 
 	m_bDamage = false;
@@ -35,7 +33,6 @@ COrnament::~COrnament()
 *@return true: ê∂ë∂ / false: éÄñS
 ***************************************************/
 bool COrnament::move() {
-	m_fX += m_fVX;
 	m_fY += m_fVY;
 	if (m_fVY < 0) {
 		if (m_fY < -64)
@@ -52,7 +49,6 @@ bool COrnament::move() {
 }
 
 void COrnament::draw(ID2D1RenderTarget *pRenderTarget) {
-	int    ix, iy;
 	D2D1_RECT_F rc;
 	rc.left = m_fX;
 	rc.top = m_fY;
@@ -85,6 +81,9 @@ bool COrnament::collide(IGameObject *pObj) {
 }
 void COrnament::hit(float amount) {
 	m_bDamage = true;
+}
+bool COrnament::make() {
+	return false;
 }
 
 /*********************************************************

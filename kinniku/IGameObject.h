@@ -16,6 +16,7 @@ public:
 		return false;
 	}
 	virtual void hit(float amount) {};
+	virtual bool make() { return false; };
 };
 
 

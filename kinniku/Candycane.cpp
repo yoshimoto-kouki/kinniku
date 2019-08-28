@@ -15,12 +15,9 @@ ID2D1Bitmap *CCandy::m_pTexture = NULL;
 ***************************************************/
 CCandy::CCandy(CStage *pStage, float x, float y)
 {
-	m_pParent = pStage;
 	m_fX = x;
 	m_fY = y;
-	m_fVX = 0;
 	m_fVY = 1.5f;
-
 	m_bDamage = false;
 }
 
@@ -35,7 +32,6 @@ CCandy::~CCandy()
 *@return true: 生存 / false: 死亡
 ***************************************************/
 bool CCandy::move() {
-	m_fX += m_fVX;
 	m_fY += m_fVY;
 	if (m_fVY < 0) {
 		if (m_fY < -64)
@@ -86,7 +82,9 @@ bool CCandy::collide(IGameObject *pObj) {
 void CCandy::hit(float amount) {
 	m_bDamage = true;
 }
-
+bool CCandy::make() {
+	return false;
+}
 /*********************************************************
 *@fn
 *  共有メディアファイルを読み込む

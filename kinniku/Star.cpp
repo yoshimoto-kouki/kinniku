@@ -15,7 +15,6 @@ ID2D1Bitmap *CStar::m_pBitmap = NULL;
  ***************************************************/
 CStar::CStar(CStage *pStage, float x, float y)
 {
-	m_pParent = pStage;    //  Œã‚Å’e‚ðŒ‚‚Â‚Ì‚É•K—v
 	m_fX = x;
 	m_fY = y;
 	m_fVY = 1;
@@ -48,14 +47,12 @@ bool CStar::move() {
 }
 
 void CStar::draw(ID2D1RenderTarget *pRenderTarget) {
-	if (!m_bDamage) {
 		D2D1_RECT_F rc;
 		rc.left = m_fX;
 		rc.top = m_fY;
 		rc.right = rc.left + 64;
 		rc.bottom = rc.top + 64;
 		pRenderTarget->DrawBitmap(m_pBitmap, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
-	}
 }
 
 bool CStar::collide(float x, float y, float w, float h) {
@@ -82,6 +79,9 @@ bool CStar::collide(IGameObject *pObj) {
 
 void CStar::hit(float amount) {
 	m_bDamage = true;
+}
+bool CStar::make() {
+	return true;
 }
 
 /*********************************************************

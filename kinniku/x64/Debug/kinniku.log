@@ -1,2 +1,14 @@
-﻿  Player.cpp
+﻿  ItemSet.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\itemset.cpp(70): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\itemset.cpp(73): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\itemset.cpp(76): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\itemset.cpp(79): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\itemset.cpp(99): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\itemset.cpp(102): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\itemset.cpp(105): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\itemset.cpp(108): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+  PlayGame.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\playgame.cpp(95): warning C4244: '引数': 'time_t' から 'unsigned int' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\playgame.cpp(227): warning C4101: 'textureSize': ローカル変数は 1 度も使われていません。
+  コードを生成中...
   kinniku.vcxproj -> C:\Users\rtamura\source\repos\kinniku\x64\Debug\kinniku.exe

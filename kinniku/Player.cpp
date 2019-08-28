@@ -31,7 +31,6 @@ CPlayer::CPlayer(CStage *pStage)
 
 CPlayer::~CPlayer()
 {
-	//SAFE_RELEASE(m_pRed);
 	SAFE_RELEASE(m_pBitmapP);
 }
 
@@ -76,9 +75,6 @@ bool CPlayer::move() {
 	}
 	else
 		m_bTama = false;
-
-	GameData::TreeConplete = true;//‚±‚Ìƒtƒ‰ƒO‚Å“¾“_‰ÁŽZ
-	
 	return true;
 }
 
@@ -93,8 +89,6 @@ void CPlayer::draw(ID2D1RenderTarget *pRenderTarget) {
 		return;
 	size = m_pBitmapP->GetSize();
 	Ssize = pRenderTarget->GetSize();
-//	rc.left = Ssize.width * 0.35 - size.width + m_fX;
-//	rc.top = Ssize.height - size.height - 30;
 	rc.left = m_fX;
 	rc.top = m_fY;
 	rc.right = rc.left + size.width;

@@ -31,10 +31,6 @@ bool CTama::move() {
 
 void CTama::draw(ID2D1RenderTarget *pRenderTarget) {
 	D2D1_RECT_F rc;
-	D2D1_SIZE_F Ssize;
-	Ssize = pRenderTarget->GetSize();
-//	rc.left = Ssize.width * 0.35 - 25 + m_fX;
-//	rc.top = Ssize.height - 34 - 30 + m_fY;
 	rc.left = m_fX;
 	rc.top = m_fY;
 	rc.right = rc.left + 25;

@@ -15,10 +15,8 @@ ID2D1Bitmap *CBoots::m_pBitmap = NULL;
 ***************************************************/
 CBoots::CBoots(CStage *pStage, float x, float y)
 {
-	m_pParent = pStage;
 	m_fX = x;
 	m_fY = y;
-	m_fVX = 0;
 	m_fVY = 1.5f;
 
 	m_bDamage = false;
@@ -35,7 +33,6 @@ CBoots::~CBoots()
 *@return true: 生存 / false: 死亡
 ***************************************************/
 bool CBoots::move() {
-	m_fX += m_fVX;
 	m_fY += m_fVY;
 	if (m_fVY < 0) {
 		if (m_fY < -64)
@@ -48,11 +45,9 @@ bool CBoots::move() {
 	if (m_bDamage)
 		return false;
 	return    true;
-
 }
 
 void CBoots::draw(ID2D1RenderTarget *pRenderTarget) {
-	int    ix, iy;
 	D2D1_RECT_F rc;
 	rc.left = m_fX;
 	rc.top = m_fY;
@@ -86,7 +81,9 @@ bool CBoots::collide(IGameObject *pObj) {
 void CBoots::hit(float amount) {
 	m_bDamage = true;
 }
-
+bool CBoots::make() {
+	return false;
+}
 /*********************************************************
 *@fn
 *  共有メディアファイルを読み込む

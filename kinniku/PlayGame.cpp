@@ -2,6 +2,8 @@
 #include <d2d1.h>
 #include <list>
 #include <dwrite.h>
+#include <stdlib.h>
+#include <time.h>
 #include "PlayGame.h"//Stage
 #include "TextureLoader.h"
 #include "GameData.h"
@@ -90,6 +92,7 @@ void CStage::reset() {}
 アニメーション処理
 ***********/
 GameSceneResultCode    CStage::move() {
+	srand(time(NULL));
 	switch (m_ePhase) {
 	case STAGE_INIT:
 		m_iTimer = 0;
@@ -99,25 +102,32 @@ GameSceneResultCode    CStage::move() {
 	{
 		bool bDone = false;
 		++m_iTimer;
-		if (m_iTimer > 500)//ゲーム終了条件
+		if (m_iTimer > 1300)//ゲーム終了条件
 			bDone = true;
 		if (bDone) {
 			m_iFadeTimer = 0;
 			m_ePhase = STAGE_FADE;
 		}
-		//------------------------------------------------
+		//----ゲーム本編--------------------------------------------
 		int timing = m_iTimer;//STAGE_RUN開始からのカウントを渡している。(Item出現タイミング用)
-		//~~~~~~~Item処理~~~~~~~~~~~~~~~~~~~~~~
+		//~~~~~~~Item初期生成~~~~~~~~~~~~~~~~~~~~~~
 		if (m_pItems && m_pItemSet) {
-			IGameObject *pObj;
-			//if () {//    条件を満たしたらしたらItemセットをリセットするとき用
-			//	m_pItemSet->Reset();    
-			//}
-			do {
-				pObj = m_pItemSet->GetItemToSet(timing);
+			if (!GameData::StartIndexEnd) {//初期生成配列の最大値が生成されたら切り替わる
+				IGameObject *pObj;
+				do {
+					pObj = m_pItemSet->GetItemToSet(timing);
+					if (pObj != NULL)
+						m_pItems->push_back(pObj);
+				} while (pObj);
+			}
+			//***星ランダム位置に生成******
+			if (timing % 50 == 0) {
+				IGameObject *pObj;
+				pObj = m_pItemSet->ItemAdd(rand(),1);//()の数値は星だけ生成するために使用
 				if (pObj != NULL)
 					m_pItems->push_back(pObj);
-			} while (pObj);
+			}
+			//~~~~~~~~Item処理~~~~~~~~~~~~
 			std::list<IGameObject*>::iterator it = m_pItems->begin();
 			while (it != m_pItems->end()) {
 				if ((*it)->move()) {
@@ -130,44 +140,46 @@ GameSceneResultCode    CStage::move() {
 			}
 		}
 		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		if (m_pScore) //スコア用
-			m_pScore->move();  
 
-		if (m_pTamas) {//  tamaの処理
-			std::list<IGameObject*>::iterator it = m_pTamas->begin();
-			while (it != m_pTamas->end()) {
-				if ((*it)->move()) {
-					++it;
-				}
-				else {
-					SAFE_DELETE(*it);
-					it = m_pTamas->erase(it);
-				}
-			}
-		}
 		if (m_pPlayer)//Player
 			m_pPlayer->move();
 		//  tamaとItemの当たり判定
-		if (m_pTamas && m_pItems) {
+		if (m_pTamas) {
 			std::list<IGameObject*>::iterator it1 = m_pTamas->begin();
 			std::list<IGameObject*>::iterator it2;
 			while (it1 != m_pTamas->end()) {
-				it2 = m_pItems->begin();
-				while (it2 != m_pItems->end()) {
-					if ((*it2)->collide(*it1)) {
-						(*it1)->hit(1.0f);
-						(*it2)->hit(1.0f);
+				if (m_pItems) {
+					it2 = m_pItems->begin();
+					while (it2 != m_pItems->end()) {
+						if ((*it2)->collide(*it1)) {
+							(*it1)->hit(1.0f);
+							(*it2)->hit(1.0f);
+							if ((*it2)->make()) {//星破壊時の判定。
+								GameData::TreeConplete = true;//このフラグで得点加算
+								IGameObject *pObj;
+								pObj = m_pItemSet->ItemAdd(rand(),4);//()の数値で4種のItem生成・星を含む。
+								if (pObj != NULL)
+									m_pItems->push_back(pObj);
+							}
+						}
+						++it2;
 					}
-					++it2;
 				}
-				++it1;
+				if ((*it1)->move()) {
+					++it1;
+				}
+				else {
+					SAFE_DELETE(*it1);
+					it1 = m_pTamas->erase(it1);
+				}
 			}
 		}
 		//**得点加算用***************
 		if (GameData::TreeConplete) {
 			GameData::TreeConplete = false;
-			if (m_pScore)
+			if (m_pScore)//スコア用
 				m_pScore->AddScore(5);
+				m_pScore->move();
 		}
 		//**************************
 		//------------------------------------------------
@@ -208,19 +220,13 @@ void    CStage::draw(ID2D1RenderTarget *pRenderTarget) {
 		}
 	}
 	//----------------------------------------------
-	
-	D2D1_RECT_F rc, src;
-	D2D1_SIZE_F screenSize, textureSize;
-	screenSize = pRenderTarget->GetSize();
-	
-	rc.left = 0;
-	rc.top = 0;
-	rc.right = rc.left + screenSize.width;
-	rc.bottom = rc.top + screenSize.height;
-	
 	switch (m_ePhase) {
 	case STAGE_FADE:
 	case STAGE_DONE:
+		D2D1_RECT_F rc, src;
+		D2D1_SIZE_F screenSize, textureSize;
+		screenSize = pRenderTarget->GetSize();
+
 		rc.left = 0;
 		rc.top = 0;
 		rc.right = screenSize.width;

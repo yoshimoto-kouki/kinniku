@@ -4,11 +4,13 @@
 #include "Candycane.h"
 #include "Ornament.h"
 #include "Boots.h"
+#include "GameData.h"
 
 CItemSet::CItemSet(CStage *pStage)
 {
 	m_iIndex = 0;
 	m_pParent = pStage;
+	m_iTiming = 0;
 }
 
 
@@ -40,6 +42,7 @@ void CItemSet::Restore(ID2D1RenderTarget *pRT) {
 void CItemSet::Finalize() {
 	CStar::Finalize();
 	CCandy::Finalize();
+	COrnament::Finalize();
 	CBoots::Finalize();
 }
 
@@ -51,8 +54,15 @@ void CItemSet::Finalize() {
 IGameObject *CItemSet::GetItemToSet(int timing) {
 	IGameObject *pObj = NULL;
 	int    sx, sy;
+	int SetTimingMAX;
+	for (int i = 0; i < m_szSetDataSize - 4; i += 4) {
+		if (m_pSetData[i] > m_pSetData[i + 4])
+			SetTimingMAX = m_pSetData[i];
+	}
+	if (timing >= SetTimingMAX)
+		GameData::StartIndexEnd = !GameData::StartIndexEnd;
 	if (m_iIndex < m_szSetDataSize) {
-		if (timing <= m_pSetData[m_iIndex]) {//timing=ゲーム開始からの時間
+		if (timing >= m_pSetData[m_iIndex]) {//timing=ゲーム開始からの時間
 			sx = m_pSetData[m_iIndex + 1];
 			sy = m_pSetData[m_iIndex + 2];
 			switch (m_pSetData[m_iIndex + 3]) {
@@ -78,16 +88,39 @@ void CItemSet::Reset() {
 	m_iIndex = 0;
 }
 
+IGameObject *CItemSet::ItemAdd(int rand ,int type) {
+	IGameObject *pObj = NULL;
+	int Setx, Sety, id;
+	Setx = rand % 20 * 50;
+	Sety = -60;
+	id = rand % type;
+	switch (id) {
+	case 0://star
+		pObj = new CStar(m_pParent, Setx, Sety);
+		break;
+	case 1://candy
+		pObj = new CCandy(m_pParent, Setx, Sety);
+		break;
+	case 2://Ornament balls
+		pObj = new COrnament(m_pParent, Setx, Sety);
+		break;
+	case 3://X'mas bootu
+		pObj = new CBoots(m_pParent, Setx, Sety);
+		break;
+	}
+	return pObj;
+}
 /*
  *  Itemセットデータ(無条件で出てくるやつ)の初期位置と種類
  */
 SHORT CItemSet::m_pSetData[] = {//種類(0=星、1=杖、2=丸飾、3=？？、4=プロテイン)
-	136,200,50,0,      //  敵セットを行うタイミング、セット座標(x,y)、種類
-	1000,600,50,0,
-	500,300,0,1,
-	1300,400,20,2,
-	600,200,40,3,
+	136,200,50,0,      //  星セットを行うタイミング、セット座標(x,y)、種類
+	50,600,50,0,
+	400,300,0,0,
+	130,400,20,0,
+	620,200,40,0,
 	500,600,100,0,
+	230,400,20,0,
 };
 
 size_t CItemSet::m_szSetDataSize = _countof(CItemSet::m_pSetData);
