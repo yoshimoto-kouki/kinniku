@@ -16,6 +16,8 @@ CItemSet::CItemSet(CStage *pStage)
 
 CItemSet::~CItemSet()
 {
+	if (m_pParent)
+		m_pParent = NULL;
 }
 
 
@@ -27,10 +29,10 @@ CItemSet::~CItemSet()
  *   Ç±Ç§Ç∑ÇÈÇ±Ç∆Ç≈èoåªñàÇ…âÊëúÇì«Ç›çûÇ‹Ç»Ç¢ÇÊÇ§Ç…Ç∑ÇÈ
  ******************************************************/
 void CItemSet::Restore(ID2D1RenderTarget *pRT) {
-	CStar::Restore(pRT);
-	CCandy::Restore(pRT);
-	COrnament::Restore(pRT);
-	CBoots::Restore(pRT);
+	CStar::Restore(m_pParent,pRT);
+	CCandy::Restore(m_pParent, pRT);
+	COrnament::Restore(m_pParent, pRT);
+	CBoots::Restore(m_pParent, pRT);
 }
 
 /******************************************************
@@ -67,16 +69,16 @@ IGameObject *CItemSet::GetItemToSet(int timing) {
 			sy = m_pSetData[m_iIndex + 2];
 			switch (m_pSetData[m_iIndex + 3]) {
 			case 0://star
-				pObj = new CStar(m_pParent, sx, sy);
+				pObj = new CStar(sx, sy);
 				break;
 			case 1://candy
-				pObj = new CCandy(m_pParent, sx, sy);
+				pObj = new CCandy(sx, sy);
 				break;
 			case 2://Ornament balls
-				pObj = new COrnament(m_pParent, sx, sy);
+				pObj = new COrnament(sx, sy);
 				break;
 			case 3://X'mas bootu
-				pObj = new CBoots(m_pParent, sx, sy);
+				pObj = new CBoots(sx, sy);
 				break;
 			}
 			m_iIndex += 4;
@@ -96,16 +98,16 @@ IGameObject *CItemSet::ItemAdd(int rand ,int type) {
 	id = rand % type;
 	switch (id) {
 	case 0://star
-		pObj = new CStar(m_pParent, Setx, Sety);
+		pObj = new CStar(Setx, Sety);
 		break;
 	case 1://candy
-		pObj = new CCandy(m_pParent, Setx, Sety);
+		pObj = new CCandy(Setx, Sety);
 		break;
 	case 2://Ornament balls
-		pObj = new COrnament(m_pParent, Setx, Sety);
+		pObj = new COrnament(Setx, Sety);
 		break;
 	case 3://X'mas bootu
-		pObj = new CBoots(m_pParent, Setx, Sety);
+		pObj = new CBoots(Setx, Sety);
 		break;
 	}
 	return pObj;

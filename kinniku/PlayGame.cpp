@@ -151,7 +151,7 @@ GameSceneResultCode    CStage::move() {
 				if (m_pItems) {
 					it2 = m_pItems->begin();
 					while (it2 != m_pItems->end()) {
-						if ((*it2)->collide(*it1)) {
+   						if ((*it2)->collide(*it1)) {
 							(*it1)->hit(1.0f);
 							(*it2)->hit(1.0f);
 							if ((*it2)->make()) {//¯”j‰ó‚Ì”»’èB

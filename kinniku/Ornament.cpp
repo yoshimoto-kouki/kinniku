@@ -6,6 +6,7 @@
 #include "Player.h"
 
 ID2D1Bitmap *COrnament::m_pTexture = NULL;
+CStage *COrnament::m_pParent = NULL;
 
 /****************************************************
 *@method
@@ -13,7 +14,7 @@ ID2D1Bitmap *COrnament::m_pTexture = NULL;
 *@param in x  登場位置のX座標
 *@param in y  登場位置のY座標
 ***************************************************/
-COrnament::COrnament(CStage *pStage, float x, float y)
+COrnament::COrnament(float x, float y)
 {
 	m_fX = x;
 	m_fY = y;
@@ -91,9 +92,10 @@ bool COrnament::make() {
 *  共有メディアファイルを読み込む
 *  シーン開始時などに呼び出すようにする
 *********************************************************/
-void COrnament::Restore(ID2D1RenderTarget *pRT) {
+void COrnament::Restore(CStage *pStage, ID2D1RenderTarget *pRT) {
 	SAFE_RELEASE(m_pTexture);
 	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\ornament.png"), &m_pTexture);
+	m_pParent = pStage;
 }
 
 /*********************************************************
@@ -103,4 +105,5 @@ void COrnament::Restore(ID2D1RenderTarget *pRT) {
 *********************************************************/
 void COrnament::Finalize() {
 	SAFE_RELEASE(m_pTexture);
+	m_pParent = NULL;
 }

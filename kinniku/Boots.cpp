@@ -6,6 +6,7 @@
 #include "Player.h"
 
 ID2D1Bitmap *CBoots::m_pBitmap = NULL;
+CStage *CBoots::m_pParent = NULL;
 
 /****************************************************
 *@method
@@ -13,7 +14,7 @@ ID2D1Bitmap *CBoots::m_pBitmap = NULL;
 *@param in x  登場位置のX座標
 *@param in y  登場位置のY座標
 ***************************************************/
-CBoots::CBoots(CStage *pStage, float x, float y)
+CBoots::CBoots(float x, float y)
 {
 	m_fX = x;
 	m_fY = y;
@@ -89,9 +90,10 @@ bool CBoots::make() {
 *  共有メディアファイルを読み込む
 *  シーン開始時などに呼び出すようにする
 *********************************************************/
-void CBoots::Restore(ID2D1RenderTarget *pRT) {
+void CBoots::Restore(CStage *pStage,ID2D1RenderTarget *pRT) {
 	SAFE_RELEASE(m_pBitmap);
 	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\boots.png"), &m_pBitmap);
+	m_pParent = pStage;
 }
 
 /*********************************************************
@@ -101,4 +103,5 @@ void CBoots::Restore(ID2D1RenderTarget *pRT) {
 *********************************************************/
 void CBoots::Finalize() {
 	SAFE_RELEASE(m_pBitmap);
+	m_pParent = NULL;
 }

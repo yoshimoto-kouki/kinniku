@@ -3,6 +3,7 @@
 #include "IGameObject.h"
 
 struct ID2D1RenderTarget;
+
 class IGameObject
 {
 public:

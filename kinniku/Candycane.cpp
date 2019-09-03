@@ -6,6 +6,7 @@
 #include "Player.h"
 
 ID2D1Bitmap *CCandy::m_pTexture = NULL;
+CStage *CCandy::m_pParent = NULL;
 
 /****************************************************
 *@method
@@ -13,7 +14,7 @@ ID2D1Bitmap *CCandy::m_pTexture = NULL;
 *@param in x  登場位置のX座標
 *@param in y  登場位置のY座標
 ***************************************************/
-CCandy::CCandy(CStage *pStage, float x, float y)
+CCandy::CCandy(float x, float y)
 {
 	m_fX = x;
 	m_fY = y;
@@ -90,9 +91,10 @@ bool CCandy::make() {
 *  共有メディアファイルを読み込む
 *  シーン開始時などに呼び出すようにする
 *********************************************************/
-void CCandy::Restore(ID2D1RenderTarget *pRT) {
+void CCandy::Restore(CStage *pStage, ID2D1RenderTarget *pRT) {
 	SAFE_RELEASE(m_pTexture);
 	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\candy.png"), &m_pTexture);
+	m_pParent = pStage;
 }
 
 /*********************************************************
@@ -102,4 +104,5 @@ void CCandy::Restore(ID2D1RenderTarget *pRT) {
 *********************************************************/
 void CCandy::Finalize() {
 	SAFE_RELEASE(m_pTexture);
+	m_pParent = NULL;
 }

@@ -20,6 +20,7 @@ class CScoreUI;
 class CBG;
 class CPlayer;
 class CItemSet;
+
 struct ID2D1Bitmap;
 struct ID2D1SolidColorBrush;
  
@@ -33,16 +34,16 @@ class CStage : public IGameScene
 {
 public:
 	CStage(CSelector *pv);
-	virtual ~CStage(void);
+	virtual ~CStage();
 	virtual GameSceneResultCode  move() override; //  シーンのアニメート
 	virtual void draw(ID2D1RenderTarget *pRenderTarget) override; //  シーンの描画
+
 	virtual void reset();
 	virtual void AddTama(IGameObject *pObj);//tama
 	virtual CPlayer *GetPlayer();
 	ID2D1RenderTarget *GetRenderTarget();
 protected:
 	CSelector * m_pSystem;
-	//BOOL        m_bGameOver;
 	CScoreUI *m_pScore;//UI
 	CBG			*m_pBG;//BG
 	CPlayer     *m_pPlayer;//player
@@ -53,6 +54,8 @@ protected:
 	ID2D1SolidColorBrush *m_pBlack2;//フェードアウト用?
 	INT     m_iTimer = 0;
 	INT		m_iFadeTimer;
+
+	//BOOL        m_bGameOver;
 	
 	INT	m_bFlag = true;
 	INT mTimer;//タイマー

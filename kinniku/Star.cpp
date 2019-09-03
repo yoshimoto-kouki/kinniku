@@ -6,6 +6,7 @@
 
 
 ID2D1Bitmap *CStar::m_pBitmap = NULL;
+CStage *CStar::m_pParent = NULL;
 
 /****************************************************
  *@method
@@ -13,7 +14,7 @@ ID2D1Bitmap *CStar::m_pBitmap = NULL;
  *@param in x  登場位置のX座標
  *@param in y  登場位置のY座標
  ***************************************************/
-CStar::CStar(CStage *pStage, float x, float y)
+CStar::CStar(float x, float y)
 {
 	m_fX = x;
 	m_fY = y;
@@ -32,6 +33,8 @@ CStar::~CStar()
  *@return true: 生存 / false: 死亡
  ***************************************************/
 bool CStar::move() {
+	if (m_bDamage)//当たったら消滅
+		return false;
 	m_fY += m_fVY;
 	if (m_fVY < 0) {
 		if (m_fY < -64)
@@ -41,8 +44,6 @@ bool CStar::move() {
 		if (m_fY > 1080)
 			return  false;    //    画面外に出たら終了
 	}
-	if (m_bDamage)//当たったら消滅
-		return false;
 	return    true;
 }
 
@@ -89,9 +90,10 @@ bool CStar::make() {
  *  共有メディアファイルを読み込む
  *  シーン開始時などに呼び出すようにする
  *********************************************************/
-void CStar::Restore(ID2D1RenderTarget *pRT) {
+void CStar::Restore(CStage *pStage, ID2D1RenderTarget *pRT) {
 	SAFE_RELEASE(m_pBitmap);
 	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\star.png"), &m_pBitmap);
+	m_pParent = pStage;
 }
 
 /*********************************************************
@@ -101,4 +103,5 @@ void CStar::Restore(ID2D1RenderTarget *pRT) {
 *********************************************************/
 void CStar::Finalize() {
 	SAFE_RELEASE(m_pBitmap);
+	m_pParent = NULL;
 }
