@@ -4,6 +4,8 @@
 #endif
 struct ID2D1RenderTarget;
 struct ID2D1Bitmap;
+struct ID2D1SolidColorBrush;
+
 class CStage;
 
 class CPlayer : public IGameObject
@@ -20,8 +22,12 @@ public:
 		return m_fY;
 	}
 protected:
-	CStage * m_pStage;
+	CStage		* m_pStage;
 	ID2D1Bitmap *m_pBitmapP;
-	FLOAT    m_fX, m_fY;
-	BOOL m_bTama;
+	FLOAT		m_fX, m_fY;
+	FLOAT		m_fKeyTime;
+	BOOL		m_bTama;
+#ifdef _DEBUG
+	ID2D1SolidColorBrush		*m_pBrush;
+#endif // _DEBUG
 };

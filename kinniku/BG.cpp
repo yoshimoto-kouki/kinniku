@@ -15,7 +15,7 @@
 CBG::CBG(ID2D1RenderTarget *pRenderTarget)
 {
 	m_pBitmap = NULL;
-	CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\bgs.png"), &m_pBitmap);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\snowshow.png"), &m_pBitmap);
 }
 
 

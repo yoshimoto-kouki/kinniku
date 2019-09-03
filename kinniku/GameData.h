@@ -9,6 +9,7 @@ public:
 	//このフラグで得点加算。複数種必要な場合はbool->intにすること
 	static bool TreeConplete;
 	static bool StartIndexEnd;
+	static bool LongPressKey;
 
 };
 

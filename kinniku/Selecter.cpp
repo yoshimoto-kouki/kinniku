@@ -54,7 +54,7 @@ CSelector::CSelector(ID2D1RenderTarget *pRenderTarget)
 	}
 	//  ‰æ–Ê•ªŠ„—pƒuƒ‰ƒV‚Ì¶¬-----------
 	if (FAILED(m_pRenderTarget->CreateSolidColorBrush(
-		D2D1::ColorF(D2D1::ColorF::Yellow),
+		D2D1::ColorF(D2D1::ColorF::Snow),
 		&pBrush
 	))) {
 		SAFE_RELEASE(pBrush);
@@ -119,8 +119,8 @@ void CSelector::doDraw(ID2D1RenderTarget *pRenderTarget) {
 		//‰æ–Ê•ªŠ„7Š„-----------------------
 	if (m_eGamePhase == GAMEPHASE_GAME) {
 		D2D1_RECT_F rec;
-		rec.left = Ssize.width*0.7;
-		rec.right = 0;
+		rec.left = 0;
+		rec.right = Ssize.width*0.7;
 		rec.top = Ssize.height;
 		rec.bottom = 0;
 		pRenderTarget->FillRectangle(&rec, pBrush);

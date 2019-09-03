@@ -1,7 +1,4 @@
-﻿  Boots.cpp
-  Candycane.cpp
-c:\users\rtamura\source\repos\kinniku\kinniku\candycane.cpp(52): warning C4101: 'ix': ローカル変数は 1 度も使われていません。
-c:\users\rtamura\source\repos\kinniku\kinniku\candycane.cpp(52): warning C4101: 'iy': ローカル変数は 1 度も使われていません。
-  Ornament.cpp
-  コードを生成中...
+﻿  tama.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\tama.cpp(27): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\tama.cpp(28): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
   kinniku.vcxproj -> C:\Users\rtamura\source\repos\kinniku\x64\Debug\kinniku.exe
