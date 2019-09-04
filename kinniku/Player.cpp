@@ -12,6 +12,8 @@
 
 #define TexsizeHalf 30
 #define PTexsizeHalf 32
+#define Pressinterval 3
+#define ChargeTime 30
 
 
 CPlayer::CPlayer(CStage *pStage)
@@ -23,6 +25,7 @@ CPlayer::CPlayer(CStage *pStage)
 	m_fX = 510.f;
 	m_fY = 700.f;
 	m_fKeyTime = 0;
+	m_fThrowTime = 0;
 	m_pStage = pStage;
 	m_bLongPushSpace = false;
 	//  CSelector が所有しているID2D1RenderTarget を、
@@ -30,6 +33,7 @@ CPlayer::CPlayer(CStage *pStage)
 	pRenderTarget = pStage->GetRenderTarget();
 	if (pRenderTarget) {
 		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\smilie.tga"), &m_pBitmapP);
+		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\smile.png"), &m_pBitmapPT);
 		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\charge.png"), &m_pBitmapC);
 		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\shotS.png"), &m_pBitmapNT);
 		pRenderTarget->Release();    //  Release して解放
@@ -45,6 +49,7 @@ CPlayer::CPlayer(CStage *pStage)
 CPlayer::~CPlayer()
 {
 	SAFE_RELEASE(m_pBitmapP);
+	SAFE_RELEASE(m_pBitmapPT);
 	SAFE_RELEASE(m_pBitmapC);
 	SAFE_RELEASE(m_pBitmapNT);
 	SAFE_RELEASE(m_pBitmapCT);
@@ -85,6 +90,8 @@ bool CPlayer::move() {
 		if (GameData::tamay = 0)m_bFlag = false;
 	}
 	***********************************************/ 
+	if (0 < m_fThrowTime)
+		m_fThrowTime--;
 	if (GetAsyncKeyState(VK_SPACE)) {
 		m_fKeyTime += 1;
 		m_bLongPushSpace = true;
@@ -96,14 +103,15 @@ bool CPlayer::move() {
 	//-----モミの木チャージ判定------
 	if (!GameData::ProteinFlag) {//プロテインバーストしてないとき
 		if (!m_bLongPushSpace) {
-			if (0 < m_fKeyTime) {
-				if (m_fKeyTime < 30) {
+			if (Pressinterval < m_fKeyTime) {
+				if (m_fKeyTime < ChargeTime) {
 					if (!m_bTama) {
 						IGameObject *pObj = new CTama(m_pStage, m_fX + TexsizeHalf, m_fY + TexsizeHalf);
 						m_pStage->AddTama(pObj);
 					}
 					m_bTama = true;
 					m_fKeyTime = 0;
+					m_fThrowTime = 20;
 				}
 				else {
 					if (!m_bTama) {
@@ -114,6 +122,7 @@ bool CPlayer::move() {
 					}
 					m_bTama = true;
 					m_fKeyTime = 0;
+					m_fThrowTime = 20;
 				}
 			}
 		}
@@ -122,7 +131,6 @@ bool CPlayer::move() {
 
 	//----Protein-------------
 	if (GameData::ProteinFlag) {
-
 		if (!m_bTama) {
 			IGameObject *pObj = new CTama(m_pStage, m_fX + TexsizeHalf, m_fY + TexsizeHalf);
 			m_pStage->AddTama(pObj);
@@ -144,19 +152,29 @@ void CPlayer::draw(ID2D1RenderTarget *pRenderTarget) {
 		return;
 	size = m_pBitmapP->GetSize();
 	Ssize = pRenderTarget->GetSize();
-	rc.left = m_fX;
-	rc.top = m_fY;
-	rc.right = rc.left + size.width;
-	rc.bottom = rc.top + size.height;
-	pRenderTarget->DrawBitmap(m_pBitmapP, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
-
-	if (m_bLongPushSpace) {
+	if (m_bLongPushSpace) {//チャージ用赤
 		rc.left = m_fX - 20;
 		rc.top = m_fY - 20;
 		rc.right = rc.left + size.width + 40;
 		rc.bottom = rc.top + size.height + 40;
 		pRenderTarget->DrawBitmap(m_pBitmapC, rc, (m_fKeyTime / 30), D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
-		
+	}
+
+	if (0 <= m_fThrowTime <= 15) {//キャラ用投擲前
+		rc.left = m_fX;
+		rc.top = m_fY;
+		rc.right = rc.left + size.width;
+		rc.bottom = rc.top + size.height;
+		pRenderTarget->DrawBitmap(m_pBitmapP, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+	}
+	if (15 < m_fThrowTime) {//キャラ用投擲後
+		rc.left = m_fX;
+		rc.top = m_fY;
+		rc.right = rc.left + size.width;
+		rc.bottom = rc.top + size.height;
+		pRenderTarget->DrawBitmap(m_pBitmapPT, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+	}
+	if (m_bLongPushSpace) {//キャラ所持モミの木
 		if (m_fKeyTime < 30) {
 			rcT.left = m_fX + 40;
 			rcT.top = m_fY + 30;

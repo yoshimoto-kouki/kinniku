@@ -1,36 +1,4 @@
-﻿  Boots.cpp
-  Candycane.cpp
-c:\users\rtamura\source\repos\kinniku\kinniku\candycane.cpp(52): warning C4101: 'ix': ローカル変数は 1 度も使われていません。
-c:\users\rtamura\source\repos\kinniku\kinniku\candycane.cpp(52): warning C4101: 'iy': ローカル変数は 1 度も使われていません。
-  GameOver.cpp
-c:\users\rtamura\source\repos\kinniku\kinniku\gameover.cpp(81): warning C4101: 'prc': ローカル変数は 1 度も使われていません。
-  IGameObject.cpp
-  ItemSet.cpp
-c:\users\rtamura\source\repos\kinniku\kinniku\itemset.cpp(75): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\itemset.cpp(78): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\itemset.cpp(81): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\itemset.cpp(84): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\itemset.cpp(104): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\itemset.cpp(107): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\itemset.cpp(110): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\itemset.cpp(113): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\itemset.cpp(123): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-  Ornament.cpp
-  PlayGame.cpp
+﻿  Player.cpp
 c:\users\rtamura\source\repos\kinniku\kinniku\tama.h(20): warning C4244: 'return': 'int' から 'float' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\playgame.cpp(110): warning C4244: '引数': 'time_t' から 'unsigned int' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\playgame.cpp(214): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\playgame.cpp(301): warning C4101: 'textureSize': ローカル変数は 1 度も使われていません。
-  Player.cpp
-c:\users\rtamura\source\repos\kinniku\kinniku\tama.h(20): warning C4244: 'return': 'int' から 'float' への変換です。データが失われる可能性があります。
-  Protein.cpp
-c:\users\rtamura\source\repos\kinniku\kinniku\protein.cpp(40): warning C4101: 'size': ローカル変数は 1 度も使われていません。
-  Selecter.cpp
-c:\users\rtamura\source\repos\kinniku\kinniku\selecter.cpp(124): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
-  Star.cpp
-  tama.cpp
-c:\users\rtamura\source\repos\kinniku\kinniku\tama.h(20): warning C4244: 'return': 'int' から 'float' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\tama.cpp(15): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\tama.cpp(16): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-  コードを生成中...
+c:\users\rtamura\source\repos\kinniku\kinniku\player.cpp(163): warning C4804: '<=': 演算中の 'bool' 型の使用方法が安全ではありません
   kinniku.vcxproj -> C:\Users\rtamura\source\repos\kinniku\x64\Debug\kinniku.exe

@@ -27,11 +27,13 @@ public:
 protected:
 	CStage		* m_pStage;
 	ID2D1Bitmap *m_pBitmapP;
+	ID2D1Bitmap *m_pBitmapPT;
 	ID2D1Bitmap *m_pBitmapC;
 	ID2D1Bitmap *m_pBitmapNT;
 	ID2D1Bitmap *m_pBitmapCT;
 	FLOAT		m_fX, m_fY;
 	FLOAT		m_fKeyTime;
+	FLOAT		m_fThrowTime;
 	BOOL		m_bTama;
 	BOOL		m_bLongPushSpace;
 #ifdef _DEBUG
