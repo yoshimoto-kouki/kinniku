@@ -84,9 +84,7 @@ void COrnament::hit(float amount) {
 	if(amount==1.0f)
 		m_bDamage = true;
 }
-bool COrnament::make() {
-	return false;
-}
+
 
 /*********************************************************
 *@fn

@@ -76,10 +76,13 @@ bool CProtein::collide(float x, float y, float w, float h) {
 *@param in pObj　相手オブジェクト
 *@return true : 当たり / false : あたってない
 ************************************************************/
-bool CProtein::collide(IGameObject *pObj) {
+bool CProtein::collide(IGameObject *pObj) {//主にTamaとのあたり判定に使用しているため、fasleで実行しないようにする
+/*
 	float l = m_fX;
 	float t = m_fY;
 	return pObj->collide(l, t, texX, texY);//数値は画像幅高
+*/
+	return false;
 }
 
 
@@ -89,9 +92,7 @@ void CProtein::hit(float amount) {
 		GameData::ProteinFlag = true;
 	}
 }
-bool CProtein::make() {
-	return false;
-}
+
 /*********************************************************
 *@fn
 *  共有メディアデータの生成

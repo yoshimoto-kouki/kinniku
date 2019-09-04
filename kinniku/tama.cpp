@@ -11,6 +11,7 @@ ID2D1Bitmap *CTama::m_pBitmap = NULL;
 CTama::CTama(CStage *pStage, float x, float y)
 {
 	m_pParent = pStage;
+	TreeScore = 0;
  	m_fX = x - Bitmap01sizeX * 0.5;
 	m_fY = y - Bitmap01sizeY * 0.5;
 	m_fVX = 0;
@@ -25,9 +26,9 @@ CTama::~CTama()
 
 bool CTama::move() {
 	if (m_bDamage)
-		return false;
+		return false;//Tamaが消える理由。
 	m_fY += m_fVY;
-	if (m_fY < -1000)//画面上部へ向かって-yして飛んでいくため
+	if (m_fY < -1000) //画面上部へ向かって-yして飛んでいくため
 		return    false;
 	return    true;
 }
@@ -79,7 +80,10 @@ bool CTama::collide(IGameObject *pObj) {
 
 
 void CTama::hit(float amount) {
-	m_bDamage = true;
+	if (1.0f != amount)//特殊処理Starであるとき
+		m_bDamage = true;//Tamaが消える理由。
+	else
+		TreeScore += 1;
 }
 
 /*********************************************************

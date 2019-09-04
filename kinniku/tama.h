@@ -17,6 +17,8 @@ public:
 	virtual bool collide(float x, float y, float w, float h) override;
 	virtual bool collide(IGameObject *pObj) override;
 	virtual void hit(float amount) override;
+	float TreeScoreBack() { return TreeScore; }
+	bool  StarHitFlag() { return m_bDamage; }
 	static void Restore(ID2D1RenderTarget *pRT);
 	static void Finalize();
 
@@ -27,4 +29,5 @@ protected:
 	BOOL m_bDamage;
 	float m_fX, m_fY;
 	float m_fVX, m_fVY;	
+	int TreeScore;
 };

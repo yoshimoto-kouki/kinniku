@@ -20,7 +20,7 @@ public:
 	virtual void hit(float amount) override;
 	static void Restore(CStage *pStage, ID2D1RenderTarget *pRT);
 	static void Finalize();
-	virtual bool make()override;
+
 
 protected:
 	//static ID2D1RenderTarget *pRenderTarget;

@@ -84,9 +84,7 @@ void CCandy::hit(float amount) {
 	if (amount == 1.0f)
 		m_bDamage = true;
 }
-bool CCandy::make() {
-	return false;
-}
+
 /*********************************************************
 *@fn
 *  共有メディアファイルを読み込む

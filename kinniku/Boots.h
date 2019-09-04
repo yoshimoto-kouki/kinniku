@@ -16,7 +16,6 @@ public:
 	virtual bool collide(float x, float y, float w, float h) override;
 	virtual bool collide(IGameObject *pObj) override;
 	virtual void hit(float amount) override;
-	virtual bool make()override;
 	static void Restore(CStage *pStage,ID2D1RenderTarget *pRT);
 	static void Finalize();
 protected:

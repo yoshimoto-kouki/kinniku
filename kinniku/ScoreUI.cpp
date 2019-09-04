@@ -4,6 +4,7 @@
 ****************************************/
 #include "stdafx.h"
 #include <d2d1.h>
+#include <math.h>
 #include "TextureLoader.h"
 #include "ScoreUI.h"
 
@@ -51,7 +52,11 @@ INT CScoreUI::GetScore() {
 *@param in value  ‰ÁŽZ‚·‚é’l
 *************************************************/
 void CScoreUI::AddScore(INT score) {
-	m_iScore += score;
+	if (score != 0) {
+		score -= 1;
+		int ScoreSum = pow(2, score);
+		m_iScore += (100 + 100 * ScoreSum);
+	}
 }
 
 /*************************************************

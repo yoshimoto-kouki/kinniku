@@ -82,6 +82,9 @@ void CStar::hit(float amount) {
 	if (amount == 1.0f)
 		m_bDamage = true;
 }
+bool CStar::hitType(){
+	return true;
+}
 bool CStar::make() {
 	return true;
 }

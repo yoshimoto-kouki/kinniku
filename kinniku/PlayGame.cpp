@@ -188,8 +188,10 @@ GameSceneResultCode    CStage::move() {
 				if (m_pItems) {
 					it2 = m_pItems->begin();
 					while (it2 != m_pItems->end()) {
-   						if ((*it2)->collide(*it1)) {//当たり判定
-							(*it1)->hit(1.0f);
+   						if ((*it2)->collide(*it1)) {//当たり判定true/false
+							if ((*it2)->hitType())//星か否か判定
+								(*it1)->hit(10.0f);//ありえない数値を渡すことで特殊処理
+							(*it1)->hit(1.0f);//モミの木のhitへ(数値)を渡している。
 							(*it2)->hit(1.0f);
 							if ((*it2)->make()) {//星破壊時の判定。
 								GameData::TreeConplete = true;//このフラグで得点加算
@@ -206,6 +208,13 @@ GameSceneResultCode    CStage::move() {
 					++it1;
 				}
 				else {
+					if (m_pScore)//スコア用
+						if ((*it1)->StarHitFlag()) {
+							m_pScore->AddScore(
+								(*it1)->TreeScoreBack()//Tamaが失われるとき得点を取得して加算
+							);
+							m_pScore->move();
+						}
 					SAFE_DELETE(*it1);
 					it1 = m_pTamas->erase(it1);
 				}
@@ -233,12 +242,14 @@ GameSceneResultCode    CStage::move() {
 		
 		//-------------------------------
 		//**得点加算用***************
+		/*/
 		if (GameData::TreeConplete) {
 			GameData::TreeConplete = false;
 			if (m_pScore)//スコア用
 				m_pScore->AddScore(5);
 				m_pScore->move();
 		}
+		*/
 		//**************************
 		break;
 	}

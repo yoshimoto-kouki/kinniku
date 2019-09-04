@@ -83,9 +83,7 @@ void CBoots::hit(float amount) {
 	if (amount == 1.0f)
 		m_bDamage = true;
 }
-bool CBoots::make() {
-	return false;
-}
+
 /*********************************************************
 *@fn
 *  共有メディアファイルを読み込む

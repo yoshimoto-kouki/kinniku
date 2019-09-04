@@ -16,8 +16,11 @@ public:
 	virtual bool collide(IGameObject *Obj) {
 		return false;
 	}
+	virtual bool hitType() { return false; };
 	virtual void hit(float amount) {};
 	virtual bool make() { return false; };
+	virtual float TreeScoreBack() { return 0; };
+	virtual bool StarHitFlag() { return false; };
 };
 
 
