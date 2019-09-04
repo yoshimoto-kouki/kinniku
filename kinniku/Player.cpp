@@ -23,7 +23,7 @@ CPlayer::CPlayer(CStage *pStage)
 	
 	m_bTama = true;
 	m_fX = 510.f;
-	m_fY = 700.f;
+	m_fY = 850.f;
 	m_fKeyTime = 0;
 	m_fThrowTime = 0;
 	m_pStage = pStage;
@@ -32,7 +32,8 @@ CPlayer::CPlayer(CStage *pStage)
 	//  CStage ‚©‚ç‚Ü‚½ŽØ‚è‚·‚é
 	pRenderTarget = pStage->GetRenderTarget();
 	if (pRenderTarget) {
-		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\smilie.tga"), &m_pBitmapP);
+//		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\smilie.tga"), &m_pBitmapP);
+		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\test.png"), &m_pBitmapP);
 		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\smile.png"), &m_pBitmapPT);
 		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\charge.png"), &m_pBitmapC);
 		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\shotS.png"), &m_pBitmapNT);
