@@ -10,7 +10,8 @@
 #define GAMESTAGE_WIDE 1344
 #define GAMESTAGE_HIGH 1080
 
-#define TexsizeHalf 30
+#define TexsizeHalfX 75
+#define TexsizeHalfY 90
 #define PTexsizeHalf 32
 #define Pressinterval 3
 #define ChargeTime 30
@@ -107,7 +108,7 @@ bool CPlayer::move() {
 			if (Pressinterval < m_fKeyTime) {
 				if (m_fKeyTime < ChargeTime) {
 					if (!m_bTama) {
-						IGameObject *pObj = new CTama(m_pStage, m_fX + TexsizeHalf, m_fY + TexsizeHalf);
+						IGameObject *pObj = new CTama(m_pStage, m_fX + TexsizeHalfX, m_fY + TexsizeHalfY);
 						m_pStage->AddTama(pObj);
 					}
 					m_bTama = true;
@@ -116,9 +117,9 @@ bool CPlayer::move() {
 				}
 				else {
 					if (!m_bTama) {
-						IGameObject *pObj = new CTama(m_pStage, m_fX + TexsizeHalf+ PTexsizeHalf, m_fY + TexsizeHalf);
+						IGameObject *pObj = new CTama(m_pStage, m_fX + TexsizeHalfX+ PTexsizeHalf, m_fY + TexsizeHalfY);
 						m_pStage->AddTama(pObj);
-						IGameObject *pObj2 = new CTama(m_pStage, m_fX - TexsizeHalf + PTexsizeHalf, m_fY + TexsizeHalf);
+						IGameObject *pObj2 = new CTama(m_pStage, m_fX - TexsizeHalfX + PTexsizeHalf, m_fY + TexsizeHalfY);
 						m_pStage->AddTama(pObj2);
 					}
 					m_bTama = true;
@@ -133,7 +134,7 @@ bool CPlayer::move() {
 	//----Protein-------------
 	if (GameData::ProteinFlag) {
 		if (!m_bTama) {
-			IGameObject *pObj = new CTama(m_pStage, m_fX + TexsizeHalf, m_fY + TexsizeHalf);
+			IGameObject *pObj = new CTama(m_pStage, m_fX + TexsizeHalfX, m_fY + TexsizeHalfY);
 			m_pStage->AddTama(pObj);
 		}
 

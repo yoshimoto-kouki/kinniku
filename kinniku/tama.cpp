@@ -4,8 +4,8 @@
 #include "TextureLoader.h"
 
 ID2D1Bitmap *CTama::m_pBitmap = NULL;
-#define Bitmap01sizeX 25
-#define Bitmap01sizeY 34
+#define Bitmap01sizeX 100//25
+#define Bitmap01sizeY 180//34
 
 
 CTama::CTama(CStage *pStage, float x, float y)
@@ -93,7 +93,8 @@ void CTama::hit(float amount) {
 *********************************************************/
 void CTama::Restore(ID2D1RenderTarget *pRT){
 	SAFE_RELEASE(m_pBitmap);
-	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\shot.png"), &m_pBitmap);
+//	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\shot.png"), &m_pBitmap);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\shot2.png"), &m_pBitmap);
 }
 
 /*********************************************************

@@ -1,4 +1,5 @@
-﻿  Player.cpp
+﻿  tama.cpp
 c:\users\rtamura\source\repos\kinniku\kinniku\tama.h(20): warning C4244: 'return': 'int' から 'float' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\player.cpp(164): warning C4804: '<=': 演算中の 'bool' 型の使用方法が安全ではありません
+c:\users\rtamura\source\repos\kinniku\kinniku\tama.cpp(15): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\tama.cpp(16): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
   kinniku.vcxproj -> C:\Users\rtamura\source\repos\kinniku\x64\Debug\kinniku.exe
