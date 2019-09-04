@@ -81,7 +81,8 @@ bool CCandy::collide(IGameObject *pObj) {
 	return pObj->collide(l, t, 64, 64);
 }
 void CCandy::hit(float amount) {
-	m_bDamage = true;
+	if (amount == 1.0f)
+		m_bDamage = true;
 }
 bool CCandy::make() {
 	return false;

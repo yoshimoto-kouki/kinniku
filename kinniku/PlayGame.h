@@ -20,6 +20,7 @@ class CScoreUI;
 class CBG;
 class CPlayer;
 class CItemSet;
+class CProtein;
 
 struct ID2D1Bitmap;
 struct ID2D1SolidColorBrush;
@@ -40,11 +41,12 @@ public:
 
 	virtual void reset();
 	virtual void AddTama(IGameObject *pObj);//tama
+	virtual void AddProtein(IGameObject *pObj);//Protein
 	virtual CPlayer *GetPlayer();
 	ID2D1RenderTarget *GetRenderTarget();
 protected:
-	CSelector * m_pSystem;
-	CScoreUI *m_pScore;//UI
+	CSelector	* m_pSystem;
+	CScoreUI	*m_pScore;//UI
 	CBG			*m_pBG;//BG
 	CPlayer     *m_pPlayer;//player
 	CItemSet	*m_pItemSet;//星とかの降るアイテム用
@@ -56,7 +58,7 @@ protected:
 	INT		m_iFadeTimer;
 
 	//BOOL        m_bGameOver;
-	
+	float m_fProteinTimer;
 	INT	m_bFlag = true;
 	INT mTimer;//タイマー
 	INT mFrame;//アニメーションフレーム
@@ -64,6 +66,7 @@ protected:
 
 	std::list<IGameObject*> *m_pItems;
 	std::list<IGameObject*> *m_pTamas;//tama
+	std::list<IGameObject*> *m_pProtein;//Protein
 };
 
 

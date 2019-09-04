@@ -15,6 +15,9 @@ public:
 	virtual ~CPlayer();
 	virtual bool    move() override;
 	virtual void    draw(ID2D1RenderTarget *pRenderTarget) override;
+	virtual bool collide(float x, float y, float w, float h) override;
+	virtual bool collide(IGameObject *pObj) override;
+	virtual void hit(float amount) override;
 	virtual float    getX() {
 		return m_fX;
 	}
@@ -25,6 +28,8 @@ protected:
 	CStage		* m_pStage;
 	ID2D1Bitmap *m_pBitmapP;
 	ID2D1Bitmap *m_pBitmapC;
+	ID2D1Bitmap *m_pBitmapNT;
+	ID2D1Bitmap *m_pBitmapCT;
 	FLOAT		m_fX, m_fY;
 	FLOAT		m_fKeyTime;
 	BOOL		m_bTama;

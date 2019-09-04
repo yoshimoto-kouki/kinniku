@@ -160,6 +160,7 @@
     <ClInclude Include="Ornament.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayGame.h" />
+    <ClInclude Include="Protein.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ScoreUI.h" />
     <ClInclude Include="Selecter.h" />
@@ -185,6 +186,7 @@
     <ClCompile Include="Ornament.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayGame.cpp" />
+    <ClCompile Include="Protein.cpp" />
     <ClCompile Include="ScoreUI.cpp" />
     <ClCompile Include="Selecter.cpp" />
     <ClCompile Include="Star.cpp" />

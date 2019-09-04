@@ -10,7 +10,7 @@ class CStage;
 class CTama : public IGameObject
 {
 public:
-	CTama(CStage *pStage, float x, float y,bool Keystate);
+	CTama(CStage *pStage, float x, float y);
 	~CTama();
 	virtual bool move() override;
 	virtual void draw(ID2D1RenderTarget *pRenderTarget) override;
@@ -23,10 +23,8 @@ public:
 protected:
 	static ID2D1RenderTarget *pRenderTarget;
 	static ID2D1Bitmap *m_pBitmap;
-	static ID2D1Bitmap *m_pBitmap2;
 	CStage *m_pParent;
 	BOOL m_bDamage;
-	bool m_bLong;
 	float m_fX, m_fY;
 	float m_fVX, m_fVY;	
 };

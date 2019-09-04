@@ -1,1 +1,4 @@
-﻿  kinniku.vcxproj -> C:\Users\rtamura\source\repos\kinniku\x64\Debug\kinniku.exe
+﻿  PlayGame.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\playgame.cpp(110): warning C4244: '引数': 'time_t' から 'unsigned int' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\playgame.cpp(290): warning C4101: 'textureSize': ローカル変数は 1 度も使われていません。
+  kinniku.vcxproj -> C:\Users\rtamura\source\repos\kinniku\x64\Debug\kinniku.exe

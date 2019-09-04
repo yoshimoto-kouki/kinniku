@@ -9,4 +9,4 @@ bool GameData::shot = false;
 
 bool GameData::TreeConplete = false;
 bool GameData::StartIndexEnd = false;
-bool GameData::LongPressKey = false;
+bool GameData::ProteinFlag = false;

@@ -79,7 +79,8 @@ bool CStar::collide(IGameObject *pObj) {
 }
 
 void CStar::hit(float amount) {
-	m_bDamage = true;
+	if (amount == 1.0f)
+		m_bDamage = true;
 }
 bool CStar::make() {
 	return true;

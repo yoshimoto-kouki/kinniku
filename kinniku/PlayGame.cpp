@@ -14,12 +14,14 @@
 #include "Player.h"
 #include "tama.h"
 #include "ItemSet.h"
+#include "Protein.h"
  
 #pragma comment(lib,"winmm.lib")
 
 
 CStage::CStage(CSelector *pSystem)
 {
+	m_fProteinTimer = 0;//プロテインバースト時間計測用
 	ID2D1RenderTarget *pTarget;
 	m_iFadeTimer = 0;
 	m_pBlack = NULL;
@@ -42,6 +44,7 @@ CStage::CStage(CSelector *pSystem)
 		}
 		CTama::Restore(pRenderTarget);//tama用
 		m_pTamas = new std::list<IGameObject*>();
+
 
 		m_pItemSet = new CItemSet(this);
 		m_pItemSet->Restore(pRenderTarget);
@@ -77,7 +80,19 @@ CStage::~CStage()
 		delete m_pTamas;
 		m_pTamas = NULL;
 	}
+	//  全プロテインの強制削除
+	if (m_pProtein) {
+		std::list<IGameObject*>::iterator it = m_pProtein->begin();
+		while (it != m_pProtein->end()) {
+			SAFE_DELETE(*it);
+			it = m_pProtein->erase(it);
+		}
+		delete m_pProtein;
+		m_pProtein = NULL;
+	}
+
 	CTama::Finalize();
+	CProtein::Finalize();
 	SAFE_DELETE(m_pBG);//BG
 	SAFE_DELETE(m_pScore);//UI
 	SAFE_DELETE(m_pPlayer);//player
@@ -108,10 +123,11 @@ GameSceneResultCode    CStage::move() {
 			m_iFadeTimer = 0;
 			m_ePhase = STAGE_FADE;
 		}
-		//----ゲーム本編--------------------------------------------
+		//*****ゲーム本編**************************************
 		int timing = m_iTimer;//STAGE_RUN開始からのカウントを渡している。(Item出現タイミング用)
-		//~~~~~~~Item初期生成~~~~~~~~~~~~~~~~~~~~~~
+		//~~~~~~~Item生成~~~~~~~~~~~~~~~~~~~~~~
 		if (m_pItems && m_pItemSet) {
+			//初期生成
 			if (!GameData::StartIndexEnd) {//初期生成配列の最大値が生成されたら切り替わる
 				IGameObject *pObj;
 				do {
@@ -120,6 +136,8 @@ GameSceneResultCode    CStage::move() {
 						m_pItems->push_back(pObj);
 				} while (pObj);
 			}
+			//END-初期生成---
+
 			//***星ランダム位置に生成******
 			if (timing % 50 == 0) {
 				IGameObject *pObj;
@@ -127,6 +145,16 @@ GameSceneResultCode    CStage::move() {
 				if (pObj != NULL)
 					m_pItems->push_back(pObj);
 			}
+			//END***星ランダム位置に生成******
+			//Protein生成=========
+			if (timing % 900 == 0) {
+				IGameObject *pObj;
+				pObj = m_pItemSet->ProteinAdd(rand());
+				if (pObj != NULL)
+					m_pItems->push_back(pObj);
+			}
+			//END Protein生成=====
+
 			//~~~~~~~~Item処理~~~~~~~~~~~~
 			std::list<IGameObject*>::iterator it = m_pItems->begin();
 			while (it != m_pItems->end()) {
@@ -138,12 +166,21 @@ GameSceneResultCode    CStage::move() {
 					it = m_pItems->erase(it);
 				}
 			}
+			//~~END~~Item処理~~~~~~~~~~~~
 		}
-		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		//END ITEM生成----------------
 
-		if (m_pPlayer)//Player
+
+		if (m_pPlayer)//Player処理
 			m_pPlayer->move();
-		//  tamaとItemの当たり判定
+		/*
+		if (GameData::ProteinFlag) {
+			m_fProteinTimer++;
+			if (m_fProteinTimer > 150)//30FPSで更新されるだろうから＊5して出した。5秒用
+				GameData::ProteinFlag = !GameData::ProteinFlag;
+		}
+		*/
+		//---------------tamaとItemの当たり判定-------------
 		if (m_pTamas) {
 			std::list<IGameObject*>::iterator it1 = m_pTamas->begin();
 			std::list<IGameObject*>::iterator it2;
@@ -151,7 +188,7 @@ GameSceneResultCode    CStage::move() {
 				if (m_pItems) {
 					it2 = m_pItems->begin();
 					while (it2 != m_pItems->end()) {
-   						if ((*it2)->collide(*it1)) {
+   						if ((*it2)->collide(*it1)) {//当たり判定
 							(*it1)->hit(1.0f);
 							(*it2)->hit(1.0f);
 							if ((*it2)->make()) {//星破壊時の判定。
@@ -174,6 +211,27 @@ GameSceneResultCode    CStage::move() {
 				}
 			}
 		}
+		//-----END-tamaとItemの当たり判定--------------------------
+
+		
+		// ----ItemとPlayerの当たり判定-----------------
+		if (m_pItems && m_pPlayer) {
+			std::list<IGameObject*>::iterator it1 = m_pItems->begin();
+			while (it1 != m_pItems->end()) {
+				if (m_pItems) {
+ 					if ((m_pPlayer)->collide(*it1)) {
+						(*it1)->hit(2.0f);//Proteinのみ動作させるために2.0fを渡している
+					}
+				}
+				else {
+					SAFE_DELETE(*it1);
+					it1 = m_pItems->erase(it1);
+				}
+				++it1;
+			}
+		}
+		
+		//-------------------------------
 		//**得点加算用***************
 		if (GameData::TreeConplete) {
 			GameData::TreeConplete = false;
@@ -182,7 +240,6 @@ GameSceneResultCode    CStage::move() {
 				m_pScore->move();
 		}
 		//**************************
-		//------------------------------------------------
 		break;
 	}
 	case STAGE_FADE:
@@ -210,6 +267,12 @@ void    CStage::draw(ID2D1RenderTarget *pRenderTarget) {
 	if (m_pTamas) {//  ショットの処理
 		std::list<IGameObject*>::iterator it = m_pTamas->begin();
 		while (it != m_pTamas->end()) {
+			(*it++)->draw(pRenderTarget);
+		}
+	}
+	if (m_pProtein) {//  プロテインの処理
+		std::list<IGameObject*>::iterator it = m_pProtein->begin();
+		while (it != m_pProtein->end()) {
 			(*it++)->draw(pRenderTarget);
 		}
 	}
@@ -265,6 +328,11 @@ ID2D1RenderTarget *CStage::GetRenderTarget() {
 void CStage::AddTama(IGameObject *pObj) {
 	if (m_pTamas) {
 		m_pTamas->push_back(pObj);
+	}
+}
+void CStage::AddProtein(IGameObject *pObj) {
+	if (m_pProtein) {
+		m_pProtein->push_back(pObj);
 	}
 }
 /***********************************************

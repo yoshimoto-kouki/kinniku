@@ -81,7 +81,8 @@ bool COrnament::collide(IGameObject *pObj) {
 	return pObj->collide(l, t, 64, 64);
 }
 void COrnament::hit(float amount) {
-	m_bDamage = true;
+	if(amount==1.0f)
+		m_bDamage = true;
 }
 bool COrnament::make() {
 	return false;

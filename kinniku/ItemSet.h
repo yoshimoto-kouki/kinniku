@@ -14,6 +14,7 @@ public:
 	virtual IGameObject *GetItemToSet(int timing);
 	virtual void Reset();
 	virtual IGameObject *ItemAdd(int rand,int type);
+	virtual IGameObject *ProteinAdd(int rand);
 protected:
 	CStage * m_pParent;
 	int m_iIndex;

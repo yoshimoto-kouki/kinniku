@@ -4,6 +4,7 @@
 #include "Candycane.h"
 #include "Ornament.h"
 #include "Boots.h"
+#include "Protein.h"
 #include "GameData.h"
 
 CItemSet::CItemSet(CStage *pStage)
@@ -33,6 +34,7 @@ void CItemSet::Restore(ID2D1RenderTarget *pRT) {
 	CCandy::Restore(m_pParent, pRT);
 	COrnament::Restore(m_pParent, pRT);
 	CBoots::Restore(m_pParent, pRT);
+	CProtein::Restore(m_pParent, pRT);
 }
 
 /******************************************************
@@ -46,6 +48,7 @@ void CItemSet::Finalize() {
 	CCandy::Finalize();
 	COrnament::Finalize();
 	CBoots::Finalize();
+	CProtein::Finalize();
 }
 
 /******************************************************
@@ -110,6 +113,14 @@ IGameObject *CItemSet::ItemAdd(int rand ,int type) {
 		pObj = new CBoots(Setx, Sety);
 		break;
 	}
+	return pObj;
+}
+IGameObject *CItemSet::ProteinAdd(int rand) {
+	IGameObject *pObj = NULL;
+	int Setx, Sety;
+	Setx = rand % 20 * 50;
+	Sety = -60;
+	pObj = new CProtein(Setx, Sety);
 	return pObj;
 }
 /*
