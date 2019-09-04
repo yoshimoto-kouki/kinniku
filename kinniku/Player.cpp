@@ -24,13 +24,16 @@ CPlayer::CPlayer(CStage *pStage)
 	m_fY = 700.f;
 	m_fKeyTime = 0;
 	m_pStage = pStage;
+	m_bLongPushSpace = false;
 	//  CSelector ‚ªŠ—L‚µ‚Ä‚¢‚éID2D1RenderTarget ‚ðA
 	//  CStage ‚©‚ç‚Ü‚½ŽØ‚è‚·‚é
 	pRenderTarget = pStage->GetRenderTarget();
 	if (pRenderTarget) {
 		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\smilie.tga"), &m_pBitmapP);
+		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\charge.png"), &m_pBitmapC);
 		pRenderTarget->Release();    //  Release ‚µ‚Ä‰ð•ú
 	}
+
 #ifdef _DEBUG
 	pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::IndianRed), &m_pBrush);
 	SAFE_RELEASE(pRenderTarget);
@@ -41,6 +44,7 @@ CPlayer::CPlayer(CStage *pStage)
 CPlayer::~CPlayer()
 {
 	SAFE_RELEASE(m_pBitmapP);
+	SAFE_RELEASE(m_pBitmapC);
 #ifdef _DEBUG
 	SAFE_RELEASE(m_pBrush);
 #endif // _DEBUG
@@ -80,14 +84,14 @@ bool CPlayer::move() {
 	***********************************************/ 
 	if (GetAsyncKeyState(VK_SPACE)) {
 		m_fKeyTime += 1;
-		GameData::LongPressKey = true;
+		m_bLongPushSpace = true;
 	}
 	else {
-		GameData::LongPressKey = false;
+		m_bLongPushSpace = false;
 		m_bTama = false;
 	}
 
-	if (!GameData::LongPressKey) {
+	if (!m_bLongPushSpace) {
 		if (0 < m_fKeyTime) {
 			if (m_fKeyTime < 30) {
 				if (!m_bTama) {
@@ -118,7 +122,7 @@ bool CPlayer::move() {
  *******************************************************/
 void CPlayer::draw(ID2D1RenderTarget *pRenderTarget) {
 	D2D1_RECT_F rc;
-	D2D1_SIZE_F size,Ssize;
+	D2D1_SIZE_F size, Ssize;
 	if (m_pBitmapP == NULL)
 		return;
 	size = m_pBitmapP->GetSize();
@@ -127,11 +131,21 @@ void CPlayer::draw(ID2D1RenderTarget *pRenderTarget) {
 	rc.top = m_fY;
 	rc.right = rc.left + size.width;
 	rc.bottom = rc.top + size.height;
+	/*
 #ifdef _DEBUG
 	if (30 < m_fKeyTime)
-		pRenderTarget->FillRectangle(rc, m_pBrush);
+	pRenderTarget->DrawBitmap(m_pBitmapC, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 #endif // _DEBUG
+*/
+
 	pRenderTarget->DrawBitmap(m_pBitmapP, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+	if (m_bLongPushSpace) {
+		rc.left = m_fX-20;
+		rc.top = m_fY-20;
+		rc.right = rc.left + size.width+40;
+		rc.bottom = rc.top + size.height+40;
+		pRenderTarget->DrawBitmap(m_pBitmapC, rc, (m_fKeyTime / 30), D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+	}
 }
 /*
 D2D1_RECT_F tama;

@@ -24,9 +24,11 @@ public:
 protected:
 	CStage		* m_pStage;
 	ID2D1Bitmap *m_pBitmapP;
+	ID2D1Bitmap *m_pBitmapC;
 	FLOAT		m_fX, m_fY;
 	FLOAT		m_fKeyTime;
 	BOOL		m_bTama;
+	BOOL		m_bLongPushSpace;
 #ifdef _DEBUG
 	ID2D1SolidColorBrush		*m_pBrush;
 #endif // _DEBUG

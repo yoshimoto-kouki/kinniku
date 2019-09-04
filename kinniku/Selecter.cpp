@@ -64,10 +64,11 @@ CSelector::CSelector(ID2D1RenderTarget *pRenderTarget)
 
 CSelector::~CSelector(void)
 {
+	if(m_pRenderTarget)
+		SAFE_RELEASE(m_pRenderTarget);
 	SAFE_DELETE(m_pScene);
 	SAFE_RELEASE(m_pWhiteBrush);
 	SAFE_RELEASE(pBrush);
-	SAFE_RELEASE(m_pRenderTarget);
 	SAFE_RELEASE(m_pTextFormat);
 }
 

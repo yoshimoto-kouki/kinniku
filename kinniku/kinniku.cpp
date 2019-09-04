@@ -175,8 +175,9 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 		}
 	}
 eExit:
+	if(g_pRenderTarget)
+		SAFE_RELEASE(g_pRenderTarget);
 	SAFE_DELETE(g_pSystem);
-	SAFE_RELEASE(g_pRenderTarget);
 	SAFE_RELEASE(g_pDefaultTextFormat);
 	SAFE_RELEASE(g_pD2DFactory);
 
