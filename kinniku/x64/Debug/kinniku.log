@@ -1,12 +1,5 @@
-﻿  PlayGame.cpp
-c:\users\rtamura\source\repos\kinniku\kinniku\tama.h(23): warning C4244: 'return': 'int' から 'float' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\playgame.cpp(122): warning C4244: '引数': 'time_t' から 'unsigned int' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\playgame.cpp(232): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\playgame.cpp(237): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\playgame.cpp(325): warning C4101: 'textureSize': ローカル変数は 1 度も使われていません。
-  ScoreRemnant.cpp
-c:\users\rtamura\source\repos\kinniku\kinniku\scoreremnant.cpp(16): warning C4244: '=': 'double' から 'int' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\scoreremnant.cpp(42): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\scoreremnant.cpp(43): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
-  コードを生成中...
+﻿  ScoreRemnant.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\scoreremnant.cpp(18): warning C4244: '=': 'double' から 'int' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\scoreremnant.cpp(44): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\scoreremnant.cpp(45): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
   kinniku.vcxproj -> C:\Users\rtamura\source\repos\kinniku\x64\Debug\kinniku.exe

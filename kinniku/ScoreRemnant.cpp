@@ -5,8 +5,10 @@
 #include "ScoreRemnant.h"
 #include "TextureLoader.h"
 
+#define ScoreLimitY 30
 ID2D1Bitmap *CScoreRemnant::m_pBitmap = NULL;
 CStage *CScoreRemnant::m_pParent = NULL;
+
 CScoreRemnant::CScoreRemnant(float x, float y, int score)
 {
 	m_fX = x;
@@ -14,7 +16,7 @@ CScoreRemnant::CScoreRemnant(float x, float y, int score)
 	m_fVY = -0.3f;
 	m_bEND = false;
 	m_iRemScore = (1 + pow(2, score));
-
+	m_fLimitY = y - ScoreLimitY;
 }
 
 CScoreRemnant::~CScoreRemnant(){}
@@ -24,7 +26,7 @@ bool CScoreRemnant::move()
 	if (m_bEND)
 		return false;
 	m_fY += m_fVY;
-	if (30 < m_fY)
+	if (m_fY < m_fLimitY)
 		m_bEND = true;
 	return true;
 }

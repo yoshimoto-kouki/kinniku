@@ -22,6 +22,7 @@ protected:
 	float m_fX;
 	float m_fY;
 	float m_fVY;
+	float m_fLimitY;
 	int  m_iRemScore;
 	bool  m_bEND;
 	static CStage *m_pParent;
