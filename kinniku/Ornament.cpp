@@ -5,7 +5,12 @@
 #include "TextureLoader.h"
 #include "Player.h"
 
-ID2D1Bitmap *COrnament::m_pTexture = NULL;
+ID2D1Bitmap *COrnament::m_pTexOrnamentR = NULL;
+ID2D1Bitmap *COrnament::m_pTexOrnamentRD = NULL;
+ID2D1Bitmap *COrnament::m_pTexOrnamentB = NULL;
+ID2D1Bitmap *COrnament::m_pTexOrnamentBD = NULL;
+ID2D1Bitmap *COrnament::m_pTexOrnamentG = NULL;
+ID2D1Bitmap *COrnament::m_pTexOrnamentGD = NULL;
 CStage *COrnament::m_pParent = NULL;
 
 /****************************************************
@@ -19,7 +24,7 @@ COrnament::COrnament(float x, float y)
 	m_fX = x;
 	m_fY = y;
 	m_fVY = 1.5f;
-
+	m_fOType = (int)rand() % 5;
 	m_bDamage = false;
 }
 
@@ -55,7 +60,26 @@ void COrnament::draw(ID2D1RenderTarget *pRenderTarget) {
 	rc.top = m_fY;
 	rc.right = rc.left + 64;
 	rc.bottom = rc.top + 64;
-	pRenderTarget->DrawBitmap(m_pTexture, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+	switch (m_fOType) {
+	case 0:
+		pRenderTarget->DrawBitmap(m_pTexOrnamentR, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+		break;
+	case 1:
+		pRenderTarget->DrawBitmap(m_pTexOrnamentRD, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+		break;
+	case 2:
+		pRenderTarget->DrawBitmap(m_pTexOrnamentB, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+		break;
+	case 3:
+		pRenderTarget->DrawBitmap(m_pTexOrnamentBD, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+		break;
+	case 4:
+		pRenderTarget->DrawBitmap(m_pTexOrnamentG, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+		break;
+	case 5:
+		pRenderTarget->DrawBitmap(m_pTexOrnamentGD, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+		break;
+	}
 }
 
 bool COrnament::collide(float x, float y, float w, float h) {
@@ -81,7 +105,7 @@ bool COrnament::collide(IGameObject *pObj) {
 	return pObj->collide(l, t, 64, 64);
 }
 void COrnament::hit(float amount) {
-	if(amount==1.0f)
+	if (amount != 1.0f)
 		m_bDamage = true;
 }
 
@@ -92,8 +116,18 @@ void COrnament::hit(float amount) {
 *  シーン開始時などに呼び出すようにする
 *********************************************************/
 void COrnament::Restore(CStage *pStage, ID2D1RenderTarget *pRT) {
-	SAFE_RELEASE(m_pTexture);
-	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\ornament.png"), &m_pTexture);
+	SAFE_RELEASE(m_pTexOrnamentR);
+	SAFE_RELEASE(m_pTexOrnamentRD);
+	SAFE_RELEASE(m_pTexOrnamentB);
+	SAFE_RELEASE(m_pTexOrnamentBD);
+	SAFE_RELEASE(m_pTexOrnamentG);
+	SAFE_RELEASE(m_pTexOrnamentGD);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\akairo.jpg"), &m_pTexOrnamentR);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\akairo2.jpg"), &m_pTexOrnamentRD);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\aoiro.jpg"), &m_pTexOrnamentB);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\aoiro2.jpg"), &m_pTexOrnamentBD);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\midoriiro.jpg"), &m_pTexOrnamentG);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\midoriiro2.jpg"), &m_pTexOrnamentGD);
 	m_pParent = pStage;
 }
 
@@ -103,6 +137,11 @@ void COrnament::Restore(CStage *pStage, ID2D1RenderTarget *pRT) {
 *  シーン削除時などに呼び出すようにする
 *********************************************************/
 void COrnament::Finalize() {
-	SAFE_RELEASE(m_pTexture);
+	SAFE_RELEASE(m_pTexOrnamentR);
+	SAFE_RELEASE(m_pTexOrnamentRD);
+	SAFE_RELEASE(m_pTexOrnamentB);
+	SAFE_RELEASE(m_pTexOrnamentBD);
+	SAFE_RELEASE(m_pTexOrnamentG);
+	SAFE_RELEASE(m_pTexOrnamentGD);
 	m_pParent = NULL;
 }

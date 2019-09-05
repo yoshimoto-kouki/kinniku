@@ -80,7 +80,7 @@ bool CBoots::collide(IGameObject *pObj) {
 	return pObj->collide(l, t, 64, 64);
 }
 void CBoots::hit(float amount) {
-	if (amount == 1.0f)
+	if (amount != 1.0f)
 		m_bDamage = true;
 }
 
@@ -91,7 +91,7 @@ void CBoots::hit(float amount) {
 *********************************************************/
 void CBoots::Restore(CStage *pStage,ID2D1RenderTarget *pRT) {
 	SAFE_RELEASE(m_pBitmap);
-	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\boots.png"), &m_pBitmap);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\kutusita.jpg"), &m_pBitmap);
 	m_pParent = pStage;
 }
 

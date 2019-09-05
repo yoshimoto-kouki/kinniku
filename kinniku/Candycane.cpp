@@ -81,7 +81,7 @@ bool CCandy::collide(IGameObject *pObj) {
 	return pObj->collide(l, t, 64, 64);
 }
 void CCandy::hit(float amount) {
-	if (amount == 1.0f)
+	if (amount != 1.0f)
 		m_bDamage = true;
 }
 
@@ -92,7 +92,7 @@ void CCandy::hit(float amount) {
 *********************************************************/
 void CCandy::Restore(CStage *pStage, ID2D1RenderTarget *pRT) {
 	SAFE_RELEASE(m_pTexture);
-	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\candy.png"), &m_pTexture);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\candy.jpg"), &m_pTexture);
 	m_pParent = pStage;
 }
 

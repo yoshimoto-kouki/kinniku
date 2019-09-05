@@ -173,6 +173,8 @@ GameSceneResultCode    CStage::move() {
 
 		if (m_pPlayer)//Player処理
 			m_pPlayer->move();
+		if (m_pBG)
+			m_pBG->move();
 		/*
 		if (GameData::ProteinFlag) {
 			m_fProteinTimer++;
@@ -191,7 +193,7 @@ GameSceneResultCode    CStage::move() {
    						if ((*it2)->collide(*it1)) {//当たり判定true/false
 							if ((*it2)->hitType())//星か否か判定
 								(*it1)->hit(10.0f);//ありえない数値を渡すことで特殊処理
-							(*it1)->hit(1.0f);//モミの木のhitへ(数値)を渡している。
+							//(*it1)->hit(1.0f);//モミの木のhitへ(数値)を渡している。
 							(*it2)->hit(1.0f);
 							if ((*it2)->make()) {//星破壊時の判定。
 								GameData::TreeConplete = true;//このフラグで得点加算
@@ -228,8 +230,11 @@ GameSceneResultCode    CStage::move() {
 			std::list<IGameObject*>::iterator it1 = m_pItems->begin();
 			while (it1 != m_pItems->end()) {
 				if (m_pItems) {
- 					if ((m_pPlayer)->collide(*it1)) {
-						(*it1)->hit(2.0f);//Proteinのみ動作させるために2.0fを渡している
+   					if ((m_pPlayer)->collide(*it1)) {
+						if (!(*it1)->hitType()) {
+							(*it1)->hit(2.0f);
+							(m_pPlayer)->hit(1.0f);
+						}
 					}
 				}
 				else {

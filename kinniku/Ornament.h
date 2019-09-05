@@ -21,7 +21,13 @@ public:
 	static void Finalize();
 protected:
 	static CStage		*m_pParent;
-	static ID2D1Bitmap *m_pTexture;
+	static ID2D1Bitmap	*m_pTexOrnamentR;
+	static ID2D1Bitmap	*m_pTexOrnamentRD;
+	static ID2D1Bitmap	*m_pTexOrnamentB;
+	static ID2D1Bitmap	*m_pTexOrnamentBD;
+	static ID2D1Bitmap	*m_pTexOrnamentG;
+	static ID2D1Bitmap	*m_pTexOrnamentGD;
+	int m_fOType;
 	float m_fX;
 	float m_fY;
 	float m_fVY;

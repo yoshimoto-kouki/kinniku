@@ -8,10 +8,10 @@ ID2D1Bitmap *CTama::m_pBitmap = NULL;
 #define Bitmap01sizeY 180//34
 
 
-CTama::CTama(CStage *pStage, float x, float y)
+CTama::CTama(CStage *pStage, float x, float y,int Decoration)
 {
 	m_pParent = pStage;
-	TreeScore = 0;
+	TreeScore = Decoration;
  	m_fX = x - Bitmap01sizeX * 0.5;
 	m_fY = y - Bitmap01sizeY * 0.5;
 	m_fVX = 0;
@@ -82,8 +82,6 @@ bool CTama::collide(IGameObject *pObj) {
 void CTama::hit(float amount) {
 	if (1.0f != amount)//“Áêˆ—Star‚Å‚ ‚é‚Æ‚«
 		m_bDamage = true;//Tama‚ªÁ‚¦‚é——RB
-	else
-		TreeScore += 1;
 }
 
 /*********************************************************
@@ -93,7 +91,6 @@ void CTama::hit(float amount) {
 *********************************************************/
 void CTama::Restore(ID2D1RenderTarget *pRT){
 	SAFE_RELEASE(m_pBitmap);
-//	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\shot.png"), &m_pBitmap);
 	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\shot2.png"), &m_pBitmap);
 }
 

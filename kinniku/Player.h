@@ -28,13 +28,16 @@ protected:
 	CStage		* m_pStage;
 	ID2D1Bitmap *m_pBitmapP;
 	ID2D1Bitmap *m_pBitmapPT;
+	ID2D1Bitmap *m_pBitmapPTC;
 	ID2D1Bitmap *m_pBitmapC;
 	ID2D1Bitmap *m_pBitmapNT;
 	ID2D1Bitmap *m_pBitmapCT;
 	FLOAT		m_fX, m_fY;
 	FLOAT		m_fKeyTime;
 	FLOAT		m_fThrowTime;
+	FLOAT		m_fItemGetScore;
 	BOOL		m_bTama;
+	BOOL		m_bTC;
 	BOOL		m_bLongPushSpace;
 #ifdef _DEBUG
 	ID2D1SolidColorBrush		*m_pBrush;
