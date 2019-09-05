@@ -11,6 +11,7 @@
 #include  <mmsystem.h>
 #include "BG.h"
 #include "ScoreUI.h"
+#include "ScoreRemnant.h"
 #include "Player.h"
 #include "tama.h"
 #include "ItemSet.h"
@@ -90,9 +91,20 @@ CStage::~CStage()
 		delete m_pProtein;
 		m_pProtein = NULL;
 	}
+	//  全一時スコアの強制削除
+	if (m_pScoreRemnant) {
+		std::list<IGameObject*>::iterator it = m_pScoreRemnant->begin();
+		while (it != m_pScoreRemnant->end()) {
+			SAFE_DELETE(*it);
+			it = m_pScoreRemnant->erase(it);
+		}
+		delete m_pScoreRemnant;
+		m_pScoreRemnant = NULL;
+	}
 
 	CTama::Finalize();
 	CProtein::Finalize();
+	CScoreRemnant::Finalize();
 	SAFE_DELETE(m_pBG);//BG
 	SAFE_DELETE(m_pScore);//UI
 	SAFE_DELETE(m_pPlayer);//player
@@ -117,7 +129,7 @@ GameSceneResultCode    CStage::move() {
 	{
 		bool bDone = false;
 		++m_iTimer;
-		if (m_iTimer > 1300)//ゲーム終了条件
+		if (m_iTimer > 2700)//ゲーム終了条件1分30秒になってるはず
 			bDone = true;
 		if (bDone) {
 			m_iFadeTimer = 0;
@@ -175,13 +187,15 @@ GameSceneResultCode    CStage::move() {
 			m_pPlayer->move();
 		if (m_pBG)
 			m_pBG->move();
-		/*
+		
 		if (GameData::ProteinFlag) {
 			m_fProteinTimer++;
-			if (m_fProteinTimer > 150)//30FPSで更新されるだろうから＊5して出した。5秒用
+			if (m_fProteinTimer > 150){//30FPSで更新されるだろうから＊5して出した。5秒用
 				GameData::ProteinFlag = !GameData::ProteinFlag;
+				m_fProteinTimer = 0;
+				}
 		}
-		*/
+		
 		//---------------tamaとItemの当たり判定-------------
 		if (m_pTamas) {
 			std::list<IGameObject*>::iterator it1 = m_pTamas->begin();
@@ -196,7 +210,9 @@ GameSceneResultCode    CStage::move() {
 							//(*it1)->hit(1.0f);//モミの木のhitへ(数値)を渡している。
 							(*it2)->hit(1.0f);
 							if ((*it2)->make()) {//星破壊時の判定。
-								GameData::TreeConplete = true;//このフラグで得点加算
+
+								(*it1)->collidePos((*it2)->StarPointBackx(), (*it2)->StarPointBacky());
+
 								IGameObject *pObj;
 								pObj = m_pItemSet->ItemAdd(rand(),4);//()の数値で4種のItem生成・星を含む。
 								if (pObj != NULL)
@@ -216,6 +232,12 @@ GameSceneResultCode    CStage::move() {
 								(*it1)->TreeScoreBack()//Tamaが失われるとき得点を取得して加算
 							);
 							m_pScore->move();
+							//**星刺し時得点用***************
+							IGameObject *pObj;
+							pObj = m_pItemSet->ScoreRemnantAdd((*it1)->TSPointBackx(), (*it1)->TSPointBacky(), (*it1)->TreeScoreBack());
+							if (pObj != NULL)
+								m_pItems->push_back(pObj);
+							//**************************
 						}
 					SAFE_DELETE(*it1);
 					it1 = m_pTamas->erase(it1);
@@ -246,16 +268,6 @@ GameSceneResultCode    CStage::move() {
 		}
 		
 		//-------------------------------
-		//**得点加算用***************
-		/*/
-		if (GameData::TreeConplete) {
-			GameData::TreeConplete = false;
-			if (m_pScore)//スコア用
-				m_pScore->AddScore(5);
-				m_pScore->move();
-		}
-		*/
-		//**************************
 		break;
 	}
 	case STAGE_FADE:
@@ -277,7 +289,7 @@ void    CStage::draw(ID2D1RenderTarget *pRenderTarget) {
 	if (m_pBG)//背景用
 		m_pBG->draw(pRenderTarget);
 	if (m_pScore)//スコア用
-		m_pScore->draw(pRenderTarget, 1100.0f, 10.0f, 32.0f);
+		m_pScore->Draw(pRenderTarget, 1100.0f, 10.0f, 32.0f);
 	if (m_pPlayer)//player
 		m_pPlayer->draw(pRenderTarget);
 	if (m_pTamas) {//  ショットの処理
@@ -289,6 +301,13 @@ void    CStage::draw(ID2D1RenderTarget *pRenderTarget) {
 	if (m_pProtein) {//  プロテインの処理
 		std::list<IGameObject*>::iterator it = m_pProtein->begin();
 		while (it != m_pProtein->end()) {
+			(*it++)->draw(pRenderTarget);
+		}
+	}
+	
+	if (m_pScoreRemnant) {//  一時Scoreの処理
+		std::list<IGameObject*>::iterator it = m_pScoreRemnant->begin();
+		while (it != m_pScoreRemnant->end()) {
 			(*it++)->draw(pRenderTarget);
 		}
 	}
@@ -349,6 +368,12 @@ void CStage::AddTama(IGameObject *pObj) {
 void CStage::AddProtein(IGameObject *pObj) {
 	if (m_pProtein) {
 		m_pProtein->push_back(pObj);
+	}
+}
+
+void CStage::AddScoreRemnant(IGameObject *pObj) {
+	if (m_pScoreRemnant) {
+		m_pScoreRemnant->push_back(pObj);
 	}
 }
 /***********************************************

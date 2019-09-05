@@ -16,6 +16,7 @@
 #define PTexsizeHalfY 96
 #define Pressinterval 20
 #define ChargeTime 30
+#define ScoreLimit 3//ŠŒÀŠE
 
 
 CPlayer::CPlayer(CStage *pStage)
@@ -240,7 +241,8 @@ bool CPlayer::collide(IGameObject *pObj) {
 
 
 void CPlayer::hit(float amount) {
-	m_fItemGetScore += 1;
+	if (m_fItemGetScore < ScoreLimit)
+		m_fItemGetScore += 1;
 }
 
 

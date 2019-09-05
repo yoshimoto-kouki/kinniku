@@ -88,6 +88,12 @@ bool CStar::hitType(){
 bool CStar::make() {
 	return true;
 }
+float CStar::StarPointBackx() {
+	return m_fX;
+}
+float CStar::StarPointBacky() {
+	return m_fY;
+}
 
 /*********************************************************
  *@fn

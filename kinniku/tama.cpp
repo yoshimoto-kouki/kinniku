@@ -17,6 +17,8 @@ CTama::CTama(CStage *pStage, float x, float y,int Decoration)
 	m_fVX = 0;
 	m_fVY = -3.0f;
 	m_bDamage = false;
+	coliPosx = 0;
+	coliPosy = 0;
 }
 
 CTama::~CTama()
@@ -28,7 +30,7 @@ bool CTama::move() {
 	if (m_bDamage)
 		return false;//Tamaが消える理由。
 	m_fY += m_fVY;
-	if (m_fY < -1000) //画面上部へ向かって-yして飛んでいくため
+	if (m_fY < -110) //画面上部へ向かって-yして飛んでいくため
 		return    false;
 	return    true;
 }
@@ -82,6 +84,13 @@ bool CTama::collide(IGameObject *pObj) {
 void CTama::hit(float amount) {
 	if (1.0f != amount)//特殊処理Starであるとき
 		m_bDamage = true;//Tamaが消える理由。
+}
+
+bool CTama::collidePos(float x, float y)
+{
+	coliPosx = x;
+	coliPosy = y;
+	return false;
 }
 
 /*********************************************************

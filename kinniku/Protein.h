@@ -11,7 +11,7 @@ class CProtein : public IGameObject
 {
 public:
 	CProtein(float x, float y);
-	~CProtein();
+	virtual ~CProtein();
 
 	virtual bool move() override;
 	virtual void draw(ID2D1RenderTarget *pRenderTarget) override;

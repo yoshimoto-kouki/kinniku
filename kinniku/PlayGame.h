@@ -42,6 +42,7 @@ public:
 	virtual void reset();
 	virtual void AddTama(IGameObject *pObj);//tama
 	virtual void AddProtein(IGameObject *pObj);//Protein
+	virtual void AddScoreRemnant(IGameObject *pObj);//ˆêŽžScore
 	virtual CPlayer *GetPlayer();
 	ID2D1RenderTarget *GetRenderTarget();
 protected:
@@ -67,6 +68,7 @@ protected:
 	std::list<IGameObject*> *m_pItems;
 	std::list<IGameObject*> *m_pTamas;//tama
 	std::list<IGameObject*> *m_pProtein;//Protein
+	std::list<IGameObject*> *m_pScoreRemnant;//ˆêŽžScore
 };
 
 

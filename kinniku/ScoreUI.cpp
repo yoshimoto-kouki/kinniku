@@ -6,6 +6,7 @@
 #include <d2d1.h>
 #include <math.h>
 #include "TextureLoader.h"
+#include "PlayGame.h"
 #include "ScoreUI.h"
 
 //  マクロ定義
@@ -35,7 +36,7 @@ CScoreUI::~CScoreUI()
  *  スコアに値をセットする
  *@param in score   セットするスコア
  *************************************************/
-void CScoreUI::SetScore(INT score) {
+void CScoreUI::SetScore(int score) {
 	m_iScore = score;
 }
 /*************************************************
@@ -51,13 +52,10 @@ INT CScoreUI::GetScore() {
 *  スコアに値を加算
 *@param in value  加算する値
 *************************************************/
-void CScoreUI::AddScore(INT score) {
-	if (score != 0) {
-		score -= 1;
-		int ScoreSum = pow(2, score);
-		m_iScore += (100 + 100 * ScoreSum);
-	}
+void CScoreUI::AddScore(int score) {
+	m_iScore += (100 * pow(2, score));
 }
+
 
 /*************************************************
 *@fn
@@ -85,7 +83,7 @@ static void prepareTextureCoords(int code, D2D1_RECT_F &rc) {
  *  スコア表示
  *@param in pRenderTarget  描画先ターゲット
  *************************************************/
-void CScoreUI::draw(ID2D1RenderTarget *pRenderTarget, FLOAT x, FLOAT y, FLOAT h) {
+void CScoreUI::Draw(ID2D1RenderTarget *pRenderTarget, FLOAT x, FLOAT y, FLOAT h) {
 	FLOAT tmpX = x;
 	FLOAT scale = h / 64.0f;
 	FLOAT strideA = 64.0f * scale;    //    width for alphabet

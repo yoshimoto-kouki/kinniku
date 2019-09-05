@@ -5,6 +5,7 @@
 #include "Ornament.h"
 #include "Boots.h"
 #include "Protein.h"
+#include "ScoreRemnant.h"
 #include "GameData.h"
 
 CItemSet::CItemSet(CStage *pStage)
@@ -35,6 +36,7 @@ void CItemSet::Restore(ID2D1RenderTarget *pRT) {
 	COrnament::Restore(m_pParent, pRT);
 	CBoots::Restore(m_pParent, pRT);
 	CProtein::Restore(m_pParent, pRT);
+	CScoreRemnant::Restore(m_pParent, pRT);
 }
 
 /******************************************************
@@ -49,6 +51,7 @@ void CItemSet::Finalize() {
 	COrnament::Finalize();
 	CBoots::Finalize();
 	CProtein::Finalize();
+	CScoreRemnant::Finalize();
 }
 
 /******************************************************
@@ -123,10 +126,16 @@ IGameObject *CItemSet::ProteinAdd(int rand) {
 	pObj = new CProtein(Setx, Sety);
 	return pObj;
 }
+IGameObject *CItemSet::ScoreRemnantAdd(float x, float y, int score)
+{
+	IGameObject *pObj = NULL;
+	pObj = new CScoreRemnant(x, y,score);
+	return pObj;
+}
 /*
  *  Itemセットデータ(無条件で出てくるやつ)の初期位置と種類
  */
-SHORT CItemSet::m_pSetData[] = {//種類(0=星、1=杖、2=丸飾、3=？？、4=プロテイン)
+SHORT CItemSet::m_pSetData[] = {//種類(0=星、1=杖、2=丸飾、3=靴)
 	136,200,50,0,      //  星セットを行うタイミング、セット座標(x,y)、種類
 	50,600,50,0,
 	400,300,0,0,

@@ -19,8 +19,13 @@ public:
 	virtual bool hitType() { return false; };
 	virtual void hit(float amount) {};
 	virtual bool make() { return false; };
-	virtual float TreeScoreBack() { return 0; };
-	virtual bool StarHitFlag() { return false; };
+	virtual float TreeScoreBack() { return 0; };//星の持つスコアを返す
+	virtual bool StarHitFlag() { return false; };//星か否か
+	virtual float StarPointBackx() { return 0; };//星の現在位置xを返す
+	virtual float StarPointBacky() { return 0; };//星の現在位置yを返す
+	virtual bool collidePos(float x, float y) { return 0; };//星の現在位置を弾に渡している
+	virtual float TSPointBackx() { return 0; };//弾の現在位置xを返す
+	virtual float TSPointBacky() { return 0; };//弾の現在位置yを返す
 };
 
 
