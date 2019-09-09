@@ -29,8 +29,8 @@ CTitle::CTitle(CSelector *pSystem)
 	pTarget = pSystem->GetRenderTaget();
 	if (pTarget) {
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\taitoru.jpg"), &m_pImage);
-		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\santa1.jpg"), &m_pImageSanta1);
-		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\santa2.jpg"), &m_pImageSanta2);
+		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\santa1.png"), &m_pImageSanta1);
+		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\santa2.png"), &m_pImageSanta2);
 		pTarget->CreateSolidColorBrush(D2D1::ColorF(0.0f, 0.0f, 0.0f), &m_pBlack);
 		pTarget->Release();
 		pTarget = NULL;

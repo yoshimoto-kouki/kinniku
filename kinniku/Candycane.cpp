@@ -92,7 +92,7 @@ void CCandy::hit(float amount) {
 *********************************************************/
 void CCandy::Restore(CStage *pStage, ID2D1RenderTarget *pRT) {
 	SAFE_RELEASE(m_pTexture);
-	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\candy.jpg"), &m_pTexture);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\candy.png"), &m_pTexture);
 	m_pParent = pStage;
 }
 

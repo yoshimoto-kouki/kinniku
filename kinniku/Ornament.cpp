@@ -122,12 +122,12 @@ void COrnament::Restore(CStage *pStage, ID2D1RenderTarget *pRT) {
 	SAFE_RELEASE(m_pTexOrnamentBD);
 	SAFE_RELEASE(m_pTexOrnamentG);
 	SAFE_RELEASE(m_pTexOrnamentGD);
-	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\akairo.jpg"), &m_pTexOrnamentR);
-	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\akairo2.jpg"), &m_pTexOrnamentRD);
-	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\aoiro.jpg"), &m_pTexOrnamentB);
-	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\aoiro2.jpg"), &m_pTexOrnamentBD);
-	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\midoriiro.jpg"), &m_pTexOrnamentG);
-	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\midoriiro2.jpg"), &m_pTexOrnamentGD);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\akairo.png"), &m_pTexOrnamentR);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\akairo2.png"), &m_pTexOrnamentRD);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\aoiro.png"), &m_pTexOrnamentB);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\aoiro2.png"), &m_pTexOrnamentBD);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\midoriiro.png"), &m_pTexOrnamentG);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\midoriiro2.png"), &m_pTexOrnamentGD);
 	m_pParent = pStage;
 }
 

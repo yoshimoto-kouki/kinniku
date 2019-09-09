@@ -104,7 +104,7 @@ bool CStar::make() {
  *********************************************************/
 void CStar::Restore(CStage *pStage, ID2D1RenderTarget *pRT) {
 	SAFE_RELEASE(m_pBitmap);
-	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\hosi.jpg"), &m_pBitmap);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\hosi.png"), &m_pBitmap);
 	m_pParent = pStage;
 }
 

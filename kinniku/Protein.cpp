@@ -100,7 +100,7 @@ void CProtein::hit(float amount) {
 *********************************************************/
 void CProtein::Restore(CStage *pStage, ID2D1RenderTarget *pRT){
 	SAFE_RELEASE(m_pTexture);
-	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\protein.jpg"), &m_pTexture);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\protein.png"), &m_pTexture);
 	m_pParent = pStage;
 }
 

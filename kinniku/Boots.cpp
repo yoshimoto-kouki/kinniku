@@ -91,7 +91,7 @@ void CBoots::hit(float amount) {
 *********************************************************/
 void CBoots::Restore(CStage *pStage,ID2D1RenderTarget *pRT) {
 	SAFE_RELEASE(m_pBitmap);
-	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\kutusita.jpg"), &m_pBitmap);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\kutusita.png"), &m_pBitmap);
 	m_pParent = pStage;
 }
 
