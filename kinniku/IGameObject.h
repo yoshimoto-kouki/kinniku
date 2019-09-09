@@ -12,14 +12,20 @@ public:
 	virtual void draw(ID2D1RenderTarget *pRenderTarget) = 0;
 	virtual bool collide(float x, float y, float w, float h) {
 		return false;
+	}	virtual bool collide(float x, float w) {
+		return false;
 	}
 	virtual bool collide(IGameObject *Obj) {
+		return false;
+	}
+	virtual bool collide(IGameObject *Obj,int x) {
 		return false;
 	}
 	virtual bool hitType() { return false; };
 	virtual void hit(float amount) {};
 	virtual bool make() { return false; };
-	virtual float TreeScoreBack() { return 0; };//星の持つスコアを返す
+	virtual int TreeScoreBack() { return 0; };//星の持つスコアを返す
+	virtual float ScoreBack() { return (int)0; };//星の持つスコアを返す
 	virtual bool StarHitFlag() { return false; };//星か否か
 	virtual float StarPointBackx() { return 0; };//星の現在位置xを返す
 	virtual float StarPointBacky() { return 0; };//星の現在位置yを返す

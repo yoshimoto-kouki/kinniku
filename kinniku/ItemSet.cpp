@@ -99,7 +99,7 @@ void CItemSet::Reset() {
 IGameObject *CItemSet::ItemAdd(int rand ,int type) {
 	IGameObject *pObj = NULL;
 	int Setx, Sety, id;
-	Setx = rand % 20 * 50;
+	Setx = rand % 26 * 50;
 	Sety = -60;
 	id = rand % type;
 	switch (id) {
@@ -121,27 +121,27 @@ IGameObject *CItemSet::ItemAdd(int rand ,int type) {
 IGameObject *CItemSet::ProteinAdd(int rand) {
 	IGameObject *pObj = NULL;
 	int Setx, Sety;
-	Setx = rand % 20 * 50;
+	Setx = rand % 26 * 50;
 	Sety = -60;
 	pObj = new CProtein(Setx, Sety);
 	return pObj;
 }
-IGameObject *CItemSet::ScoreRemnantAdd(float x, float y, int score)
+IGameObject *CItemSet::ScoreRemnantAdd(float x, float y, int tscore,int score)
 {
 	IGameObject *pObj = NULL;
-	pObj = new CScoreRemnant(x, y,score);
+	pObj = new CScoreRemnant(x, y,tscore,score);
 	return pObj;
 }
 /*
  *  Itemセットデータ(無条件で出てくるやつ)の初期位置と種類
  */
 SHORT CItemSet::m_pSetData[] = {//種類(0=星、1=杖、2=丸飾、3=靴)
-	136,200,50,0,      //  星セットを行うタイミング、セット座標(x,y)、種類
-	50,600,50,0,
+	136,200,-50,0,      //  星セットを行うタイミング、セット座標(x,y)、種類
+	50 ,600,30,0,
 	400,300,0,0,
-	130,400,20,0,
+	130,400,-20,0,
 	620,200,40,0,
-	500,600,100,0,
+	500,600,-10,0,
 	230,400,20,0,
 };
 

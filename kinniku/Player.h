@@ -24,6 +24,9 @@ public:
 	virtual float    getY() {
 		return m_fY;
 	}
+	virtual float getLongTimePush() {
+		return m_bLongPushSpace;
+	}
 protected:
 	CStage		* m_pStage;
 	ID2D1Bitmap *m_pBitmapP;
@@ -39,7 +42,6 @@ protected:
 	BOOL		m_bTama;
 	BOOL		m_bTC;
 	BOOL		m_bLongPushSpace;
-#ifdef _DEBUG
 	ID2D1SolidColorBrush		*m_pBrush;
-#endif // _DEBUG
+
 };

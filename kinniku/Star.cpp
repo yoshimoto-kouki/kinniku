@@ -78,6 +78,14 @@ bool CStar::collide(IGameObject *pObj) {
 	return pObj->collide(l, t, 64, 64);
 }
 
+bool CStar::collide(IGameObject * pObj, int x)
+{
+	//星のポイント判定用*********************
+	float l = m_fX;
+	return pObj->collide(l,64);
+	//***************************************
+}
+
 void CStar::hit(float amount) {
 	if (amount == 1.0f)
 		m_bDamage = true;

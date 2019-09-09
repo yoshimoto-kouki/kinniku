@@ -2,6 +2,7 @@
 #include <d2d1.h>
 #include "tama.h"
 #include "TextureLoader.h"
+#include <math.h>
 
 ID2D1Bitmap *CTama::m_pBitmap = NULL;
 #define Bitmap01sizeX 100//25
@@ -19,6 +20,7 @@ CTama::CTama(CStage *pStage, float x, float y,int Decoration)
 	m_bDamage = false;
 	coliPosx = 0;
 	coliPosy = 0;
+	m_fTreeScore = 100;
 }
 
 CTama::~CTama()
@@ -54,18 +56,27 @@ void CTama::draw(ID2D1RenderTarget *pRenderTarget) {
 *@return true : “–‚½‚è / false : ‚ ‚½‚Á‚Ä‚È‚¢
 ************************************************************/
 bool CTama::collide(float x, float y, float w, float h) {
+	float center = x + w * 0.5;//’e‚É“–‚½‚é‰æ‘œ‚Ì’†S
 	float left = m_fX;
 	float top = m_fY;
 	float right = m_fX + Bitmap01sizeX; //¶ã{‰æ‘œ•
-	float bottom = m_fY + Bitmap01sizeY;//¶ã{‰æ‘œ‚
+	float bottom = m_fY + Bitmap01sizeY*0.6;//¶ã{‰æ‘œ‚
 	if (top > (y + h))
 		return false;
 	if (bottom < y)
 		return false;
-	if (left > (x + w))
+	if (left > center)
 		return false;
-	if (right < x)
+	if (right < center)
 		return false;
+	return true;
+}
+bool CTama::collide(float x,float w)
+{
+	float senter_x = m_fX + (Bitmap01sizeX * 0.5f);
+	float StarSenterx = x + (w * 0.5f);
+	m_fTreeScore *= (32.f - fabsf(senter_x - StarSenterx)) / 32.f;
+	
 	return true;
 }
 /************************************************************

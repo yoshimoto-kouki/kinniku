@@ -188,7 +188,7 @@ GameSceneResultCode    CStage::move() {
 		if (m_pBG)
 			m_pBG->move();
 		
-		if (GameData::ProteinFlag) {
+		if (GameData::ProteinFlag) {//プロテインバースト中カウント
 			m_fProteinTimer++;
 			if (m_fProteinTimer > 150){//30FPSで更新されるだろうから＊5して出した。5秒用
 				GameData::ProteinFlag = !GameData::ProteinFlag;
@@ -205,14 +205,15 @@ GameSceneResultCode    CStage::move() {
 					it2 = m_pItems->begin();
 					while (it2 != m_pItems->end()) {
    						if ((*it2)->collide(*it1)) {//当たり判定true/false
-							if ((*it2)->hitType())//星か否か判定
+							if ((*it2)->hitType()) {//星か否か判定
 								(*it1)->hit(10.0f);//ありえない数値を渡すことで特殊処理
-							//(*it1)->hit(1.0f);//モミの木のhitへ(数値)を渡している。
+								(*it2)->collide(*it1,1);
+							}
 							(*it2)->hit(1.0f);
 							if ((*it2)->make()) {//星破壊時の判定。
 
 								(*it1)->collidePos((*it2)->StarPointBackx(), (*it2)->StarPointBacky());
-
+									;
 								IGameObject *pObj;
 								pObj = m_pItemSet->ItemAdd(rand(),4);//()の数値で4種のItem生成・星を含む。
 								if (pObj != NULL)
@@ -229,12 +230,13 @@ GameSceneResultCode    CStage::move() {
 					if (m_pScore)//スコア用
 						if ((*it1)->StarHitFlag()) {
 							m_pScore->AddScore(
-								(*it1)->TreeScoreBack()//Tamaが失われるとき得点を取得して加算
+								(*it1)->TreeScoreBack()//Tamaが失われるとき得点を取得して総得点に加算
+								, (*it1)->ScoreBack()
 							);
 							m_pScore->move();
 							//**星刺し時得点用***************
 							IGameObject *pObj;
-							pObj = m_pItemSet->ScoreRemnantAdd((*it1)->TSPointBackx(), (*it1)->TSPointBacky(), (*it1)->TreeScoreBack());
+							pObj = m_pItemSet->ScoreRemnantAdd((*it1)->TSPointBackx(), (*it1)->TSPointBacky(), (*it1)->TreeScoreBack(),(*it1)->ScoreBack());
 							if (pObj != NULL)
 								m_pItems->push_back(pObj);
 							//**************************

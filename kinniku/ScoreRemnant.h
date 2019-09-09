@@ -10,7 +10,7 @@ class CStage;
 class CScoreRemnant : public IGameObject
 {
 public:
-	CScoreRemnant(float x,float y,int score);
+	CScoreRemnant(float x,float y,int tscore,int score);
 	virtual ~CScoreRemnant();
 
 	virtual bool move()override;

@@ -10,7 +10,7 @@
 #define GAMESTAGE_WIDE 1344
 #define GAMESTAGE_HIGH 1080
 
-#define TexsizeHalfX 50
+#define TexsizeHalfX 80
 #define TexsizeHalfY 90
 #define PTexsizeHalfX 75
 #define PTexsizeHalfY 96
@@ -36,7 +36,6 @@ CPlayer::CPlayer(CStage *pStage)
 	//  CStage からまた借りする
 	pRenderTarget = pStage->GetRenderTarget();
 	if (pRenderTarget) {
-//		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\smilie.tga"), &m_pBitmapP);
 		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\santest.png"), &m_pBitmapP);
 		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\santest2.png"), &m_pBitmapPT);
 		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\santest3.png"), &m_pBitmapPTC);
@@ -45,10 +44,9 @@ CPlayer::CPlayer(CStage *pStage)
 		pRenderTarget->Release();    //  Release して解放
 	}
 
-#ifdef _DEBUG
 	pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::IndianRed), &m_pBrush);
 	SAFE_RELEASE(pRenderTarget);
-#endif // DEBUG
+
 }
 
 
@@ -77,30 +75,16 @@ bool CPlayer::move() {
 	if (GetAsyncKeyState(VK_RIGHT))
 		m_fX += 10.0f;
 	
-	if (m_fX > 1015)//right
-		m_fX = 1015;
+	if (m_fX > 1230)//right
+		m_fX = 1230;
 	if (m_fX < -5)//left
 		m_fX = -5;
-	/*********************************************
-	if (GetAsyncKeyState(VK_SPACE)) {
-		if (!GameData::shot) {
-			GameData::shot = true;
-			GameData::tamax = 430;
-			GameData::tamay = 700;
-		}
-	}
-//	else {
-//		m_bFlag = false;
-//	}
-	if (GameData::shot) {
-		GameData::tamay -= 16;
-		if (GameData::tamay = 0)m_bFlag = false;
-	}
-	***********************************************/ 
 	if (0 < m_fThrowTime)
 		m_fThrowTime--;
 	if (GetAsyncKeyState(VK_SPACE)) {
 		m_fKeyTime += 1;
+		if (ChargeTime < m_fKeyTime)
+			m_fKeyTime = ChargeTime; 
 		m_bLongPushSpace = true;
 	}
 	else {
@@ -109,11 +93,11 @@ bool CPlayer::move() {
 	}
 	//-----モミの木チャージ判定------
 	if (!GameData::ProteinFlag) {//プロテインバーストしてないとき
-		if (!m_bLongPushSpace) {
-			if (Pressinterval < m_fKeyTime) {
+		if(m_fThrowTime < m_fKeyTime){
+			if (!m_bLongPushSpace) {
 				if (m_fKeyTime < ChargeTime) {
 					if (!m_bTama) {
-						IGameObject *pObj = new CTama(m_pStage, m_fX + TexsizeHalfX, m_fY + TexsizeHalfY,m_fItemGetScore);
+						IGameObject *pObj = new CTama(m_pStage, m_fX + TexsizeHalfX, m_fY + TexsizeHalfY, m_fItemGetScore);
 						m_pStage->AddTama(pObj);
 					}
 					m_fItemGetScore = 0;
@@ -124,9 +108,9 @@ bool CPlayer::move() {
 				}
 				else {
 					if (!m_bTama) {
-						IGameObject *pObj = new CTama(m_pStage, m_fX + TexsizeHalfX+ PTexsizeHalfX, m_fY + TexsizeHalfY,m_fItemGetScore);
+						IGameObject *pObj = new CTama(m_pStage, m_fX + TexsizeHalfX + PTexsizeHalfX, m_fY + TexsizeHalfY, m_fItemGetScore);
 						m_pStage->AddTama(pObj);
-						IGameObject *pObj2 = new CTama(m_pStage, m_fX - TexsizeHalfX + PTexsizeHalfX, m_fY + TexsizeHalfY,m_fItemGetScore);
+						IGameObject *pObj2 = new CTama(m_pStage, m_fX - TexsizeHalfX + PTexsizeHalfX, m_fY + TexsizeHalfY, m_fItemGetScore);
 						m_pStage->AddTama(pObj2);
 					}
 					m_fItemGetScore = 0;
@@ -156,7 +140,7 @@ bool CPlayer::move() {
  *  描画処理
  *******************************************************/
 void CPlayer::draw(ID2D1RenderTarget *pRenderTarget) {
-	D2D1_RECT_F rc,rcT;
+	D2D1_RECT_F rc,rcT,rcIcon;
 	D2D1_SIZE_F size, Ssize;
 	if (m_pBitmapP == NULL)
 		return;
@@ -170,7 +154,7 @@ void CPlayer::draw(ID2D1RenderTarget *pRenderTarget) {
 		pRenderTarget->DrawBitmap(m_pBitmapC, rc, (m_fKeyTime / 30), D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 	}
 
-	if (0 <= m_fThrowTime < 15) {//キャラ用投擲前
+	if (!m_bTama && m_fThrowTime < 15) {//キャラ用投擲前
 		rc.left = m_fX;
 		rc.top = m_fY;
 		rc.right = rc.left + size.width;
@@ -184,7 +168,7 @@ void CPlayer::draw(ID2D1RenderTarget *pRenderTarget) {
 		rc.bottom = rc.top + size.height;
 		pRenderTarget->DrawBitmap(m_pBitmapPT, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 	}
-	if (15 <= m_fThrowTime && m_bTC) {//キャラ用投擲後
+	if (15 <= m_fThrowTime && m_bTC) {//キャラ用投擲後(チャージ)
 		rc.left = m_fX;
 		rc.top = m_fY;
 		rc.right = rc.left + size.width;
@@ -200,17 +184,30 @@ void CPlayer::draw(ID2D1RenderTarget *pRenderTarget) {
 			pRenderTarget->DrawBitmap(m_pBitmapNT, rcT, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 		}
 		else {
-			rcT.left = m_fX + PTexsizeHalfX * 2 - 10;
-			rcT.top = m_fY + PTexsizeHalfY;
+			rcT.left = m_fX + PTexsizeHalfX * 1.5f;
+			rcT.top = m_fY + PTexsizeHalfY*0.5f;
 			rcT.right = rcT.left + TexsizeHalfX;			
 			rcT.bottom = rcT.top + TexsizeHalfY;
 			pRenderTarget->DrawBitmap(m_pBitmapNT, rcT, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
-			rcT.left = m_fX - 20;
+			rcT.left = rc.left - PTexsizeHalfX*0.6f;
 			rcT.right = rcT.left + TexsizeHalfX;
 			pRenderTarget->DrawBitmap(m_pBitmapNT, rcT, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 		}
 	}
-
+	if (m_bLongPushSpace) {
+		if ( 0 < m_fKeyTime) {
+			rcIcon.left = 1800;
+			rcIcon.top = 936 - m_fKeyTime * 10;
+			rcIcon.right = rcIcon.left + 64 ;
+			rcIcon.bottom = 1000;
+			pRenderTarget->FillRectangle(rcIcon, m_pBrush);
+			if (ChargeTime <= m_fKeyTime) {
+				rcIcon.top = rcIcon.top - 64;
+				rcIcon.bottom = rcIcon.top + 64;
+				pRenderTarget->DrawBitmap(m_pBitmapC, rcIcon, (m_fKeyTime / 30), D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+			}
+		}
+	}
 }
 bool CPlayer::collide(float x, float y, float w, float h) {
 	float l = m_fX ;
@@ -244,49 +241,3 @@ void CPlayer::hit(float amount) {
 	if (m_fItemGetScore < ScoreLimit)
 		m_fItemGetScore += 1;
 }
-
-
-/*
-D2D1_RECT_F tama;
-	tama.left = 430;
-	tama.top = 700;
-	tama.right = rc.left + 64;
-	tama.bottom = rc.top + 64;
-	if (GameData::shot) {
-		tama.left = GameData::tamax;
-		tama.top = GameData::tamay;
-		tama.right = rc.left + 64;
-		tama.bottom = rc.top + 64;
-	}
-
-				//^^^^^^^^^^^^^^
-			if (!GameData::shot) {
-
-				GameData::shot = true;
-				GameData::tamax = 430;
-				GameData::tamay = 700;
-				//^^^^^^^^^^^^^^^^^^^^^^^^^
-
-			}		if (GameData::shot) {
-				GameData::tamay -= 16;
-				if (GameData::tamay = 0)m_bFlag = false;
-			}
-
-
-
-			struct SHOT {
-
-bool flag;//弾が発射中かどうか
-
-double x;//x座標
-
-double y;//y座標
-
-int gh;//グラフィックハンドル
-
-int width, height;//画像の幅と高さ
-};
-
-	void Draw(ID2D1RenderTarget *pTarget);
-	void SetPos(int x, int y);
-*/

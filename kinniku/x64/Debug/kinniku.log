@@ -1,5 +1,5 @@
 ﻿  ScoreRemnant.cpp
 c:\users\rtamura\source\repos\kinniku\kinniku\scoreremnant.cpp(18): warning C4244: '=': 'double' から 'int' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\scoreremnant.cpp(44): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
 c:\users\rtamura\source\repos\kinniku\kinniku\scoreremnant.cpp(45): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\scoreremnant.cpp(46): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
   kinniku.vcxproj -> C:\Users\rtamura\source\repos\kinniku\x64\Debug\kinniku.exe

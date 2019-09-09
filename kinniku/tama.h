@@ -15,12 +15,14 @@ public:
 	virtual bool move() override;
 	virtual void draw(ID2D1RenderTarget *pRenderTarget) override;
 	virtual bool collide(float x, float y, float w, float h) override;
+	virtual bool collide(float x, float w) override;
 	virtual bool collide(IGameObject *pObj) override;
 	virtual void hit(float amount) override;
 	virtual bool collidePos(float x, float y);
 	virtual float TSPointBackx() { return coliPosx; }
 	virtual float TSPointBacky() { return coliPosy;	}
-	float TreeScoreBack() { return TreeScore; }
+	int TreeScoreBack() { return TreeScore; }
+	float ScoreBack() { return (int)m_fTreeScore; }
 	bool  StarHitFlag() { return m_bDamage; }
 	static void Restore(ID2D1RenderTarget *pRT);
 	static void Finalize();
@@ -34,4 +36,5 @@ protected:
 	float m_fVX, m_fVY;	
 	float coliPosx, coliPosy;
 	int TreeScore;
+	float m_fTreeScore;
 };

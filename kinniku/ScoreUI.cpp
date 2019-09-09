@@ -22,6 +22,7 @@ CScoreUI::CScoreUI(ID2D1RenderTarget *pRenderTarget)
 	m_iScore = 0;
 	m_pTexture = NULL;
 	CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\digit.png"), &m_pTexture);
+	
 }
 
 
@@ -52,8 +53,9 @@ INT CScoreUI::GetScore() {
 *  スコアに値を加算
 *@param in value  加算する値
 *************************************************/
-void CScoreUI::AddScore(int score) {
-	m_iScore += (100 * pow(2, score));
+void CScoreUI::AddScore(int value,int score) {
+	int val = score * (100 * pow(2, value));
+	m_iScore += val;
 }
 
 

@@ -15,6 +15,7 @@ public:
 	virtual void draw(ID2D1RenderTarget *pRenderTarget)override;
 	virtual bool collide(float x, float y, float w, float h) override;
 	virtual bool collide(IGameObject *pObj) override;
+	virtual bool collide(IGameObject *pObj,int x) override;
 	virtual void hit(float amount) override;
 	virtual bool hitType() override;
 	virtual bool make()override;

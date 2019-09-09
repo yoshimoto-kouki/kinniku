@@ -15,7 +15,7 @@ public:
 	virtual void Reset();
 	virtual IGameObject *ItemAdd(int rand,int type);
 	virtual IGameObject *ProteinAdd(int rand);
-	virtual IGameObject *ScoreRemnantAdd(float x,float y,int score);
+	virtual IGameObject *ScoreRemnantAdd(float x,float y,int tscore, int score);
 protected:
 	CStage * m_pParent;
 	int m_iIndex;
