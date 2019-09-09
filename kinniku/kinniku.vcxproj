@@ -151,8 +151,10 @@
     <ClInclude Include="Boots.h" />
     <ClInclude Include="Candycane.h" />
     <ClInclude Include="ddsfunctions.h" />
+    <ClInclude Include="GameClear.h" />
     <ClInclude Include="GameData.h" />
     <ClInclude Include="GameOver.h" />
+    <ClInclude Include="GameResult.h" />
     <ClInclude Include="IGameObject.h" />
     <ClInclude Include="IGameScene.h" />
     <ClInclude Include="ItemSet.h" />
@@ -178,8 +180,10 @@
     <ClCompile Include="Boots.cpp" />
     <ClCompile Include="Candycane.cpp" />
     <ClCompile Include="ddsfunctions.cpp" />
+    <ClCompile Include="GameClear.cpp" />
     <ClCompile Include="GameData.cpp" />
     <ClCompile Include="GameOver.cpp" />
+    <ClCompile Include="GameResult.cpp" />
     <ClCompile Include="IGameObject.cpp" />
     <ClCompile Include="IGameScene.cpp" />
     <ClCompile Include="ItemSet.cpp" />

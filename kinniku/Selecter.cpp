@@ -5,6 +5,8 @@
 #include<stdio.h>
 #include "PlayGame.h"
 #include "GameOver.h"
+#include "GameResult.h"
+#include "GameClear.h"
 #include "Title.h"
 #include <directxmath.h>
 
@@ -84,7 +86,6 @@ void CSelector::doAnim() {
 	case	GAMEPHASE_TITLE:
 		if (m_pScene != NULL) {
 			rc = m_pScene->move();
-
 		}
 		if (rc == GAMESCENE_DEFAULT)
 			break;
@@ -98,19 +99,42 @@ void CSelector::doAnim() {
 		if (rc == GAMESCENE_DEFAULT)
 			break;
 		SAFE_DELETE(m_pScene);
-		m_pScene = new CGameOver(this);
-		m_eGamePhase = GAMEPHASE_GAMEOVER;
+		m_pScene = new CGameResult(this);
+		m_eGamePhase = GAMEPHASE_GAMERESULT;
+		break;
+	case GAMEPHASE_GAMERESULT:
+		if (m_pScene != NULL) {
+			rc = m_pScene->move();
+		}
+		if (rc == GAMESCENE_DEFAULT)
+			break;
+		SAFE_DELETE(m_pScene);
+
+		if (rc == GAMESCENE_END_OK) {
+			m_pScene = new CGameClear(this);
+			m_eGamePhase = GAMEPHASE_GAMECLEAR;
+		}else
+		if (rc == GAMESCENE_END_OK2) {
+			m_pScene = new CGameOver(this);
+			m_eGamePhase = GAMEPHASE_GAMEOVER;
+		}
 		break;
 	case    GAMEPHASE_GAMEOVER:
 		if (m_pScene != NULL) {
 			rc = m_pScene->move();
-
 		}
 		if (rc == GAMESCENE_DEFAULT)
 			break;
 		m_eGamePhase = GAMEPHASE_RESET;
-	}
-	
+		break;
+	case	GAMEPHASE_GAMECLEAR:
+		if (m_pScene != NULL) {
+			rc = m_pScene->move();
+		}
+		if (rc == GAMESCENE_DEFAULT)
+			break;
+		m_eGamePhase = GAMEPHASE_RESET;
+	}	
 }
 
 

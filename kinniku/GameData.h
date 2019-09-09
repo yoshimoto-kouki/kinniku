@@ -11,5 +11,7 @@ public:
 	static bool StartIndexEnd;
 	static bool ProteinFlag;
 
+	//ゲームリザルト画面に渡すスコア
+	static float TotalScoreResult;
 };
 

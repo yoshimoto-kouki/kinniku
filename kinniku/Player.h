@@ -34,7 +34,7 @@ protected:
 	ID2D1Bitmap *m_pBitmapPTC;
 	ID2D1Bitmap *m_pBitmapC;
 	ID2D1Bitmap *m_pBitmapNT;
-	ID2D1Bitmap *m_pBitmapCT;
+
 	FLOAT		m_fX, m_fY;
 	FLOAT		m_fKeyTime;
 	FLOAT		m_fThrowTime;

@@ -18,12 +18,11 @@ public:
 	virtual bool collide(float x, float w) override;
 	virtual bool collide(IGameObject *pObj) override;
 	virtual void hit(float amount) override;
-	virtual bool collidePos(float x, float y);
-	virtual float TSPointBackx() { return coliPosx; }
-	virtual float TSPointBacky() { return coliPosy;	}
+	virtual float TSPointBackx() override;
+	virtual float TSPointBacky() override;
 	int TreeScoreBack() { return TreeScore; }
-	float ScoreBack() { return (int)m_fTreeScore; }
-	bool  StarHitFlag() { return m_bDamage; }
+	float ScoreBack() override;
+	virtual bool  StarHitFlag()override;
 	static void Restore(ID2D1RenderTarget *pRT);
 	static void Finalize();
 
@@ -31,10 +30,10 @@ protected:
 	static ID2D1RenderTarget *pRenderTarget;
 	static ID2D1Bitmap *m_pBitmap;
 	CStage *m_pParent;
-	BOOL m_bDamage;
+	BOOL m_bDamage; //本来、このフラグで処理しようとしたが、エラーを吐く.boolを操作するとエラー何故。
+
 	float m_fX, m_fY;
 	float m_fVX, m_fVY;	
-	float coliPosx, coliPosy;
 	int TreeScore;
 	float m_fTreeScore;
 };

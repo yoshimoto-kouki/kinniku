@@ -24,6 +24,7 @@ protected:
 	float m_fVY;
 	float m_fLimitY;
 	int  m_iRemScore;
+	int  m_iRemScore2;
 	bool  m_bEND;
 	static CStage *m_pParent;
 };

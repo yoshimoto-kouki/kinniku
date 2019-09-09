@@ -19,9 +19,7 @@ public:
 	virtual void hit(float amount) override;
 	virtual bool hitType() override;
 	virtual bool make()override;
-	virtual float StarPointBackx()override;
-	virtual float StarPointBacky()override;
-
+	
 	static void Restore(CStage *pStage, ID2D1RenderTarget *pRT);
 	static void Finalize();
 protected:

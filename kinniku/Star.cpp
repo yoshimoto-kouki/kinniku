@@ -75,7 +75,7 @@ bool CStar::collide(float x, float y, float w, float h) {
 bool CStar::collide(IGameObject *pObj) {
 	float l = m_fX;
 	float t = m_fY;
-	return pObj->collide(l, t, 64, 64);
+	return pObj->collide(l, t, 64, 32);
 }
 
 bool CStar::collide(IGameObject * pObj, int x)
@@ -96,12 +96,6 @@ bool CStar::hitType(){
 bool CStar::make() {
 	return true;
 }
-float CStar::StarPointBackx() {
-	return m_fX;
-}
-float CStar::StarPointBacky() {
-	return m_fY;
-}
 
 /*********************************************************
  *@fn
@@ -110,7 +104,7 @@ float CStar::StarPointBacky() {
  *********************************************************/
 void CStar::Restore(CStage *pStage, ID2D1RenderTarget *pRT) {
 	SAFE_RELEASE(m_pBitmap);
-	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\star.png"), &m_pBitmap);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\hosi.jpg"), &m_pBitmap);
 	m_pParent = pStage;
 }
 

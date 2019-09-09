@@ -57,7 +57,7 @@ CPlayer::~CPlayer()
 	SAFE_RELEASE(m_pBitmapPTC);
 	SAFE_RELEASE(m_pBitmapC);
 	SAFE_RELEASE(m_pBitmapNT);
-	SAFE_RELEASE(m_pBitmapCT);
+	
 #ifdef _DEBUG
 	SAFE_RELEASE(m_pBrush);
 #endif // _DEBUG

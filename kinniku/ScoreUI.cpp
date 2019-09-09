@@ -8,6 +8,7 @@
 #include "TextureLoader.h"
 #include "PlayGame.h"
 #include "ScoreUI.h"
+#include "GameData.h"
 
 //  マクロ定義
 #undef SAFE_RELEASE
@@ -54,7 +55,7 @@ INT CScoreUI::GetScore() {
 *@param in value  加算する値
 *************************************************/
 void CScoreUI::AddScore(int value,int score) {
-	int val = score * (100 * pow(2, value));
+	int val = score * (10 * pow(2, value));
 	if (val < 0)
 		val = 0;
 	m_iScore += val;
@@ -66,7 +67,7 @@ void CScoreUI::AddScore(int value,int score) {
 *  スコア表示のアニメーション
 *************************************************/
 void CScoreUI::move() {
-	//  今のところ何もせず
+	GameData::TotalScoreResult = m_iScore;
 }
 
 /*************************************************

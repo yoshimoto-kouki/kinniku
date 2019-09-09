@@ -14,10 +14,9 @@ CScoreRemnant::CScoreRemnant(float x, float y, int tscore,int score)
 	m_fX = x;
 	m_fY = y;
 	m_fVY = -0.3f;
-	m_bEND = false;
-	m_iRemScore = score * (100 * pow(2, tscore));
-	if (m_iRemScore < 0)
-		m_iRemScore = 0;
+	m_bEND = false;	
+	m_iRemScore2 = score;
+	m_iRemScore = tscore;		
 	m_fLimitY = y - ScoreLimitY;
 }
 
@@ -35,7 +34,8 @@ bool CScoreRemnant::move()
 
 void CScoreRemnant::draw(ID2D1RenderTarget * pRenderTarget)
 {
-	int RemScore = m_iRemScore;
+	
+ 	int RemScore = m_iRemScore2 * (10 * pow(2, m_iRemScore));
 	
 	D2D1_RECT_F rc,src;
 	rc.left = m_fX + 16 * 3;
@@ -52,7 +52,6 @@ void CScoreRemnant::draw(ID2D1RenderTarget * pRenderTarget)
 		RemScore /= 10;
 		rc.left -= 16;
 	}
-
 }
 
 void CScoreRemnant::Restore(CStage * pStage, ID2D1RenderTarget * pRT)

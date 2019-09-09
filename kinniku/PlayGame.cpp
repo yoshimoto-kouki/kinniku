@@ -131,6 +131,10 @@ GameSceneResultCode    CStage::move() {
 		++m_iTimer;
 		if (m_iTimer > 2700)//ゲーム終了条件1分30秒になってるはず
 			bDone = true;
+#ifndef rtamura
+		if (m_iTimer > 3000)//ゲーム終了条件1分30秒になってるはず
+			bDone = true;
+#endif
 		if (bDone) {
 			m_iFadeTimer = 0;
 			m_ePhase = STAGE_FADE;
@@ -197,23 +201,22 @@ GameSceneResultCode    CStage::move() {
 		}
 		
 		//---------------tamaとItemの当たり判定-------------
+		
 		if (m_pTamas) {
 			std::list<IGameObject*>::iterator it1 = m_pTamas->begin();
 			std::list<IGameObject*>::iterator it2;
 			while (it1 != m_pTamas->end()) {
 				if (m_pItems) {
+					
 					it2 = m_pItems->begin();
 					while (it2 != m_pItems->end()) {
    						if ((*it2)->collide(*it1)) {//当たり判定true/false
 							if ((*it2)->hitType()) {//星か否か判定
-								(*it1)->hit(10.0f);//ありえない数値を渡すことで特殊処理
 								(*it2)->collide(*it1,1);
+								(*it1)->hit(1.0f);
 							}
 							(*it2)->hit(1.0f);
-							if ((*it2)->make()) {//星破壊時の判定。
-
-								(*it1)->collidePos((*it2)->StarPointBackx(), (*it2)->StarPointBacky());
-									;
+							if ((*it2)->make()) {//星破壊時の判定。	;
 								IGameObject *pObj;
 								pObj = m_pItemSet->ItemAdd(rand(),4);//()の数値で4種のItem生成・星を含む。
 								if (pObj != NULL)
@@ -241,6 +244,7 @@ GameSceneResultCode    CStage::move() {
 								m_pItems->push_back(pObj);
 							//**************************
 						}
+					
 					SAFE_DELETE(*it1);
 					it1 = m_pTamas->erase(it1);
 				}
@@ -291,7 +295,7 @@ void    CStage::draw(ID2D1RenderTarget *pRenderTarget) {
 	if (m_pBG)//背景用
 		m_pBG->draw(pRenderTarget);
 	if (m_pScore)//スコア用
-		m_pScore->Draw(pRenderTarget, 1100.0f, 10.0f, 32.0f);
+		m_pScore->Draw(pRenderTarget, 1400.0f, 10.0f, 32.0f);
 	if (m_pPlayer)//player
 		m_pPlayer->draw(pRenderTarget);
 	if (m_pTamas) {//  ショットの処理

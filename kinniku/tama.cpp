@@ -18,8 +18,6 @@ CTama::CTama(CStage *pStage, float x, float y,int Decoration)
 	m_fVX = 0;
 	m_fVY = -3.0f;
 	m_bDamage = false;
-	coliPosx = 0;
-	coliPosy = 0;
 	m_fTreeScore = 100;
 }
 
@@ -60,7 +58,7 @@ bool CTama::collide(float x, float y, float w, float h) {
 	float left = m_fX;
 	float top = m_fY;
 	float right = m_fX + Bitmap01sizeX; //¶ã{‰æ‘œ•
-	float bottom = m_fY + Bitmap01sizeY*0.6;//¶ã{‰æ‘œ‚
+	float bottom = m_fY + Bitmap01sizeY;//¶ã{‰æ‘œ‚
 	if (top > (y + h))
 		return false;
 	if (bottom < y)
@@ -75,8 +73,12 @@ bool CTama::collide(float x,float w)
 {
 	float senter_x = m_fX + (Bitmap01sizeX * 0.5f);
 	float StarSenterx = x + (w * 0.5f);
-	m_fTreeScore *= (32.f - fabsf(senter_x - StarSenterx)) / 32.f;
-	
+	if (x < senter_x && senter_x < x + w) {
+		m_fTreeScore *= (32.f - fabsf(senter_x - StarSenterx)) / 32.f;
+		int val = m_fTreeScore;
+		m_fTreeScore = val;
+		
+	}
 	return true;
 }
 /************************************************************
@@ -93,14 +95,29 @@ bool CTama::collide(IGameObject *pObj) {
 
 
 void CTama::hit(float amount) {
-	if (1.0f != amount)//“ÁŽêˆ—Star‚Å‚ ‚é‚Æ‚«
-		m_bDamage = true;//Tama‚ªÁ‚¦‚é——RB
+	m_bDamage = true;
 }
 
-bool CTama::collidePos(float x, float y)
+float CTama::TSPointBackx()
 {
-	coliPosx = x;
-	coliPosy = y;
+	return m_fX+ Bitmap01sizeX*0.5f;
+}
+
+float CTama::TSPointBacky()
+{
+	return m_fY;
+}
+
+
+float CTama::ScoreBack()
+{
+	return m_fTreeScore;
+}
+
+bool CTama::StarHitFlag()
+{
+	if(m_bDamage)
+		return true;
 	return false;
 }
 

@@ -19,10 +19,12 @@
 CBG::CBG(ID2D1RenderTarget *pRenderTarget)
 {
 	m_pBitmap = NULL;
-	CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\snowshow.png"), &m_pBitmap);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\playgamen.jpg"), &m_pBitmap);
+
 	CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\sei.png"), &m_pCHARSeiya1);
 	CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\ya.png"), &m_pCHARSeiya2);
 	CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\atension.png"), &m_pCHARSeiya3);
+
 	CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\Protein.png"), &m_pBGIconProtein);
 	CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\boots.png"), &m_pBGIconBoots);
 	CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\Ornament.png"), &m_pBGIconOrnament);
@@ -65,6 +67,15 @@ CBG::CBG(ID2D1RenderTarget *pRenderTarget)
 CBG::~CBG()
 {
 	SAFE_RELEASE(m_pBitmap);
+	SAFE_RELEASE(m_pCHARSeiya1);
+	SAFE_RELEASE(m_pCHARSeiya2);
+	SAFE_RELEASE(m_pCHARSeiya3);
+
+	SAFE_RELEASE(m_pBGIconProtein);
+	SAFE_RELEASE(m_pBGIconBoots);
+	SAFE_RELEASE(m_pBGIconOrnament);
+	SAFE_RELEASE(m_pBGIconCandy);
+	SAFE_RELEASE(m_pBGIconStar);
 }
 
 void CBG::move(){
@@ -163,22 +174,22 @@ void CBG::move(){
  ***************************************************/
 void CBG::draw(ID2D1RenderTarget *pRenderTarget) {
 	D2D1_RECT_F rc, rcw;
-	D2D1_SIZE_F size;
+	D2D1_SIZE_F sizescreen;
 	if (m_pBitmap == NULL)
 		return;
-	size = m_pBitmap->GetSize();
-
+	
+	sizescreen = pRenderTarget->GetSize();
 	rc.left = 0;
 	rc.top = 0;
-	rc.right = rc.left + size.width;
-	rc.bottom = rc.top + size.height;
+	rc.right = rc.left + sizescreen.width*0.7;
+	rc.bottom = rc.top + sizescreen.height;
 	pRenderTarget->DrawBitmap(m_pBitmap, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 
 	float moveY = m_fY;
 	if (movetype != 0) {
 		moveY = 0;
 	}
-	rcw.left = size.width + 50;
+	rcw.left = sizescreen.width*0.7 + 50;
 	rcw.top = 900 - moveY;
 	rcw.right = rcw.left + 126;
 	rcw.bottom = rcw.top + 126;
@@ -188,7 +199,7 @@ void CBG::draw(ID2D1RenderTarget *pRenderTarget) {
 	if (movetype != 1) {
 		moveY = 0;
 	}
-	rcw.left = size.width + 136 + 50;
+	rcw.left = sizescreen.width*0.7 + 136 + 50;
 	rcw.top = 900 - moveY;
 	rcw.right = rcw.left + 126;
 	rcw.bottom = rcw.top + 126;
@@ -199,7 +210,7 @@ void CBG::draw(ID2D1RenderTarget *pRenderTarget) {
 	if (movetype != 2) {
 		moveY = 0;
 	}
-	rcw.left = size.width + 272 + 50;
+	rcw.left = sizescreen.width*0.7 + 322;
 	rcw.top = 900 - moveY;
 	rcw.right = rcw.left + 126;
 	rcw.bottom = rcw.top + 126;
@@ -207,27 +218,27 @@ void CBG::draw(ID2D1RenderTarget *pRenderTarget) {
 	pRenderTarget->DrawBitmap(m_pCHARSeiya3, rcw, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 
 	D2D1_RECT_F rcs, rco, rcb, rcc, rcp;
-	rcs.left = size.width + 250 + m_fISX;
+	rcs.left = sizescreen.width*0.7 + 250 + m_fISX;
 	rcs.top = 10 + m_fISY;
 	rcs.right = rcs.left + 64;
 	rcs.bottom = rcs.top + 64;
 
-	rco.left = size.width + 250 + m_fIOX;
+	rco.left = sizescreen.width*0.7 + 250 + m_fIOX;
 	rco.top = 10 + m_fIOY;
 	rco.right = rco.left + 64;
 	rco.bottom = rco.top + 64;
 
-	rcb.left = size.width + 250 + m_fIBX;
+	rcb.left = sizescreen.width*0.7 + 250 + m_fIBX;
 	rcb.top = 10 + m_fIBY;
 	rcb.right = rcb.left + 64;
 	rcb.bottom = rcb.top + 64;
 
-	rcc.left = size.width + 250 + m_fICX;
+	rcc.left = sizescreen.width*0.7 + 250 + m_fICX;
 	rcc.top = 10 + m_fICY;
 	rcc.right = rcc.left + 64;
 	rcc.bottom = rcc.top + 64;
 
-	rcp.left = size.width + 250 + m_fIPX;
+	rcp.left = sizescreen.width*0.7 + 250 + m_fIPX;
 	rcp.top = 10 + m_fIPY;
 	rcp.right = rcp.left + 64;
 	rcp.bottom = rcp.top + 64;
