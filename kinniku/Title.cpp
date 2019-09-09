@@ -29,6 +29,7 @@ CTitle::CTitle(CSelector *pSystem)
 	pTarget = pSystem->GetRenderTaget();
 	if (pTarget) {
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\taitoru.jpg"), &m_pImage);
+		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\seiya.png"), &m_pImageseiya);
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\santa1.png"), &m_pImageSanta1);
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\santa2.png"), &m_pImageSanta2);
 		pTarget->CreateSolidColorBrush(D2D1::ColorF(0.0f, 0.0f, 0.0f), &m_pBlack);
@@ -41,6 +42,7 @@ CTitle::CTitle(CSelector *pSystem)
 CTitle::~CTitle()
 {
 	SAFE_RELEASE(m_pImage);
+	SAFE_RELEASE(m_pImageseiya);
 	SAFE_RELEASE(m_pImageSanta1);
 	SAFE_RELEASE(m_pImageSanta2);
 }
@@ -104,7 +106,7 @@ void    CTitle::draw(ID2D1RenderTarget *pRenderTarget) {
 
 	float FLAME = 60, krc;
 
-	D2D1_RECT_F rc;// , src, prc;
+	D2D1_RECT_F rc,src;// , src, prc;
 	D2D1_SIZE_F screenSize, textureSize;
 	screenSize = pRenderTarget->GetSize();
 	textureSize = m_pImage->GetSize();
@@ -112,6 +114,12 @@ void    CTitle::draw(ID2D1RenderTarget *pRenderTarget) {
 	rc.top = 0;
 	rc.right = rc.left + screenSize.width;
 	rc.bottom = rc.top + screenSize.height;
+	
+	src.left = 100;
+	src.top = -200;
+	src.right = src.left + screenSize.width;
+	src.bottom = src.top + screenSize.height;
+
 	/*
 	src.left = 0;
 	src.top = 0;
@@ -119,6 +127,7 @@ void    CTitle::draw(ID2D1RenderTarget *pRenderTarget) {
 	src.bottom = 256 / 2;
 	*/
 	pRenderTarget->DrawBitmap(m_pImage, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
+	pRenderTarget->DrawBitmap(m_pImageseiya, src, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
 	D2D1_RECT_F rcS;
 	rcS.left = 720;
 	rcS.top = 800;

@@ -25,6 +25,7 @@ protected:
 	CSelector *m_pSystem;
 	TitlePhase m_ePhase;
 	ID2D1Bitmap *m_pImage;
+	ID2D1Bitmap *m_pImageseiya;
 	ID2D1Bitmap *m_pImageSanta1;
 	ID2D1Bitmap *m_pImageSanta2;
 	ID2D1SolidColorBrush *m_pBlack;
