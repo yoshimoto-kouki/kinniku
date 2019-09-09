@@ -23,6 +23,7 @@ CGameResult::CGameResult(CSelector *pSystem)
 	pTarget = pSystem->GetRenderTaget();
 	if (pTarget) {
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\playgamen_sukoa.jpg"), &m_pImage);
+		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\digit.png"), &m_pImagedigit);
 		pTarget->CreateSolidColorBrush(D2D1::ColorF(0.0f, 0.0f, 0.0f), &m_pBlack);
 		pTarget->Release();
 		pTarget = NULL;
@@ -34,6 +35,7 @@ CGameResult::CGameResult(CSelector *pSystem)
 CGameResult::~CGameResult()
 {
 	SAFE_RELEASE(m_pImage);
+	SAFE_RELEASE(m_pImagedigit);
 }
 
 GameSceneResultCode CGameResult::move() {
@@ -92,6 +94,24 @@ void    CGameResult::draw(ID2D1RenderTarget *pRenderTarget) {
 	rc.right = rc.left + screenSize.width;
 	rc.bottom = rc.top + screenSize.height;
 	pRenderTarget->DrawBitmap(m_pImage, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
+
+	int val = GameData::TotalScoreResult;
+
+	D2D1_RECT_F rcd,drc;
+	rcd.left = 960 - 64 * ((val % 10)*0.5);
+	rcd.top = 500;
+	rcd.bottom = rcd.top + 128;
+	while (0 < val) {
+		rcd.right = rcd.left + 128;
+
+		drc.left = (val % 10) % 4 * 32;
+		drc.top = (val % 10) / 4 * 32;
+		drc.right = drc.left + 32;
+		drc.bottom = drc.top + 32;
+		pRenderTarget->DrawBitmap(m_pImagedigit, rcd, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR, drc);
+		val /= 10;
+		rcd.left -= 128;
+	}
 
 
 	switch (m_ePhase) {
