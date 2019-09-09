@@ -55,6 +55,8 @@ INT CScoreUI::GetScore() {
 *************************************************/
 void CScoreUI::AddScore(int value,int score) {
 	int val = score * (100 * pow(2, value));
+	if (val < 0)
+		val = 0;
 	m_iScore += val;
 }
 
