@@ -23,9 +23,11 @@ CGameClear::CGameClear(CSelector *pSystem)
 	pTarget = pSystem->GetRenderTaget();
 	if (pTarget) {
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\playgamen_sukoa.jpg"), &m_pImage);
+		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\shadow.png"), &m_pImageShadow);
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\santa1.png"), &m_pImageSanta1);
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\santa2.png"), &m_pImageSanta2);
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\Protein.png"), &m_pImageProtein);
+		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\seiya_english.png"), &m_pImageSeiya);
 		pTarget->CreateSolidColorBrush(D2D1::ColorF(0.0f, 0.0f, 0.0f), &m_pBlack);
 		pTarget->Release();
 		pTarget = NULL;
@@ -35,6 +37,11 @@ CGameClear::CGameClear(CSelector *pSystem)
 CGameClear::~CGameClear()
 {
 	SAFE_RELEASE(m_pImage);
+	SAFE_RELEASE(m_pImageShadow);
+	SAFE_RELEASE(m_pImageSanta1);
+	SAFE_RELEASE(m_pImageSanta2);
+	SAFE_RELEASE(m_pImageProtein);
+	SAFE_RELEASE(m_pImageSeiya);
 }
 
 GameSceneResultCode CGameClear::move() {
@@ -53,7 +60,9 @@ GameSceneResultCode CGameClear::move() {
 		}
 
 		m_fY = -20*m_iTimer + m_fVY * m_iTimer*m_iTimer;
-		
+
+
+
 		if (GetAsyncKeyState(VK_SPACE)) {
 			if (!m_bFlag) {
 
@@ -92,25 +101,59 @@ void    CGameClear::draw(ID2D1RenderTarget *pRenderTarget) {
 	rc.bottom = rc.top + screenSize.height;
 	pRenderTarget->DrawBitmap(m_pImage, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
 	
-	prc.left = 830;
-	prc.top = 800 + m_fY;
+	prc.left = 730;
+	prc.top = 960 + m_fY;
 	prc.right =  prc.left + 64;
 	prc.bottom = prc.top + 64;
 	pRenderTarget->DrawBitmap(m_pImageProtein, prc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
 
 
-	D2D1_RECT_F rcS;
+	D2D1_RECT_F rcS,rcSw,rc_seiya, rcs_seiya;
 	rcS.left = 720;
 	rcS.top = 450;
 	rcS.right = rcS.left + 900;
 	rcS.bottom = rcS.top + 684;
+	rcSw.left = 720;
+	rcSw.top = 850;
+	rcSw.right = rcSw.left + 900;
+	rcSw.bottom = rcSw.top + 284;
 	if (m_bSantaFlag) {
+		pRenderTarget->DrawBitmap(m_pImageShadow, rcSw, 0.5f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
 		pRenderTarget->DrawBitmap(m_pImageSanta1, rcS, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
 	}
 	else {
+		pRenderTarget->DrawBitmap(m_pImageShadow, rcSw, 0.8f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
 		pRenderTarget->DrawBitmap(m_pImageSanta2, rcS, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
 	}
+	
 
+	
+	pRenderTarget->SetTransform(D2D1::Matrix3x2F::Rotation(-45.f, D2D1::Point2F(945,189)));
+	if (m_bSantaFlag) {
+		rc_seiya.left = 250;
+		rc_seiya.top = 450;
+		rc_seiya.right = rc_seiya.left + 160;
+		rc_seiya.bottom = rc_seiya.top + 80;
+
+		rcs_seiya.top = 0;
+		rcs_seiya.bottom = rcs_seiya.top + 378;
+		rcs_seiya.left = 516;
+		rcs_seiya.right = rcs_seiya.left + 482;
+		pRenderTarget->DrawBitmap(m_pImageSeiya, rc_seiya, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, rcs_seiya);
+	}
+	else {
+		rc_seiya.left = 250;
+		rc_seiya.top = 450;
+		rc_seiya.right = rc_seiya.left + 128;
+		rc_seiya.bottom = rc_seiya.top + 80;
+
+		rcs_seiya.top = 0;
+		rcs_seiya.bottom = rcs_seiya.top + 378;
+		rcs_seiya.left = 1000;		
+		rcs_seiya.right = rcs_seiya.left + 400;
+		pRenderTarget->DrawBitmap(m_pImageSeiya, rc_seiya, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, rcs_seiya);
+	}
+	pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 
 	switch (m_ePhase) {
 	case GAMECLEAR_FADE:

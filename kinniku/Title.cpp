@@ -29,8 +29,11 @@ CTitle::CTitle(CSelector *pSystem)
 	pTarget = pSystem->GetRenderTaget();
 	if (pTarget) {
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\taitoru.jpg"), &m_pImage);
+		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\seiya.png"), &m_pImageSeiya);
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\santa1.png"), &m_pImageSanta1);
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\santa2.png"), &m_pImageSanta2);
+		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\shadow.png"), &m_pImageShadow);
+		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\light.png"), &m_pImageLight);
 		pTarget->CreateSolidColorBrush(D2D1::ColorF(0.0f, 0.0f, 0.0f), &m_pBlack);
 		pTarget->Release();
 		pTarget = NULL;
@@ -41,8 +44,11 @@ CTitle::CTitle(CSelector *pSystem)
 CTitle::~CTitle()
 {
 	SAFE_RELEASE(m_pImage);
+	SAFE_RELEASE(m_pImageSeiya);
+	SAFE_RELEASE(m_pImageShadow);
 	SAFE_RELEASE(m_pImageSanta1);
 	SAFE_RELEASE(m_pImageSanta2);
+	SAFE_RELEASE(m_pImageLight);
 }
 
 
@@ -64,6 +70,9 @@ GameSceneResultCode    CTitle::move() {
 		if (20 < m_iTimer) {
 			m_iTimer = 0;
 			m_bSantaFlag = !m_bSantaFlag;
+			m_iselectstar++;
+			if (13 < m_iselectstar)
+				m_iselectstar = 0;
 		}
 		if (GetAsyncKeyState(VK_SPACE)) {
 			if (!m_bFlag) {
@@ -104,7 +113,7 @@ void    CTitle::draw(ID2D1RenderTarget *pRenderTarget) {
 
 	float FLAME = 60, krc;
 
-	D2D1_RECT_F rc;// , src, prc;
+	D2D1_RECT_F rc,src;// , src, prc;
 	D2D1_SIZE_F screenSize, textureSize;
 	screenSize = pRenderTarget->GetSize();
 	textureSize = m_pImage->GetSize();
@@ -112,49 +121,138 @@ void    CTitle::draw(ID2D1RenderTarget *pRenderTarget) {
 	rc.top = 0;
 	rc.right = rc.left + screenSize.width;
 	rc.bottom = rc.top + screenSize.height;
-	/*
-	src.left = 0;
-	src.top = 0;
-	src.right = rc.left + textureSize.width;
-	src.bottom = 256 / 2;
-	*/
+	
+	src.left = 100;
+	src.top = -200;
+	src.right = src.left + screenSize.width;
+	src.bottom = src.top + screenSize.height;
+	//背景
 	pRenderTarget->DrawBitmap(m_pImage, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
+
+	D2D1_RECT_F rclight;//光
+	switch (m_iselectstar) {
+	case 0:
+		rclight.top = 160;
+		rclight.left = 1200;
+		rclight.right = rclight.left + 64;
+		rclight.bottom = rclight.top + 64;
+		pRenderTarget->DrawBitmap(m_pImageLight, rclight, 0.3f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
+		break;
+	case 1:
+		rclight.top = 245;
+		rclight.left = 250;
+		rclight.right = rclight.left + 64;
+		rclight.bottom = rclight.top + 64;
+		pRenderTarget->DrawBitmap(m_pImageLight, rclight, 0.3f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
+		break;
+	case 2:
+		rclight.top = 165;
+		rclight.left = -5;
+		rclight.right = rclight.left + 64;
+		rclight.bottom = rclight.top + 64;
+		pRenderTarget->DrawBitmap(m_pImageLight, rclight, 0.3f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
+		break;
+	case 3:
+		rclight.top = 160;
+		rclight.left = 320;
+		rclight.right = rclight.left + 64;
+		rclight.bottom = rclight.top + 64;
+		pRenderTarget->DrawBitmap(m_pImageLight, rclight, 0.3f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
+		break;
+	case 4:
+		rclight.top = 40;
+		rclight.left = 410;
+		rclight.right = rclight.left + 64;
+		rclight.bottom = rclight.top + 64;
+		pRenderTarget->DrawBitmap(m_pImageLight, rclight, 0.3f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
+		break;
+	case 5:
+		rclight.top = 20;
+		rclight.left = 1090;
+		rclight.right = rclight.left + 64;
+		rclight.bottom = rclight.top + 64;
+		pRenderTarget->DrawBitmap(m_pImageLight, rclight, 0.3f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
+		break;
+	case 6:
+		rclight.top = 20;
+		rclight.left = 1850;
+		rclight.right = rclight.left + 64;
+		rclight.bottom = rclight.top + 64;
+		pRenderTarget->DrawBitmap(m_pImageLight, rclight, 0.3f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
+		break;
+	case 7:
+		rclight.top = 255;
+		rclight.left = 1535;
+		rclight.right = rclight.left + 64;
+		rclight.bottom = rclight.top + 64;
+		pRenderTarget->DrawBitmap(m_pImageLight, rclight, 0.3f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
+		break;
+	case 8:
+		rclight.top = 295;
+		rclight.left = 1225;
+		rclight.right = rclight.left + 64;
+		rclight.bottom = rclight.top + 64;
+		pRenderTarget->DrawBitmap(m_pImageLight, rclight, 0.3f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
+		break;
+	case 9:
+		rclight.top = 95;
+		rclight.left = 85;
+		rclight.right = rclight.left + 64;
+		rclight.bottom = rclight.top + 64;
+		pRenderTarget->DrawBitmap(m_pImageLight, rclight, 0.3f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
+		break;
+	case 10:
+		rclight.top = 5;
+		rclight.left = 150;
+		rclight.right = rclight.left + 64;
+		rclight.bottom = rclight.top + 64;
+		pRenderTarget->DrawBitmap(m_pImageLight, rclight, 0.3f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
+		break;
+	case 11:
+		rclight.top = -15;
+		rclight.left = 775;
+		rclight.right = rclight.left + 64;
+		rclight.bottom = rclight.top + 64;
+		pRenderTarget->DrawBitmap(m_pImageLight, rclight, 0.3f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
+		break;
+	case 12:
+		rclight.top = 110;
+		rclight.left = 785;
+		rclight.right = rclight.left + 64;
+		rclight.bottom = rclight.top + 64;
+		pRenderTarget->DrawBitmap(m_pImageLight, rclight, 0.3f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
+		break;
+	case 13:
+		rclight.top = 70;
+		rclight.left = 645;
+		rclight.right = rclight.left + 64;
+		rclight.bottom = rclight.top + 64;
+		pRenderTarget->DrawBitmap(m_pImageLight, rclight, 0.3f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
+		break;
+	}
+	//聖夜の文字
+	pRenderTarget->DrawBitmap(m_pImageSeiya, src, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
 	D2D1_RECT_F rcS;
 	rcS.left = 720;
-	rcS.top = 450;
+	rcS.top = 850;
 	rcS.right = rcS.left + 900;
-	rcS.bottom = rcS.top + 684;
+	rcS.bottom = rcS.top + 284;
+
+	//サンタ
 	if (m_bSantaFlag){
+		pRenderTarget->DrawBitmap(m_pImageShadow, rcS, 0.5f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
+
+		rcS.top = 450;
+		rcS.bottom = rcS.top + 684;
 		pRenderTarget->DrawBitmap(m_pImageSanta1, rcS, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
 }
 	else {
+		pRenderTarget->DrawBitmap(m_pImageShadow, rcS, 0.8f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
+
+		rcS.top = 450;
+		rcS.bottom = rcS.top + 684;
 		pRenderTarget->DrawBitmap(m_pImageSanta2, rcS, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
 	}
-
-	/*
-	screenSize = pRenderTarget->GetSize();
-	textureSize = m_pImage->GetSize();
-	rc.left = 70+(screenSize.width - textureSize.width) / 2;
-	rc.top = 190+(screenSize.height - textureSize.height) / 2;
-	rc.right = rc.left + textureSize.width;
-	rc.bottom = rc.top + textureSize.height;
-
-	prc.left = 100;
-	prc.top = 256 / 2;
-	prc.right = prc.left + textureSize.width;
-	prc.bottom = prc.top + textureSize.height;
-	++count;
-	//フラッシュ機構
-	if (count % 10 == 1) {
-		krc = 0.0f;
-	}
-	else if (count % 5 == 2) {
-		krc = 0.5f;
-	}
-	else
-		krc = 1.0f;
-	pRenderTarget->DrawBitmap(m_pImage, rc, krc, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, prc);
-	*/
 
 	switch (m_ePhase) {
 	case TITLE_FADE:

@@ -25,6 +25,9 @@ protected:
 	CSelector *m_pSystem;
 	TitlePhase m_ePhase;
 	ID2D1Bitmap *m_pImage;
+	ID2D1Bitmap *m_pImageLight;
+	ID2D1Bitmap *m_pImageSeiya;
+	ID2D1Bitmap *m_pImageShadow;
 	ID2D1Bitmap *m_pImageSanta1;
 	ID2D1Bitmap *m_pImageSanta2;
 	ID2D1SolidColorBrush *m_pBlack;
@@ -33,7 +36,7 @@ protected:
 	bool	m_bSantaFlag;
 	INT     m_iTimer = 0;
 	INT		m_iFadeTimer;
-
+	int    m_iselectstar = 0;
 	static const int ANIM_FRAME = 60;
 };
 

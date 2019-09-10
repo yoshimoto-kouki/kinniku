@@ -28,14 +28,17 @@ protected:
 	CSelector *m_pSystem;
 	GameClearPhase m_ePhase;
 	ID2D1Bitmap *m_pImage;
+	ID2D1Bitmap *m_pImageShadow;
 	ID2D1Bitmap *m_pImageSanta1;
 	ID2D1Bitmap *m_pImageSanta2;
 	ID2D1Bitmap *m_pImageProtein;
+	ID2D1Bitmap *m_pImageSeiya;
 	ID2D1SolidColorBrush *m_pBlack;
 	bool m_bFlag;
 	bool m_bSantaFlag;
 	INT m_iTimer = 0;
 	INT m_iFadeTimer;
+	int m_iTimerP = 0;
 	float m_fY ,m_fVY;
 
 };
