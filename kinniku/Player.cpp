@@ -6,6 +6,10 @@
 #include "GameData.h"
 #include "ScoreUI.h"
 #include "tama.h"
+#include <windows.h>
+#include <mmsystem.h>
+#pragma comment(lib,"winmm.lib")
+
 
 #define GAMESTAGE_WIDE 1344
 #define GAMESTAGE_HIGH 1080
@@ -83,6 +87,7 @@ bool CPlayer::move() {
 		m_fThrowTime--;
 	if (GetAsyncKeyState(VK_SPACE)) {
 		m_fKeyTime += 1;
+		sndPlaySound(L"kakegoe.wav", SND_ASYNC);
 		if (ChargeTime < m_fKeyTime)
 			m_fKeyTime = ChargeTime; 
 		m_bLongPushSpace = true;
@@ -91,6 +96,8 @@ bool CPlayer::move() {
 		m_bLongPushSpace = false;
 		m_bTama = false;
 	}
+
+	
 	//-----モミの木チャージ判定------
 	if (!GameData::ProteinFlag) {//プロテインバーストしてないとき
 		if(m_fThrowTime < m_fKeyTime){

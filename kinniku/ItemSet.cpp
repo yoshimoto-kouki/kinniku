@@ -8,6 +8,7 @@
 #include "ScoreRemnant.h"
 #include "GameData.h"
 
+
 CItemSet::CItemSet(CStage *pStage)
 {
 	m_iIndex = 0;

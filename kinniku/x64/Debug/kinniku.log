@@ -1,3 +1,7 @@
-﻿  Title.cpp
-c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\title.cpp(107): warning C4101: 'krc': ローカル変数は 1 度も使われていません。
+﻿  PlayGame.cpp
+c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\player.h(28): warning C4244: 'return': 'BOOL' から 'float' への変換です。データが失われる可能性があります。
+c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\playgame.cpp(123): warning C4244: '引数': 'time_t' から 'unsigned int' への変換です。データが失われる可能性があります。
+c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\playgame.cpp(243): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\playgame.cpp(248): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\playgame.cpp(337): warning C4101: 'textureSize': ローカル変数は 1 度も使われていません。
   kinniku.vcxproj -> C:\Users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\x64\Debug\kinniku.exe

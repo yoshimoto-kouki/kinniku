@@ -3,7 +3,9 @@
 #include "PlayGame.h"
 #include "Star.h"
 #include "TextureLoader.h"
-
+#include <windows.h>
+#include <mmsystem.h>
+#pragma comment(lib,"winmm.lib")
 
 ID2D1Bitmap *CStar::m_pBitmap = NULL;
 CStage *CStar::m_pParent = NULL;
@@ -88,6 +90,7 @@ bool CStar::collide(IGameObject * pObj, int x)
 
 void CStar::hit(float amount) {
 	if (amount == 1.0f)
+		sndPlaySound(L"atari.wav", SND_ASYNC);
 		m_bDamage = true;
 }
 bool CStar::hitType(){
