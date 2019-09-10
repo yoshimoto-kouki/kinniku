@@ -98,7 +98,7 @@ void    CGameResult::draw(ID2D1RenderTarget *pRenderTarget) {
 	int val = GameData::TotalScoreResult;
 
 	D2D1_RECT_F rcd,drc;
-	rcd.left = 960 - 64 * ((val % 10)*0.5);
+	rcd.left = 960 + 128 * ((val % 10)*0.5);
 	rcd.top = 500;
 	rcd.bottom = rcd.top + 128;
 	while (0 < val) {

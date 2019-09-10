@@ -1,15 +1,2 @@
-﻿  Boots.cpp
-c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\player.h(28): warning C4244: 'return': 'BOOL' から 'float' への変換です。データが失われる可能性があります。
-  Candycane.cpp
-c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\player.h(28): warning C4244: 'return': 'BOOL' から 'float' への変換です。データが失われる可能性があります。
-c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\candycane.cpp(52): warning C4101: 'ix': ローカル変数は 1 度も使われていません。
-c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\candycane.cpp(52): warning C4101: 'iy': ローカル変数は 1 度も使われていません。
-  Ornament.cpp
-c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\player.h(28): warning C4244: 'return': 'BOOL' から 'float' への変換です。データが失われる可能性があります。
-  Protein.cpp
-c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\protein.cpp(40): warning C4101: 'size': ローカル変数は 1 度も使われていません。
-  Star.cpp
-  Title.cpp
-c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\title.cpp(105): warning C4101: 'krc': ローカル変数は 1 度も使われていません。
-  コードを生成中...
-  kinniku.vcxproj -> C:\Users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\x64\Debug\kinniku.exe
+﻿  GameClear.cpp
+  kinniku.vcxproj -> C:\Users\rtamura\source\repos\kinniku\x64\Debug\kinniku.exe

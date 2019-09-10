@@ -121,9 +121,9 @@ void    CTitle::draw(ID2D1RenderTarget *pRenderTarget) {
 	pRenderTarget->DrawBitmap(m_pImage, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
 	D2D1_RECT_F rcS;
 	rcS.left = 720;
-	rcS.top = 800;
+	rcS.top = 450;
 	rcS.right = rcS.left + 900;
-	rcS.bottom = rcS.top + 250;
+	rcS.bottom = rcS.top + 684;
 	if (m_bSantaFlag){
 		pRenderTarget->DrawBitmap(m_pImageSanta1, rcS, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
 }
