@@ -91,9 +91,9 @@ void CSelector::doAnim() {
 			break;
 		SAFE_DELETE(m_pScene);
 #ifndef rtamura
-		m_pScene = new CGameClear(this);
-		m_eGamePhase = GAMEPHASE_GAMECLEAR;
-		break;
+	//	m_pScene = new CGameClear(this);
+	//	m_eGamePhase = GAMEPHASE_GAMECLEAR;
+	//	break;
 #endif
 		m_pScene = new CStage(this);
 		m_eGamePhase = GAMEPHASE_GAME;

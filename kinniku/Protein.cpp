@@ -4,6 +4,7 @@
 #include "TextureLoader.h"
 #include "GameData.h"
 
+
 ID2D1Bitmap *CProtein::m_pTexture = NULL;
 CStage *CProtein::m_pParent = NULL;
 #define texX 64

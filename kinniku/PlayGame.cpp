@@ -16,7 +16,8 @@
 #include "tama.h"
 #include "ItemSet.h"
 #include "Protein.h"
- 
+#include <windows.h>
+#include <mmsystem.h>
 #pragma comment(lib,"winmm.lib")
 
 
@@ -121,7 +122,10 @@ void CStage::reset() {}
 GameSceneResultCode    CStage::move() {
 	srand(time(NULL));
 	switch (m_ePhase) {
+		 
 	case STAGE_INIT:
+		mciSendString(L"open GameBGM.mp3 type mpegvideo alias GameBGM", NULL, 0, NULL);
+		mciSendString(L"play GameBGM from 0 repeat", NULL, 0, NULL);
 		m_iTimer = 0;
 		m_ePhase = STAGE_RUN;
 		
@@ -131,11 +135,13 @@ GameSceneResultCode    CStage::move() {
 		++m_iTimer;
 		if (m_iTimer > 2700)//ƒQ[ƒ€I—¹ğŒ1•ª30•b‚É‚È‚Á‚Ä‚é‚Í‚¸
 			bDone = true;
+
 #ifndef rtamura
 		if (m_iTimer > 3000)//ƒQ[ƒ€I—¹ğŒ1•ª30•b‚É‚È‚Á‚Ä‚é‚Í‚¸
 			bDone = true;
 #endif
 		if (bDone) {
+			mciSendString(L"stop all", NULL, 0, NULL);
 			m_iFadeTimer = 0;
 			m_ePhase = STAGE_FADE;
 		}

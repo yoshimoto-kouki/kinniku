@@ -4,6 +4,11 @@
 #include "Boots.h"
 #include "TextureLoader.h"
 #include "Player.h"
+#include <windows.h>
+#include <mmsystem.h>
+#pragma comment(lib,"winmm.lib")
+
+
 
 ID2D1Bitmap *CBoots::m_pBitmap = NULL;
 CStage *CBoots::m_pParent = NULL;
@@ -81,6 +86,7 @@ bool CBoots::collide(IGameObject *pObj) {
 }
 void CBoots::hit(float amount) {
 	if (amount != 1.0f)
+		sndPlaySound(L"item.wav", SND_ASYNC);
 		m_bDamage = true;
 }
 

@@ -1,3 +1,3 @@
-﻿  Title.cpp
-c:\users\rtamura\source\repos\kinniku\kinniku\title.cpp(114): warning C4101: 'krc': ローカル変数は 1 度も使われていません。
+﻿  Selecter.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\selecter.cpp(153): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
   kinniku.vcxproj -> C:\Users\rtamura\source\repos\kinniku\x64\Debug\kinniku.exe

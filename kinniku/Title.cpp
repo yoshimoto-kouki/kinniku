@@ -10,8 +10,12 @@
 #include <dsound.h>
 #include "GameData.h"
 #include <mmiscapi.h>
+#include <windows.h>
+#include <mmsystem.h>
+
 #pragma comment(lib,"dsound.lib")
 #pragma comment(lib,"winmm.lib")
+
 
 
 
@@ -55,7 +59,8 @@ CTitle::~CTitle()
 GameSceneResultCode    CTitle::move() {
 	switch (m_ePhase) {
 	case TITLE_INIT:
-
+		mciSendString(L"open TitleBGM.mp3 type mpegvideo alias BGM01", NULL, 0, NULL);
+		mciSendString(L"play BGM01 from 0 repeat", NULL, 0, NULL);
 		m_iTimer = 0;
 		m_bFlag = true;
 		m_ePhase = TITLE_RUN;
@@ -64,6 +69,7 @@ GameSceneResultCode    CTitle::move() {
 		//mciSendString(L"play honoo from 0 repeat", NULL, 0, NULL);
 	case TITLE_RUN:
 	{
+
 
 		bool bDone = false;
 		++m_iTimer;
@@ -76,6 +82,9 @@ GameSceneResultCode    CTitle::move() {
 		}
 		if (GetAsyncKeyState(VK_SPACE)) {
 			if (!m_bFlag) {
+				
+				mciSendString(L"stop all", NULL, 0, NULL);
+				sndPlaySound(L"op.wav", SND_ASYNC);
 				//mciSendString(L"open kinniku.mp3 type mpegvideo alias kinniku", NULL, 0, NULL);
 				//mciSendString(L"stop all", NULL, 0, NULL);
 				//mciSendString(L"play kinniku from 0 repeat", NULL, 0, NULL);

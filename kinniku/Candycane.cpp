@@ -4,6 +4,10 @@
 #include "Candycane.h"
 #include "TextureLoader.h"
 #include "Player.h"
+#include <windows.h>
+#include <mmsystem.h>
+#pragma comment(lib,"winmm.lib")
+
 
 ID2D1Bitmap *CCandy::m_pTexture = NULL;
 CStage *CCandy::m_pParent = NULL;
@@ -82,6 +86,7 @@ bool CCandy::collide(IGameObject *pObj) {
 }
 void CCandy::hit(float amount) {
 	if (amount != 1.0f)
+		sndPlaySound(L"item.wav", SND_ASYNC);
 		m_bDamage = true;
 }
 
