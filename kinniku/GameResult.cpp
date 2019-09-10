@@ -98,7 +98,7 @@ void    CGameResult::draw(ID2D1RenderTarget *pRenderTarget) {
 	int val = GameData::TotalScoreResult;
 
 	D2D1_RECT_F rcd,drc;
-	rcd.left = 960 + 128 * ((val % 10));
+	rcd.left = 1400;
 	rcd.top = 500;
 	rcd.bottom = rcd.top + 128;
 	while (0 < val) {
@@ -123,8 +123,6 @@ void    CGameResult::draw(ID2D1RenderTarget *pRenderTarget) {
 		rc.bottom = screenSize.height;
 		m_pBlack->SetOpacity(m_iFadeTimer / 30.0f);
 		pRenderTarget->FillRectangle(rc, m_pBlack);
-
 	}
-
 }
 
