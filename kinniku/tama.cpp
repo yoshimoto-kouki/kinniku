@@ -128,7 +128,7 @@ bool CTama::StarHitFlag()
 *********************************************************/
 void CTama::Restore(ID2D1RenderTarget *pRT){
 	SAFE_RELEASE(m_pBitmap);
-	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\shot2.png"), &m_pBitmap);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\tree.png"), &m_pBitmap);
 }
 
 /*********************************************************

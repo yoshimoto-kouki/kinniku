@@ -44,7 +44,7 @@ CPlayer::CPlayer(CStage *pStage)
 		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\santest2.png"), &m_pBitmapPT);
 		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\santest3.png"), &m_pBitmapPTC);
 		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\charge.png"), &m_pBitmapC);
-		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\shot2.png"), &m_pBitmapNT);
+		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\tree.png"), &m_pBitmapNT);
 		pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::IndianRed), &m_pBrush);
  		SAFE_RELEASE(pRenderTarget);//‚±‚±‚Å“ñd‚ÉRELEASE‚µ‚Ä‚½‚Ì‚ªŒ´ˆö‚Å‚·
 	}
