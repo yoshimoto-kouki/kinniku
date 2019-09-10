@@ -14,7 +14,7 @@
 #define SAFE_DELETE_ARRAY(o) if (o){ delete [] (o); o = NULL; }
 
 #define Five_point_starsPosx 0 
-#define Five_point_starsPosy 200 
+#define Five_point_starsPosy 150 
 
 CBG::CBG(ID2D1RenderTarget *pRenderTarget)
 {
@@ -33,6 +33,9 @@ CBG::CBG(ID2D1RenderTarget *pRenderTarget)
 
 	CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\star.png"), &m_pBGStar);
 	CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\digit.png"), &m_pBGtime);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\setumei.png"), &m_pBGDescription);
+
+	CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\digit_another.png"), &m_pBitmapItemNum);
 	m_fY = 0;
 	m_fVY = 9.8f * 5;
 	m_fGY = -4.9f;
@@ -70,6 +73,7 @@ CBG::CBG(ID2D1RenderTarget *pRenderTarget)
 CBG::~CBG()
 {
 	SAFE_RELEASE(m_pBitmap);
+
 	SAFE_RELEASE(m_pCHARSeiya1);
 	SAFE_RELEASE(m_pCHARSeiya2);
 	SAFE_RELEASE(m_pCHARSeiya3);
@@ -79,6 +83,10 @@ CBG::~CBG()
 	SAFE_RELEASE(m_pBGIconOrnament);
 	SAFE_RELEASE(m_pBGIconCandy);
 	SAFE_RELEASE(m_pBGIconStar);
+
+	SAFE_RELEASE(m_pBGStar);
+	SAFE_RELEASE(m_pBGtime);
+	SAFE_RELEASE(m_pBGDescription);
 }
 
 void CBG::move(){
@@ -221,33 +229,33 @@ void CBG::draw(ID2D1RenderTarget *pRenderTarget) {
 	pRenderTarget->DrawBitmap(m_pCHARSeiya3, rcw, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 
 	D2D1_RECT_F rcBS, rcs, rco, rcb, rcc, rcp;
-	rcBS.left = sizescreen.width*0.7 + 185;
+	rcBS.left = sizescreen.width*0.7 + 185+ Five_point_starsPosx;
 	rcBS.top = Five_point_starsPosy + 45;
 	rcBS.right = rcBS.left + 200;
 	rcBS.bottom = rcBS.top + 200;
 	pRenderTarget->DrawBitmap(m_pBGStar, rcBS, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 
-	rcs.left = sizescreen.width*0.7 + 250 + m_fISX;
+	rcs.left = sizescreen.width*0.7 + 250 + m_fISX+ Five_point_starsPosx;
 	rcs.top = 10 + m_fISY;
 	rcs.right = rcs.left + 64;
 	rcs.bottom = rcs.top + 64;
 
-	rco.left = sizescreen.width*0.7 + 250 + m_fIOX;
+	rco.left = sizescreen.width*0.7 + 250 + m_fIOX+ Five_point_starsPosx;
 	rco.top = 10 + m_fIOY;
 	rco.right = rco.left + 64;
 	rco.bottom = rco.top + 64;
 
-	rcb.left = sizescreen.width*0.7 + 250 + m_fIBX;
+	rcb.left = sizescreen.width*0.7 + 250 + m_fIBX+ Five_point_starsPosx;
 	rcb.top = 10 + m_fIBY;
 	rcb.right = rcb.left + 64;
 	rcb.bottom = rcb.top + 64;
 
-	rcc.left = sizescreen.width*0.7 + 250 + m_fICX;
+	rcc.left = sizescreen.width*0.7 + 250 + m_fICX+ Five_point_starsPosx;
 	rcc.top = 10 + m_fICY;
 	rcc.right = rcc.left + 64;
 	rcc.bottom = rcc.top + 64;
 
-	rcp.left = sizescreen.width*0.7 + 250 + m_fIPX;
+	rcp.left = sizescreen.width*0.7 + 250 + m_fIPX+ Five_point_starsPosx;
 	rcp.top = 10 + m_fIPY;
 	rcp.right = rcp.left + 64;
 	rcp.bottom = rcp.top + 64;
@@ -288,6 +296,19 @@ void CBG::draw(ID2D1RenderTarget *pRenderTarget) {
 		pRenderTarget->DrawBitmap(m_pBGIconStar, rcs, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 		break;
 	}
+	D2D1_RECT_F rccount, rcpos;
+	rccount.top = Five_point_starsPosy + 140;
+	rccount.left = sizescreen.width*0.7f + 270+ Five_point_starsPosx;
+	rccount.bottom = rccount.top + 32;
+	rccount.right = rccount.left + 32;
+	int Itemnum = GameData::GameHoldNum;
+
+	rcpos.left = (Itemnum % 10) % 4 * 32;
+	rcpos.top = (Itemnum % 10) / 4 * 32;
+	rcpos.right = rcpos.left + 32;
+	rcpos.bottom = rcpos.top + 32;
+	pRenderTarget->DrawBitmap(m_pBitmapItemNum, rccount, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR, rcpos);
+
 	
 	int val = GameData::GameEndTime - GameData::GamePlayTime;
 	val /= 30;
@@ -308,4 +329,10 @@ void CBG::draw(ID2D1RenderTarget *pRenderTarget) {
 		rctime.left -= 64;
 	}
 	
+	D2D1_RECT_F rcDis;
+	rcDis.left =sizescreen.width*0.7;
+	rcDis.top = 450;
+	rcDis.right = rcDis.left + 400;
+	rcDis.bottom = rcDis.top + 400;
+	pRenderTarget->DrawBitmap(m_pBGDescription, rcDis, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 }

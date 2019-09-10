@@ -17,5 +17,6 @@ public:
 	//ƒQ[ƒ€ƒ^ƒCƒ€
 	static int GameEndTime;
 	static int GamePlayTime;
+	static int GameHoldNum;
 };
 

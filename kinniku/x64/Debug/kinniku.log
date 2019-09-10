@@ -1,14 +1,17 @@
 ﻿  BG.cpp
-c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(187): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
 c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(195): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(205): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(216): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(203): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(213): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
 c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(224): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(230): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(235): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(240): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(245): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(250): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(302): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(303): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(232): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(238): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(243): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(248): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(253): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(258): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(306): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(307): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(323): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(324): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(333): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
   kinniku.vcxproj -> C:\Users\rtamura\source\repos\kinniku\x64\Debug\kinniku.exe

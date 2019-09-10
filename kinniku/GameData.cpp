@@ -15,3 +15,4 @@ float GameData::TotalScoreResult = 0;
 
 int  GameData::GameEndTime = 2700;
 int  GameData::GamePlayTime = 0;
+int  GameData::GameHoldNum = 0;
