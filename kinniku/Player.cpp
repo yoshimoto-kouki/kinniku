@@ -45,6 +45,7 @@ CPlayer::CPlayer(CStage *pStage)
 		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\santest3.png"), &m_pBitmapPTC);
 		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\charge.png"), &m_pBitmapC);
 		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\shot2.png"), &m_pBitmapNT);
+		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\digit_another.png"), &m_pBitmapItemNum);
 		pRenderTarget->Release();    //  Release ‚µ‚Ä‰ð•ú
 	}
 
@@ -61,6 +62,7 @@ CPlayer::~CPlayer()
 	SAFE_RELEASE(m_pBitmapPTC);
 	SAFE_RELEASE(m_pBitmapC);
 	SAFE_RELEASE(m_pBitmapNT);
+	SAFE_RELEASE(m_pBitmapItemNum);
 	
 #ifdef _DEBUG
 	SAFE_RELEASE(m_pBrush);
@@ -216,6 +218,19 @@ void CPlayer::draw(ID2D1RenderTarget *pRenderTarget) {
 			}
 		}
 	}
+	D2D1_RECT_F rccount,rcpos;
+	rccount.top = 245;
+	rccount.left = Ssize.width*0.7f + 270;
+	rccount.bottom = rccount.top + 32;
+	rccount.right = rccount.left + 32;
+	int Itemnum = m_fItemGetScore;
+	
+	rcpos.left = (Itemnum % 10) % 4 * 32;
+	rcpos.top = (Itemnum % 10) / 4 * 32;
+	rcpos.right = rcpos.left + 32;
+	rcpos.bottom = rcpos.top + 32;
+	pRenderTarget->DrawBitmap(m_pBitmapItemNum, rccount, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR, rcpos);
+	
 }
 bool CPlayer::collide(float x, float y, float w, float h) {
 	float l = m_fX ;

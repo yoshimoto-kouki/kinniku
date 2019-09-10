@@ -29,7 +29,9 @@ CBG::CBG(ID2D1RenderTarget *pRenderTarget)
 	CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\boots.png"), &m_pBGIconBoots);
 	CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\Ornament.png"), &m_pBGIconOrnament);
 	CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\candy.png"), &m_pBGIconCandy);
-	CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\star.png"), &m_pBGIconStar);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\hosi.png"), &m_pBGIconStar);
+
+	CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\star.png"), &m_pBGStar);
 	m_fY = 0;
 	m_fVY = 9.8f * 5;
 	m_fGY = -4.9f;
@@ -217,7 +219,13 @@ void CBG::draw(ID2D1RenderTarget *pRenderTarget) {
 
 	pRenderTarget->DrawBitmap(m_pCHARSeiya3, rcw, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 
-	D2D1_RECT_F rcs, rco, rcb, rcc, rcp;
+	D2D1_RECT_F rcBS ,rcs, rco, rcb, rcc, rcp;
+	rcBS.left = sizescreen.width*0.7 + 185;
+	rcBS.top = 155;
+	rcBS.right = rcBS.left + 200;
+	rcBS.bottom = rcBS.top + 200;
+	pRenderTarget->DrawBitmap(m_pBGStar, rcBS, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+
 	rcs.left = sizescreen.width*0.7 + 250 + m_fISX;
 	rcs.top = 10 + m_fISY;
 	rcs.right = rcs.left + 64;

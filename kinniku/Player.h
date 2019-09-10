@@ -29,11 +29,14 @@ public:
 	}
 protected:
 	CStage		* m_pStage;
+	//Player画像用
 	ID2D1Bitmap *m_pBitmapP;
 	ID2D1Bitmap *m_pBitmapPT;
 	ID2D1Bitmap *m_pBitmapPTC;
 	ID2D1Bitmap *m_pBitmapC;
 	ID2D1Bitmap *m_pBitmapNT;
+	//アイテム個数用
+	ID2D1Bitmap *m_pBitmapItemNum;
 
 	FLOAT		m_fX, m_fY;
 	FLOAT		m_fKeyTime;

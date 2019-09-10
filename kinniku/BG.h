@@ -41,4 +41,6 @@ protected:
 	ID2D1Bitmap *m_pBGIconBoots;
 	ID2D1Bitmap *m_pBGIconCandy;
 	ID2D1Bitmap *m_pBGIconStar;
+
+	ID2D1Bitmap *m_pBGStar;
 };

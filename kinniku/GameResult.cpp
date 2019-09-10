@@ -72,7 +72,7 @@ GameSceneResultCode CGameResult::move() {
 		m_ePhase = GAMERESULT_DONE;
 	case GAMERESULT_DONE:
 		//****************************
-		/*ここに条件式でゲームクリアとゲームオーバー変更*/
+		/*ここの条件式でゲームクリアとゲームオーバー変更*/
 		if (GameData::TotalScoreResult > GAME_CLEAR_LINE) {
 			return GameSceneResultCode::GAMESCENE_END_OK;
 		}
@@ -98,7 +98,7 @@ void    CGameResult::draw(ID2D1RenderTarget *pRenderTarget) {
 	int val = GameData::TotalScoreResult;
 
 	D2D1_RECT_F rcd,drc;
-	rcd.left = 960 + 128 * ((val % 10)*0.5);
+	rcd.left = 960 + 128 * ((val % 10));
 	rcd.top = 500;
 	rcd.bottom = rcd.top + 128;
 	while (0 < val) {
