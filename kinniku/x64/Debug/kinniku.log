@@ -1,6 +1,10 @@
-﻿  GameResult.cpp
-c:\users\rtamura\source\repos\kinniku\kinniku\gameresult.cpp(98): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\gameresult.cpp(107): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\gameresult.cpp(108): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\gameresult.cpp(88): warning C4101: 'prc': ローカル変数は 1 度も使われていません。
-  kinniku.vcxproj -> C:\Users\rtamura\source\repos\kinniku\x64\Debug\kinniku.exe
+﻿  Player.cpp
+c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\player.h(28): warning C4244: 'return': 'BOOL' から 'float' への変換です。データが失われる可能性があります。
+c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\player.cpp(107): warning C4244: '引数': 'FLOAT' から 'int' への変換です。データが失われる可能性があります。
+c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\player.cpp(119): warning C4244: '引数': 'FLOAT' から 'int' への変換です。データが失われる可能性があります。
+c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\player.cpp(121): warning C4244: '引数': 'FLOAT' から 'int' への変換です。データが失われる可能性があります。
+c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\player.cpp(139): warning C4244: '引数': 'FLOAT' から 'int' への変換です。データが失われる可能性があります。
+c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\player.cpp(225): warning C4244: '初期化中': 'FLOAT' から 'int' への変換です。データが失われる可能性があります。
+c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\player.cpp(227): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\player.cpp(228): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
+  kinniku.vcxproj -> C:\Users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\x64\Debug\kinniku.exe
