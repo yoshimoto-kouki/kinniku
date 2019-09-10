@@ -89,9 +89,10 @@ bool CStar::collide(IGameObject * pObj, int x)
 }
 
 void CStar::hit(float amount) {
-	if (amount == 1.0f)
+	if (amount == 1.0f) {
 		sndPlaySound(L"atari.wav", SND_ASYNC);
 		m_bDamage = true;
+	}
 }
 bool CStar::hitType(){
 	return true;

@@ -85,9 +85,10 @@ bool CBoots::collide(IGameObject *pObj) {
 	return pObj->collide(l, t, 64, 64);
 }
 void CBoots::hit(float amount) {
-	if (amount != 1.0f)
+	if (amount != 1.0f) {
 		sndPlaySound(L"item.wav", SND_ASYNC);
 		m_bDamage = true;
+	}
 }
 
 /*********************************************************
