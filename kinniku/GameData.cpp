@@ -12,3 +12,6 @@ bool GameData::StartIndexEnd = false;
 bool GameData::ProteinFlag = false;
 
 float GameData::TotalScoreResult = 0;
+
+int  GameData::GameEndTime = 2700;
+int  GameData::GamePlayTime = 0;

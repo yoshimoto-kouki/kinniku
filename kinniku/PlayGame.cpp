@@ -133,12 +133,13 @@ GameSceneResultCode    CStage::move() {
 	{
 		bool bDone = false;
 		++m_iTimer;
-		if (m_iTimer > 2700)//ゲーム終了条件1分30秒になってるはず
+		GameData::GamePlayTime = m_iTimer;
+		if (m_iTimer > GameData::GameEndTime)//ゲーム終了条件1分30秒になってるはず
 			bDone = true;
 
 #ifndef rtamura
-		if (m_iTimer > 3000)
-			bDone = true;
+	//	if (m_iTimer > 3000)
+//			bDone = true;
 #endif
 		if (bDone) {
 			mciSendString(L"stop all", NULL, 0, NULL);
@@ -301,7 +302,7 @@ void    CStage::draw(ID2D1RenderTarget *pRenderTarget) {
 	if (m_pBG)//背景用
 		m_pBG->draw(pRenderTarget);
 	if (m_pScore)//スコア用
-		m_pScore->Draw(pRenderTarget, 1400.0f, 10.0f, 32.0f);
+		m_pScore->Draw(pRenderTarget, 1400.0f, 80.0f, 32.0f);
 	if (m_pPlayer)//player
 		m_pPlayer->draw(pRenderTarget);
 	if (m_pTamas) {//  ショットの処理

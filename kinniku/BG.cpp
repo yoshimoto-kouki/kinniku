@@ -14,7 +14,7 @@
 #define SAFE_DELETE_ARRAY(o) if (o){ delete [] (o); o = NULL; }
 
 #define Five_point_starsPosx 0 
-#define Five_point_starsPosy 100 
+#define Five_point_starsPosy 200 
 
 CBG::CBG(ID2D1RenderTarget *pRenderTarget)
 {
@@ -32,6 +32,7 @@ CBG::CBG(ID2D1RenderTarget *pRenderTarget)
 	CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\hosi.png"), &m_pBGIconStar);
 
 	CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\star.png"), &m_pBGStar);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\digit.png"), &m_pBGtime);
 	m_fY = 0;
 	m_fVY = 9.8f * 5;
 	m_fGY = -4.9f;
@@ -179,7 +180,7 @@ void CBG::draw(ID2D1RenderTarget *pRenderTarget) {
 	D2D1_SIZE_F sizescreen;
 	if (m_pBitmap == NULL)
 		return;
-	
+
 	sizescreen = pRenderTarget->GetSize();
 	rc.left = 0;
 	rc.top = 0;
@@ -219,9 +220,9 @@ void CBG::draw(ID2D1RenderTarget *pRenderTarget) {
 
 	pRenderTarget->DrawBitmap(m_pCHARSeiya3, rcw, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 
-	D2D1_RECT_F rcBS ,rcs, rco, rcb, rcc, rcp;
+	D2D1_RECT_F rcBS, rcs, rco, rcb, rcc, rcp;
 	rcBS.left = sizescreen.width*0.7 + 185;
-	rcBS.top = 155;
+	rcBS.top = Five_point_starsPosy + 45;
 	rcBS.right = rcBS.left + 200;
 	rcBS.bottom = rcBS.top + 200;
 	pRenderTarget->DrawBitmap(m_pBGStar, rcBS, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
@@ -284,7 +285,27 @@ void CBG::draw(ID2D1RenderTarget *pRenderTarget) {
 		pRenderTarget->DrawBitmap(m_pBGIconBoots, rcb, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 		pRenderTarget->DrawBitmap(m_pBGIconCandy, rcc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 		pRenderTarget->DrawBitmap(m_pBGIconProtein, rcp, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
-		pRenderTarget->DrawBitmap(m_pBGIconStar, rcs, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);		
+		pRenderTarget->DrawBitmap(m_pBGIconStar, rcs, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 		break;
 	}
+	
+	int val = GameData::GameEndTime - GameData::GamePlayTime;
+	val /= 30;
+	D2D1_RECT_F rctime, rcpix;
+	rctime.top = 5;
+	rctime.bottom = rctime.top + 64;
+	rctime.left = sizescreen.width - 128;
+	while (0 < val) {
+		
+		rctime.right = rctime.left + 64;
+
+		rcpix.left = (val % 10) % 4 * 32;
+		rcpix.top = (val % 10) / 4 * 32;
+		rcpix.right = rcpix.left + 32;
+		rcpix.bottom = rcpix.top + 32;
+		pRenderTarget->DrawBitmap(m_pBGtime, rctime, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR, rcpix);
+		val /= 10;
+		rctime.left -= 64;
+	}
+	
 }

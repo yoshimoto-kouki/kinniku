@@ -13,5 +13,9 @@ public:
 
 	//ゲームリザルト画面に渡すスコア
 	static float TotalScoreResult;
+	
+	//ゲームタイム
+	static int GameEndTime;
+	static int GamePlayTime;
 };
 

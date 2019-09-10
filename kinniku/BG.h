@@ -43,4 +43,5 @@ protected:
 	ID2D1Bitmap *m_pBGIconStar;
 
 	ID2D1Bitmap *m_pBGStar;
+	ID2D1Bitmap *m_pBGtime;
 };

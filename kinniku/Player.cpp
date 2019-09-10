@@ -218,7 +218,7 @@ void CPlayer::draw(ID2D1RenderTarget *pRenderTarget) {
 		}
 	}
 	D2D1_RECT_F rccount,rcpos;
-	rccount.top = 245;
+	rccount.top = 335;
 	rccount.left = Ssize.width*0.7f + 270;
 	rccount.bottom = rccount.top + 32;
 	rccount.right = rccount.left + 32;
