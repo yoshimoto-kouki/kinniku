@@ -1,3 +1,7 @@
-﻿  Selecter.cpp
-c:\users\rtamura\source\repos\kinniku\kinniku\selecter.cpp(153): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+﻿  Player.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\player.h(28): warning C4244: 'return': 'BOOL' から 'float' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\player.cpp(106): warning C4244: '引数': 'FLOAT' から 'int' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\player.cpp(118): warning C4244: '引数': 'FLOAT' から 'int' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\player.cpp(120): warning C4244: '引数': 'FLOAT' から 'int' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\player.cpp(138): warning C4244: '引数': 'FLOAT' から 'int' への変換です。データが失われる可能性があります。
   kinniku.vcxproj -> C:\Users\rtamura\source\repos\kinniku\x64\Debug\kinniku.exe

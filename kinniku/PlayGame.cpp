@@ -137,7 +137,7 @@ GameSceneResultCode    CStage::move() {
 			bDone = true;
 
 #ifndef rtamura
-		if (m_iTimer > 3000)//ƒQ[ƒ€I—¹ðŒ1•ª30•b‚É‚È‚Á‚Ä‚é‚Í‚¸
+		if (m_iTimer > 3000)
 			bDone = true;
 #endif
 		if (bDone) {

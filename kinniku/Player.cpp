@@ -87,7 +87,6 @@ bool CPlayer::move() {
 		m_fThrowTime--;
 	if (GetAsyncKeyState(VK_SPACE)) {
 		m_fKeyTime += 1;
-		sndPlaySound(L"kakegoe.wav", SND_ASYNC);
 		if (ChargeTime < m_fKeyTime)
 			m_fKeyTime = ChargeTime; 
 		m_bLongPushSpace = true;
@@ -112,6 +111,7 @@ bool CPlayer::move() {
 					m_fKeyTime = 0;
 					m_fThrowTime = Pressinterval;
 					m_bTC = false;
+					sndPlaySound(L"kakegoe.wav", SND_ASYNC);
 				}
 				else {
 					if (!m_bTama) {
@@ -125,6 +125,7 @@ bool CPlayer::move() {
 					m_fKeyTime = 0;
 					m_fThrowTime = Pressinterval;
 					m_bTC = true;
+					sndPlaySound(L"kakegoe.wav", SND_ASYNC);
 				}
 			}
 		}
