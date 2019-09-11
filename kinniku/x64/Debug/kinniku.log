@@ -1,6 +1,11 @@
-﻿  GameResult.cpp
-c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\gameresult.cpp(98): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
-c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\gameresult.cpp(107): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
-c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\gameresult.cpp(108): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
-c:\users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\kinniku\gameresult.cpp(88): warning C4101: 'prc': ローカル変数は 1 度も使われていません。
-  kinniku.vcxproj -> C:\Users\kyosimoto\source\repos\yoshimoto-kouki\kinniku\x64\Debug\kinniku.exe
+﻿  Selecter.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\selecter.cpp(157): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+  Title.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\title.cpp(116): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
+c:\users\rtamura\source\repos\kinniku\kinniku\title.cpp(127): warning C4305: '-=': 'double' から 'float' へ切り詰めます。
+c:\users\rtamura\source\repos\kinniku\kinniku\title.cpp(128): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
+c:\users\rtamura\source\repos\kinniku\kinniku\title.cpp(205): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\title.cpp(206): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\title.cpp(191): warning C4101: 'krc': ローカル変数は 1 度も使われていません。
+  コードを生成中...
+  kinniku.vcxproj -> C:\Users\rtamura\source\repos\kinniku\x64\Debug\kinniku.exe
