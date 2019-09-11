@@ -310,5 +310,4 @@ bool CPlayer::collide(IGameObject *pObj) {
 void CPlayer::hit(float amount) {
 	if (m_fItemGetScore < ScoreLimit)
 		m_fItemGetScore += 1;
-	GameData::Gametree += 1;
 }
