@@ -70,7 +70,6 @@ GameSceneResultCode CGameResult::move() {
 		++m_iTimer;
 		if (m_fVY < 1000) {
 			m_fVY += 3;
-			break;
 		}
 		if (GetAsyncKeyState(VK_SPACE) || 930 < m_iTimer) {
 			if (!m_bFlag) {
