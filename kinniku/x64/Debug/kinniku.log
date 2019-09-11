@@ -1,1 +1,110 @@
-﻿  kinniku.vcxproj -> C:\Users\rtamura\source\repos\kinniku\tree\372baa1eec1e241a094154c275ef5aaf53ba71fa\x64\Debug\kinniku.exe
+﻿  stdafx.cpp
+  BG.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(195): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(203): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(213): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(224): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(232): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(238): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(243): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(248): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(253): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(258): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(306): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(307): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(323): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(324): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\bg.cpp(333): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+  Boots.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\player.h(28): warning C4244: 'return': 'BOOL' から 'float' への変換です。データが失われる可能性があります。
+  Candycane.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\player.h(28): warning C4244: 'return': 'BOOL' から 'float' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\candycane.cpp(56): warning C4101: 'ix': ローカル変数は 1 度も使われていません。
+c:\users\rtamura\source\repos\kinniku\kinniku\candycane.cpp(56): warning C4101: 'iy': ローカル変数は 1 度も使われていません。
+  GameClear.cpp
+  GameData.cpp
+  GameOver.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\gameover.cpp(81): warning C4101: 'prc': ローカル変数は 1 度も使われていません。
+  GameResult.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\gameresult.cpp(107): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\gameresult.cpp(116): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\gameresult.cpp(117): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\gameresult.cpp(97): warning C4101: 'prc': ローカル変数は 1 度も使われていません。
+  IGameObject.cpp
+  IGameScene.cpp
+  ItemSet.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\itemset.cpp(79): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\itemset.cpp(82): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\itemset.cpp(85): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\itemset.cpp(88): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\itemset.cpp(108): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\itemset.cpp(111): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\itemset.cpp(114): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\itemset.cpp(117): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\itemset.cpp(127): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+  Ornament.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\player.h(28): warning C4244: 'return': 'BOOL' から 'float' への変換です。データが失われる可能性があります。
+  PlayGame.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\player.h(28): warning C4244: 'return': 'BOOL' から 'float' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\playgame.cpp(123): warning C4244: '引数': 'time_t' から 'unsigned int' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\playgame.cpp(246): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\playgame.cpp(251): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\playgame.cpp(340): warning C4101: 'textureSize': ローカル変数は 1 度も使われていません。
+  Player.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\player.h(28): warning C4244: 'return': 'BOOL' から 'float' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\player.cpp(101): warning C4244: '=': 'FLOAT' から 'int' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\player.cpp(109): warning C4244: '引数': 'FLOAT' から 'int' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\player.cpp(121): warning C4244: '引数': 'FLOAT' から 'int' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\player.cpp(123): warning C4244: '引数': 'FLOAT' から 'int' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\player.cpp(141): warning C4244: '引数': 'FLOAT' から 'int' への変換です。データが失われる可能性があります。
+  Protein.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\protein.cpp(41): warning C4101: 'size': ローカル変数は 1 度も使われていません。
+  ScoreRemnant.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\scoreremnant.cpp(38): warning C4244: '初期化中': 'double' から 'int' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\scoreremnant.cpp(47): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\scoreremnant.cpp(48): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
+  ScoreUI.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\scoreui.cpp(58): warning C4244: '初期化中': 'double' から 'int' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\scoreui.cpp(70): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\scoreui.cpp(80): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\scoreui.cpp(81): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
+  Selecter.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\selecter.cpp(157): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+  Star.cpp
+  TextureLoader.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\textureloader.cpp(169): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\rtamura\source\repos\kinniku\kinniku\textureloader.cpp(171): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\rtamura\source\repos\kinniku\kinniku\textureloader.cpp(207): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\rtamura\source\repos\kinniku\kinniku\textureloader.cpp(209): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+  Title.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\title.cpp(116): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
+c:\users\rtamura\source\repos\kinniku\kinniku\title.cpp(127): warning C4305: '-=': 'double' から 'float' へ切り詰めます。
+c:\users\rtamura\source\repos\kinniku\kinniku\title.cpp(128): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
+c:\users\rtamura\source\repos\kinniku\kinniku\title.cpp(205): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\title.cpp(206): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\title.cpp(191): warning C4101: 'krc': ローカル変数は 1 度も使われていません。
+  コードを生成中...
+  コンパイル中...
+  ddsfunctions.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\ddsfunctions.cpp(771): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\rtamura\source\repos\kinniku\kinniku\ddsfunctions.cpp(774): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\rtamura\source\repos\kinniku\kinniku\ddsfunctions.cpp(792): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\rtamura\source\repos\kinniku\kinniku\ddsfunctions.cpp(795): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\rtamura\source\repos\kinniku\kinniku\ddsfunctions.cpp(815): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\rtamura\source\repos\kinniku\kinniku\ddsfunctions.cpp(818): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\rtamura\source\repos\kinniku\kinniku\ddsfunctions.cpp(838): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\rtamura\source\repos\kinniku\kinniku\ddsfunctions.cpp(841): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\rtamura\source\repos\kinniku\kinniku\ddsfunctions.cpp(861): warning C4102: 'ERROR_EXIT': ラベルは 1 度も参照されません。
+  kinniku.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\kinniku.cpp(59): warning C4302: '型キャスト': 'LPWSTR' から 'WORD' へ切り詰めます。
+c:\users\rtamura\source\repos\kinniku\kinniku\kinniku.cpp(60): warning C4302: '型キャスト': 'LPWSTR' から 'WORD' へ切り詰めます。
+c:\users\rtamura\source\repos\kinniku\kinniku\kinniku.cpp(186): warning C4244: 'return': 'WPARAM' から 'int' への変換です。データが失われる可能性があります。
+  tama.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\tama.cpp(20): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\tama.cpp(21): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\tama.cpp(93): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\tama.cpp(114): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\tama.cpp(115): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+  tgafunctions.cpp
+  コードを生成中...
+  kinniku.vcxproj -> C:\Users\rtamura\source\repos\kinniku\x64\Debug\kinniku.exe

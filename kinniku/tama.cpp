@@ -41,7 +41,7 @@ bool CTama::move() {
 
 void CTama::draw(ID2D1RenderTarget *pRenderTarget) {
 	
-	if (GameData::Gametree<=0) {
+	if (TreeScore <=0) {
 		D2D1_RECT_F rc;
 		rc.left = m_fX;
 		rc.top = m_fY;
@@ -50,7 +50,7 @@ void CTama::draw(ID2D1RenderTarget *pRenderTarget) {
 		pRenderTarget->DrawBitmap(m_pBitmap, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 
 	}
-	if (GameData::Gametree >= 1) {
+	if (TreeScore >= 1) {
 		D2D1_RECT_F rc;
 		rc.left = m_fX;
 		rc.top = m_fY;
@@ -59,7 +59,7 @@ void CTama::draw(ID2D1RenderTarget *pRenderTarget) {
 		pRenderTarget->DrawBitmap(m_pBitmap2, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 
 	}
-	if (GameData::Gametree >= 2) {
+	if (TreeScore >= 2) {
 		D2D1_RECT_F rc;
 		rc.left = m_fX;
 		rc.top = m_fY;
@@ -68,7 +68,7 @@ void CTama::draw(ID2D1RenderTarget *pRenderTarget) {
 		pRenderTarget->DrawBitmap(m_pBitmap3, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 
 	}
-	if (GameData::Gametree >= 3) {
+	if (TreeScore >= 3) {
 		D2D1_RECT_F rc;
 		rc.left = m_fX;
 		rc.top = m_fY;
