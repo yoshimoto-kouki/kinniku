@@ -7,6 +7,9 @@
 #include "PlayGame.h"
 #include  <windows.h>
 #include  <mmsystem.h>
+#include <windows.h>
+#include <mmsystem.h>
+#pragma comment(lib,"winmm.lib")
 
 
 CGameClear::CGameClear(CSelector *pSystem)
@@ -46,10 +49,16 @@ CGameClear::~CGameClear()
 
 GameSceneResultCode CGameClear::move() {
 	switch (m_ePhase) {
+		
 	case GAMECLEAR_INIT:
+		mciSendString(L"open ED.mp3 type mpegvideo alias ED", NULL, 0, NULL);
+		mciSendString(L"play ED from 0 repeat", NULL, 0, NULL);
 		m_iTimer = 0;
 		m_bFlag = true;
+
 		m_ePhase = GAMECLEAR_RUN;
+
+
 	case GAMECLEAR_RUN:
 	{
 		bool bDone = false;
@@ -65,7 +74,7 @@ GameSceneResultCode CGameClear::move() {
 
 		if (GetAsyncKeyState(VK_SPACE)) {
 			if (!m_bFlag) {
-
+				mciSendString(L"stop all", NULL, 0, NULL);
 				bDone = true;
 				m_bFlag = true;
 			}

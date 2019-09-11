@@ -13,7 +13,7 @@ bool GameData::ProteinFlag = false;
 
 float GameData::TotalScoreResult = 0;
 
-int  GameData::GameEndTime = 2700;
+int  GameData::GameEndTime = 100;
 int  GameData::GamePlayTime = 0;
 int  GameData::GameHoldNum = 0;
 int  GameData::Gametree = 0;

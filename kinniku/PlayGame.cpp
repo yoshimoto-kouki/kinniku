@@ -143,6 +143,8 @@ GameSceneResultCode    CStage::move() {
 #endif
 		if (bDone) {
 			mciSendString(L"stop all", NULL, 0, NULL);
+			mciSendString(L"open score.mp3 type mpegvideo alias score", NULL, 0, NULL);
+			mciSendString(L"play score from 0 repeat", NULL, 0, NULL);
 			m_iFadeTimer = 0;
 			m_ePhase = STAGE_FADE;
 		}

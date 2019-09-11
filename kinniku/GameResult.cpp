@@ -8,6 +8,10 @@
 #include "GameData.h"
 #include  <windows.h>
 #include  <mmsystem.h>
+#include <windows.h>
+#include <mmsystem.h>
+#pragma comment(lib,"winmm.lib")
+
 
 #define GAME_CLEAR_LINE 50000
 
@@ -40,10 +44,14 @@ CGameResult::~CGameResult()
 
 GameSceneResultCode CGameResult::move() {
 	switch (m_ePhase) {
+
 	case GAMERESULT_INIT:
+	
 		m_iTimer = 0;
 		m_bFlag = true;
+
 		m_ePhase = GAMERESULT_RUN;
+
 	case GAMERESULT_RUN:
 	{
 		bool bDone = false;
@@ -51,6 +59,7 @@ GameSceneResultCode CGameResult::move() {
 
 		if (GetAsyncKeyState(VK_SPACE)) {
 			if (!m_bFlag) {
+				mciSendString(L"stop all", NULL, 0, NULL);
 
 				bDone = true;
 				m_bFlag = true;
