@@ -95,6 +95,10 @@ void CSelector::doAnim() {
 	//	m_eGamePhase = GAMEPHASE_GAMECLEAR;
 	//	break;
 #endif
+		if (rc == GAMESCENE_END_TIMEOUT) {
+			m_eGamePhase = GAMEPHASE_RESET;
+			break;
+		}
 		m_pScene = new CStage(this);
 		m_eGamePhase = GAMEPHASE_GAME;
 	case    GAMEPHASE_GAME:
