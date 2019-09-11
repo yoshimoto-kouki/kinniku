@@ -38,6 +38,7 @@ protected:
 	ID2D1Bitmap *m_pImagemovielight;
 	ID2D1Bitmap *m_pImagepresent;
 	ID2D1Bitmap *m_pImagepresent2;
+	ID2D1Bitmap *m_pImagehosi;
 	ID2D1SolidColorBrush *m_pBlack;
 	bool m_bFlag;
 	bool m_bSantaFlag;
@@ -46,6 +47,7 @@ protected:
 	INT m_iFadeTimer;
 	float m_fbord;
 	float m_fthank;
+	int m_itimer;
 	int m_iTimerP = 0;
 	float m_fY ,m_fVY;
 

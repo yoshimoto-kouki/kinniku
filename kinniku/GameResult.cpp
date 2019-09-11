@@ -21,8 +21,9 @@ CGameResult::CGameResult(CSelector *pSystem)
 	m_pImageBG = NULL;
 	m_pSystem = pSystem;
 	m_pBlack = NULL;
-	m_fVY = 1;
-
+	m_itimer = 0;
+	m_fpY = 1;
+	m_fY = 0;
 	pTarget = pSystem->GetRenderTaget();
 	if (pTarget) {
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\playgamen_sukoa.jpg"), &m_pImageBG);
@@ -68,10 +69,18 @@ GameSceneResultCode CGameResult::move() {
 	{
 		bool bDone = false;
 		++m_iTimer;
-		if (m_fVY < 1000) {
-			m_fVY += 3;
+		if (m_fpY < 1000) {
+			m_fpY += 3;
 		}
+		m_itimer++;
+		if (20 <= m_itimer)
+			m_itimer = 0;
+		m_fY = -14 * m_itimer + 0.7*m_itimer * m_itimer;
+
+
+
 		if (GetAsyncKeyState(VK_SPACE) || 930 < m_iTimer) {
+			m_fY = 0;
 			if (!m_bFlag) {
 				mciSendString(L"stop all", NULL, 0, NULL);
 
@@ -120,36 +129,36 @@ void    CGameResult::draw(ID2D1RenderTarget *pRenderTarget) {
 	rc.bottom = rc.top + screenSize.height;
 	pRenderTarget->DrawBitmap(m_pImageBG, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
 	//result文字
-	rcr.left = 1300 - m_fVY;
+	rcr.left = 1300 - m_fpY;
 	rcr.top = 200;
 	rcr.right = rcr.left + 312;
 	rcr.bottom = rcr.top + 64;
 	pRenderTarget->DrawBitmap(m_pImageRESULT, rcr, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
 	//clear line　文字
-	rcr.left = 1300 - m_fVY;
+	rcr.left = 1300 - m_fpY;
 	rcr.top = 700;
 	rcr.right = rcr.left + 491;
 	rcr.bottom = rcr.top + 64;
 	pRenderTarget->DrawBitmap(m_pImageCLEAR, rcr, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
 	rcr.left = 1100;
-	rcr.top = -800 + m_fVY;
+	rcr.top = -800 + m_fpY;
 	rcr.bottom = rcr.top + 64;
 	rcr.right = rcr.left + 234;
-	if (1000 <= m_fVY)
+	if (1000 <= m_fpY)
 		rcr.right = rcr.left + 502;
 
 	prc.top = 0;
 	prc.bottom = prc.top + 64;
 	prc.left = 0;
 	prc.right = prc.left + 234;
-	if (1000 <= m_fVY)
+	if (1000 <= m_fpY)
 		prc.right = prc.left + 502;
 	pRenderTarget->DrawBitmap(m_pImagePUSH, rcr, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, prc);
 	//スコア
 	int val = GameData::TotalScoreResult;
 
 	D2D1_RECT_F rcd,drc;
-	rcd.left = 2250 - m_fVY;
+	rcd.left = 2250 - m_fpY;
 	rcd.top = 350;
 	rcd.bottom = rcd.top + 128;
 	while (0 < val) {
@@ -166,7 +175,7 @@ void    CGameResult::draw(ID2D1RenderTarget *pRenderTarget) {
 
 	int clear = GameData::CLEAR_LINE;
 	D2D1_RECT_F rcc;
-	rcc.left = 2100 - m_fVY;
+	rcc.left = 2100 - m_fpY;
 	rcc.top = 750;
 	rcc.bottom = rcc.top + 128;
 	while (0 < clear) {
@@ -193,10 +202,19 @@ void    CGameResult::draw(ID2D1RenderTarget *pRenderTarget) {
 	rcp.right = rcp.left + 100;
 	rcp.bottom = rcp.top + 100;
 	pRenderTarget->DrawBitmap(m_pImagePresent1, rcp, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
-	rcp2.left = 1700;
-	rcp2.top = 900;
-	rcp2.right = rcp2.left + 100;
+	
+	
+	rcp2.left = 1700 - m_fpY*1.5;
+	rcp2.top = 900 - m_iFadeTimer * 2 + m_fY;
+	if (m_iTimer < 930 && m_iFadeTimer != 0) {
+		rcp2.left = 1700 - m_fpY * 1.5 - ((1500 - m_fpY)/30)*m_iFadeTimer;
+		if (rcp2.left < 200)
+			rcp2.left = 200;
+	}
+	
+	rcp2.right = rcp2.left + 170;
 	rcp2.bottom = rcp2.top + 100;
+
 	pRenderTarget->DrawBitmap(m_pImagePresent2, rcp2, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 
 

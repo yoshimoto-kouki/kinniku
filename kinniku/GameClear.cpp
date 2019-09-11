@@ -25,6 +25,7 @@ CGameClear::CGameClear(CSelector *pSystem)
 	m_fthank = 0;
 	m_fbord = 0;
 	m_bpush = false;
+	m_itimer = 0;
 	pTarget = pSystem->GetRenderTaget();
 	if (pTarget) {
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\playgamen_sukoa.jpg"), &m_pImage);
@@ -38,6 +39,7 @@ CGameClear::CGameClear(CSelector *pSystem)
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\movielight.png"), &m_pImagemovielight);
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\present2.png"), &m_pImagepresent);
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\present1.png"), &m_pImagepresent2);
+		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\hosi.png"), &m_pImagehosi);
 		pTarget->CreateSolidColorBrush(D2D1::ColorF(0.0f, 0.0f, 0.0f), &m_pBlack);
 		pTarget->Release();
 		pTarget = NULL;
@@ -56,6 +58,7 @@ CGameClear::~CGameClear()
 	SAFE_RELEASE(m_pImagemovielight);
 	SAFE_RELEASE(m_pImagepresent);
 	SAFE_RELEASE(m_pImagepresent2);
+	SAFE_RELEASE(m_pImagehosi);
 }
 
 GameSceneResultCode CGameClear::move() {
@@ -84,7 +87,9 @@ GameSceneResultCode CGameClear::move() {
 		
 		if (m_fbord <= 1)
 			m_fbord += 0.005f;
-
+		m_itimer++;
+		if (m_itimer == 360)
+			m_itimer = 0;
 
 		if (GetAsyncKeyState(VK_SPACE)) {
 			m_bpush = true;
@@ -138,8 +143,17 @@ void    CGameClear::draw(ID2D1RenderTarget *pRenderTarget) {
 	pRenderTarget->DrawBitmap(m_pImageProtein, prc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
 
 
+	//•¶Žš
+	D2D1_RECT_F rcT;
+	rcT.top = 200;
+	rcT.bottom = rcT.top + 512;
+	rcT.left = 300;
+	rcT.right = rcT.left + 674;
+
+	pRenderTarget->DrawBitmap(m_pImageThank, rcT, m_fbord, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR);
+
 	
-	D2D1_RECT_F rcS,rcSw,rc_seiya, rcs_seiya,rclight;
+	D2D1_RECT_F rcS,rcSw,rc_seiya, rcs_seiya,rclight, rcstar;
 
 	//light
 	rclight.left = 237;
@@ -147,6 +161,7 @@ void    CGameClear::draw(ID2D1RenderTarget *pRenderTarget) {
 	rclight.right = rclight.left + 739;
 	rclight.bottom = rclight.top + 718;
 	pRenderTarget->DrawBitmap(m_pImagemovielight, rclight, m_fbord, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR);
+
 	//present
 	rclight.left = 200;
 	rclight.top = 830;
@@ -204,16 +219,14 @@ void    CGameClear::draw(ID2D1RenderTarget *pRenderTarget) {
 	pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 
 
-	//•¶Žš
-	D2D1_RECT_F rcT;//674.512
-	rcT.top = 200;
-	rcT.bottom = rcT.top + 512;
-	rcT.left = 300;
-	rcT.right = rcT.left + 674;
-
-	pRenderTarget->DrawBitmap(m_pImageThank, rcT, m_fbord, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR);
-
-
+	rcstar.top = 200;
+	rcstar.bottom = rcstar.top + 356;
+	rcstar.left = 1200;
+	rcstar.right = rcstar.left + 356;
+	
+	pRenderTarget->SetTransform(D2D1::Matrix3x2F::Rotation(m_itimer, D2D1::Point2F(rcstar.left + 356 * 0.5, rcstar.top + 356 * 0.5)));
+	pRenderTarget->DrawBitmap(m_pImagehosi, rcstar, m_fbord, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR);
+	pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 
 
 	switch (m_ePhase) {

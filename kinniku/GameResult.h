@@ -37,7 +37,9 @@ protected:
 	ID2D1Bitmap *m_pImagePresent2;
 	ID2D1SolidColorBrush *m_pBlack;
 	bool m_bFlag;
-	float m_fVY;
+	float m_itimer;
+	float m_fY;
+	float m_fpY;
 	INT m_iTimer = 0;
 	INT m_iFadeTimer;
 
