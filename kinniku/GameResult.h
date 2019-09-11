@@ -27,13 +27,17 @@ public:
 protected:
 	CSelector *m_pSystem;
 	GameResultPhase m_ePhase;
-	ID2D1Bitmap *m_pImage;
+	ID2D1Bitmap *m_pImageBG;
+	ID2D1Bitmap *m_pImageRESULT;
+	ID2D1Bitmap *m_pImageCLEAR;
+	ID2D1Bitmap *m_pImagePUSH;
 	ID2D1Bitmap *m_pImagedigit;
 	ID2D1Bitmap *m_pImageBag;
 	ID2D1Bitmap *m_pImagePresent1;
 	ID2D1Bitmap *m_pImagePresent2;
 	ID2D1SolidColorBrush *m_pBlack;
 	bool m_bFlag;
+	float m_fVY;
 	INT m_iTimer = 0;
 	INT m_iFadeTimer;
 

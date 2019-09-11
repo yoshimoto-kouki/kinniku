@@ -10,8 +10,10 @@ bool GameData::shot = false;
 bool GameData::StartIndexEnd = false;//初期固定生成用
 bool GameData::ProteinFlag = false;//プロテインバースト中かどうか
 
-float GameData::TotalScoreResult = 0;//ゲーム中のトータルスコア
+float GameData::TotalScoreResult = 100000;//ゲーム中のトータルスコア
 
 int  GameData::GameEndTime = 20;//本編プレイ制限時間
 int  GameData::GamePlayTime = 0;//本編プレイ時間計測
 int  GameData::GameHoldNum = 0;//サンタの現在所持アイテム数
+
+int GameData::CLEAR_LINE = 50000;//ゲームクリアライン

@@ -19,5 +19,7 @@ public:
 	static int GamePlayTime;
 
 	static int GameHoldNum;
+
+	static int CLEAR_LINE;
 };
 
