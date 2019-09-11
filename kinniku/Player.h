@@ -35,6 +35,9 @@ protected:
 	ID2D1Bitmap *m_pBitmapPTC;
 	ID2D1Bitmap *m_pBitmapC;
 	ID2D1Bitmap *m_pBitmapNT;
+	ID2D1Bitmap *m_pBitmapNT2;
+	ID2D1Bitmap *m_pBitmapNT3;
+	ID2D1Bitmap *m_pBitmapNT4;
 	//アイテム個数用
 	ID2D1Bitmap *m_pBitmapItemNum;
 
@@ -48,3 +51,4 @@ protected:
 	ID2D1SolidColorBrush		*m_pBrush;
 
 };
+

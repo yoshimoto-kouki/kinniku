@@ -40,11 +40,14 @@ CPlayer::CPlayer(CStage *pStage)
 	//  CStage Ç©ÇÁÇ‹ÇΩéÿÇËÇ∑ÇÈ
 	pRenderTarget = pStage->GetRenderTarget();
 	if (pRenderTarget) {
-		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\santest.png"), &m_pBitmapP);
-		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\santest2.png"), &m_pBitmapPT);
-		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\santest3.png"), &m_pBitmapPTC);
+		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\GameSanta1.png"), &m_pBitmapP);
+		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\GameSanta2.png"), &m_pBitmapPT);
+		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\GameSanta3.png"), &m_pBitmapPTC);
 		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\charge.png"), &m_pBitmapC);
 		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\tree.png"), &m_pBitmapNT);
+		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\tree2.png"), &m_pBitmapNT2);
+		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\tree3.png"), &m_pBitmapNT3);
+		CTextureLoader::CreateD2D1BitmapFromFile(pRenderTarget, _T("res\\tree4.png"), &m_pBitmapNT4);
 		pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::IndianRed), &m_pBrush);
  		SAFE_RELEASE(pRenderTarget);//Ç±Ç±Ç≈ìÒèdÇ…RELEASEÇµÇƒÇΩÇÃÇ™å¥àˆÇ≈Ç∑
 	}
@@ -184,22 +187,81 @@ void CPlayer::draw(ID2D1RenderTarget *pRenderTarget) {
 		pRenderTarget->DrawBitmap(m_pBitmapPTC, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 	}
 	if (m_bLongPushSpace) {//ÉLÉÉÉâèäéùÉÇÉ~ÇÃñÿ
-		if (m_fKeyTime < 30) {
-			rcT.left = m_fX + PTexsizeHalfX + 40;
-			rcT.top = m_fY + 30;
-			rcT.right = rcT.left + TexsizeHalfX;
-			rcT.bottom = rcT.top + TexsizeHalfY;
-			pRenderTarget->DrawBitmap(m_pBitmapNT, rcT, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+		if (GameData::GameHoldNum <= 0) {
+			if (m_fKeyTime < 30) {
+				rcT.left = m_fX + PTexsizeHalfX + 30;
+		 		rcT.top = m_fY + 30;
+				rcT.right = rcT.left + TexsizeHalfX;
+				rcT.bottom = rcT.top + TexsizeHalfY;
+				pRenderTarget->DrawBitmap(m_pBitmapNT, rcT, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+			}
+			else {
+				rcT.left = m_fX + PTexsizeHalfX * 1.4f;
+				rcT.top = m_fY + PTexsizeHalfY * 0.5f;
+				rcT.right = rcT.left + TexsizeHalfX;
+				rcT.bottom = rcT.top + TexsizeHalfY;
+				pRenderTarget->DrawBitmap(m_pBitmapNT, rcT, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+				rcT.left = rc.left - PTexsizeHalfX * 0.3f;
+				rcT.right = rcT.left + TexsizeHalfX;
+				pRenderTarget->DrawBitmap(m_pBitmapNT, rcT, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+			}
 		}
-		else {
-			rcT.left = m_fX + PTexsizeHalfX * 1.5f;
-			rcT.top = m_fY + PTexsizeHalfY*0.5f;
-			rcT.right = rcT.left + TexsizeHalfX;			
-			rcT.bottom = rcT.top + TexsizeHalfY;
-			pRenderTarget->DrawBitmap(m_pBitmapNT, rcT, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
-			rcT.left = rc.left - PTexsizeHalfX*0.6f;
-			rcT.right = rcT.left + TexsizeHalfX;
-			pRenderTarget->DrawBitmap(m_pBitmapNT, rcT, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+		if (GameData::GameHoldNum>=1) {
+			if (m_fKeyTime < 30) {
+				rcT.left = m_fX + PTexsizeHalfX + 30;
+				rcT.top = m_fY + 30;
+				rcT.right = rcT.left + TexsizeHalfX;
+				rcT.bottom = rcT.top + TexsizeHalfY;
+				pRenderTarget->DrawBitmap(m_pBitmapNT2, rcT, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+			}
+			else {
+				rcT.left = m_fX + PTexsizeHalfX * 1.4f;
+				rcT.top = m_fY + PTexsizeHalfY * 0.5f;
+				rcT.right = rcT.left + TexsizeHalfX;
+				rcT.bottom = rcT.top + TexsizeHalfY;
+				pRenderTarget->DrawBitmap(m_pBitmapNT2, rcT, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+				rcT.left = rc.left - PTexsizeHalfX * 0.3f;
+				rcT.right = rcT.left + TexsizeHalfX;
+				pRenderTarget->DrawBitmap(m_pBitmapNT2, rcT, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+			}
+		}
+		if (GameData::GameHoldNum >= 2) {
+			if (m_fKeyTime < 30) {
+				rcT.left = m_fX + PTexsizeHalfX + 30;
+				rcT.top = m_fY + 30;
+				rcT.right = rcT.left + TexsizeHalfX;
+				rcT.bottom = rcT.top + TexsizeHalfY;
+				pRenderTarget->DrawBitmap(m_pBitmapNT3, rcT, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+			}
+			else {
+				rcT.left = m_fX + PTexsizeHalfX * 1.4f;
+				rcT.top = m_fY + PTexsizeHalfY * 0.5f;
+				rcT.right = rcT.left + TexsizeHalfX;
+				rcT.bottom = rcT.top + TexsizeHalfY;
+				pRenderTarget->DrawBitmap(m_pBitmapNT3, rcT, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+				rcT.left = rc.left - PTexsizeHalfX * 0.3f;
+				rcT.right = rcT.left + TexsizeHalfX;
+				pRenderTarget->DrawBitmap(m_pBitmapNT3 , rcT, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+			}
+		}
+		if (GameData::GameHoldNum >= 3) {
+			if (m_fKeyTime < 30) {
+				rcT.left = m_fX + PTexsizeHalfX + 40;
+				rcT.top = m_fY + 30;
+				rcT.right = rcT.left + TexsizeHalfX;
+				rcT.bottom = rcT.top + TexsizeHalfY;
+				pRenderTarget->DrawBitmap(m_pBitmapNT4, rcT, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+			}
+			else {
+				rcT.left = m_fX + PTexsizeHalfX * 1.4f;
+				rcT.top = m_fY + PTexsizeHalfY * 0.5f;
+				rcT.right = rcT.left + TexsizeHalfX;
+				rcT.bottom = rcT.top + TexsizeHalfY;
+				pRenderTarget->DrawBitmap(m_pBitmapNT4, rcT, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+				rcT.left = rc.left - PTexsizeHalfX * 0.3f;
+				rcT.right = rcT.left + TexsizeHalfX;
+				pRenderTarget->DrawBitmap(m_pBitmapNT4, rcT, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+			}
 		}
 	}
 	if (m_bLongPushSpace) {
@@ -248,4 +310,5 @@ bool CPlayer::collide(IGameObject *pObj) {
 void CPlayer::hit(float amount) {
 	if (m_fItemGetScore < ScoreLimit)
 		m_fItemGetScore += 1;
+	GameData::Gametree += 1;
 }

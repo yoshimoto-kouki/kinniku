@@ -18,5 +18,6 @@ public:
 	static int GameEndTime;
 	static int GamePlayTime;
 	static int GameHoldNum;
+	static int Gametree;
 };
 

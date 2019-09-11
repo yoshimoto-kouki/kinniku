@@ -3,8 +3,12 @@
 #include "tama.h"
 #include "TextureLoader.h"
 #include <math.h>
+#include "GameData.h"
 
 ID2D1Bitmap *CTama::m_pBitmap = NULL;
+ID2D1Bitmap *CTama::m_pBitmap2 = NULL;
+ID2D1Bitmap *CTama::m_pBitmap3 = NULL;
+ID2D1Bitmap *CTama::m_pBitmap4 = NULL;
 #define Bitmap01sizeX 100//25
 #define Bitmap01sizeY 180//34
 
@@ -36,12 +40,44 @@ bool CTama::move() {
 }
 
 void CTama::draw(ID2D1RenderTarget *pRenderTarget) {
-	D2D1_RECT_F rc;
-	rc.left = m_fX;
-	rc.top = m_fY;
-	rc.right = rc.left + Bitmap01sizeX;
-	rc.bottom = rc.top + Bitmap01sizeY;
-	pRenderTarget->DrawBitmap(m_pBitmap, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+	
+	if (GameData::Gametree<=0) {
+		D2D1_RECT_F rc;
+		rc.left = m_fX;
+		rc.top = m_fY;
+		rc.right = rc.left + Bitmap01sizeX;
+		rc.bottom = rc.top + Bitmap01sizeY;
+		pRenderTarget->DrawBitmap(m_pBitmap, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+
+	}
+	if (GameData::Gametree >= 1) {
+		D2D1_RECT_F rc;
+		rc.left = m_fX;
+		rc.top = m_fY;
+		rc.right = rc.left + Bitmap01sizeX;
+		rc.bottom = rc.top + Bitmap01sizeY;
+		pRenderTarget->DrawBitmap(m_pBitmap2, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+
+	}
+	if (GameData::Gametree >= 2) {
+		D2D1_RECT_F rc;
+		rc.left = m_fX;
+		rc.top = m_fY;
+		rc.right = rc.left + Bitmap01sizeX;
+		rc.bottom = rc.top + Bitmap01sizeY;
+		pRenderTarget->DrawBitmap(m_pBitmap3, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+
+	}
+	if (GameData::Gametree >= 3) {
+		D2D1_RECT_F rc;
+		rc.left = m_fX;
+		rc.top = m_fY;
+		rc.right = rc.left + Bitmap01sizeX;
+		rc.bottom = rc.top + Bitmap01sizeY;
+		pRenderTarget->DrawBitmap(m_pBitmap4, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+
+	}
+
 }
 
 /************************************************************
@@ -96,6 +132,7 @@ bool CTama::collide(IGameObject *pObj) {
 
 void CTama::hit(float amount) {
 	m_bDamage = true;
+	GameData::Gametree = 0;
 }
 
 float CTama::TSPointBackx()
@@ -128,7 +165,13 @@ bool CTama::StarHitFlag()
 *********************************************************/
 void CTama::Restore(ID2D1RenderTarget *pRT){
 	SAFE_RELEASE(m_pBitmap);
+	SAFE_RELEASE(m_pBitmap2);
+	SAFE_RELEASE(m_pBitmap3);
+	SAFE_RELEASE(m_pBitmap4);
 	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\tree.png"), &m_pBitmap);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\tree2.png"), &m_pBitmap2);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\tree3.png"), &m_pBitmap3);
+	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\tree4.png"), &m_pBitmap4);
 }
 
 /*********************************************************
@@ -138,4 +181,7 @@ void CTama::Restore(ID2D1RenderTarget *pRT){
 *********************************************************/
 void CTama::Finalize() {
 	SAFE_RELEASE(m_pBitmap);
+	SAFE_RELEASE(m_pBitmap2);
+	SAFE_RELEASE(m_pBitmap3);
+	SAFE_RELEASE(m_pBitmap4);
 }

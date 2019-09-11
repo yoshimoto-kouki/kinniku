@@ -29,6 +29,9 @@ public:
 protected:
 	static ID2D1RenderTarget *pRenderTarget;
 	static ID2D1Bitmap *m_pBitmap;
+	static ID2D1Bitmap *m_pBitmap2;
+	static ID2D1Bitmap *m_pBitmap3;
+	static ID2D1Bitmap *m_pBitmap4;
 	CStage *m_pParent;
 	BOOL m_bDamage; //本来、このフラグで処理しようとしたが、エラーを吐く.boolを操作するとエラー何故。
 
