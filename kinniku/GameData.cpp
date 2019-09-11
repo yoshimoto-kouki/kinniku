@@ -12,6 +12,6 @@ bool GameData::ProteinFlag = false;//プロテインバースト中かどうか
 
 float GameData::TotalScoreResult = 0;//ゲーム中のトータルスコア
 
-int  GameData::GameEndTime = 2000;//本編プレイ制限時間
+int  GameData::GameEndTime = 20;//本編プレイ制限時間
 int  GameData::GamePlayTime = 0;//本編プレイ時間計測
 int  GameData::GameHoldNum = 0;//サンタの現在所持アイテム数

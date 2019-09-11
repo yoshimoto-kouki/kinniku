@@ -29,6 +29,9 @@ protected:
 	GameResultPhase m_ePhase;
 	ID2D1Bitmap *m_pImage;
 	ID2D1Bitmap *m_pImagedigit;
+	ID2D1Bitmap *m_pImageBag;
+	ID2D1Bitmap *m_pImagePresent1;
+	ID2D1Bitmap *m_pImagePresent2;
 	ID2D1SolidColorBrush *m_pBlack;
 	bool m_bFlag;
 	INT m_iTimer = 0;

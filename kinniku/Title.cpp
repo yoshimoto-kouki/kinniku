@@ -141,10 +141,10 @@ GameSceneResultCode    CTitle::move() {
 				}
 			}
 		}
-		if (0.7 < m_fPresentNum) {
+		if (0.65 < m_fPresentNum) {
 			m_ftitleX = -1000;
 		}
-		if (0.9 < m_fPresentNum) {
+		if (0.7 < m_fPresentNum) {
 			return GameSceneResultCode::GAMESCENE_END_TIMEOUT;
 		}
 

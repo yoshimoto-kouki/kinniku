@@ -113,11 +113,10 @@ bool CTama::collide(float x,float w)
 	if (x < senter_x && senter_x < x + w) {
 		m_fTreeScore *= (32.f - fabsf(senter_x - StarSenterx)) / 32.f;
 		int val = m_fTreeScore;
-		m_fTreeScore = val;
-		
+		m_fTreeScore = val;	
 	}
 	else {
-		if(GameData::ProteinFlag)
+		if(!GameData::ProteinFlag)
 			m_fTreeScore = 0;
 	}
 	return true;

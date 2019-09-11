@@ -28,6 +28,9 @@ CGameResult::CGameResult(CSelector *pSystem)
 	if (pTarget) {
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\playgamen_sukoa.jpg"), &m_pImage);
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\digit.png"), &m_pImagedigit);
+		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\presentbag.png"), &m_pImageBag);
+		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\present1.png"), &m_pImagePresent1);
+		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\present2.png"), &m_pImagePresent2);
 		pTarget->CreateSolidColorBrush(D2D1::ColorF(0.0f, 0.0f, 0.0f), &m_pBlack);
 		pTarget->Release();
 		pTarget = NULL;
@@ -40,6 +43,9 @@ CGameResult::~CGameResult()
 {
 	SAFE_RELEASE(m_pImage);
 	SAFE_RELEASE(m_pImagedigit);
+	SAFE_RELEASE(m_pImageBag);
+	SAFE_RELEASE(m_pImagePresent1);
+	SAFE_RELEASE(m_pImagePresent2);
 }
 
 GameSceneResultCode CGameResult::move() {
@@ -93,6 +99,8 @@ GameSceneResultCode CGameResult::move() {
 	return GameSceneResultCode::GAMESCENE_DEFAULT;
 }
 void    CGameResult::draw(ID2D1RenderTarget *pRenderTarget) {
+
+	//îwåi
 	int frc = 0;
 	D2D1_RECT_F rc, prc;
 	D2D1_SIZE_F screenSize, textureSize;
@@ -104,6 +112,31 @@ void    CGameResult::draw(ID2D1RenderTarget *pRenderTarget) {
 	rc.bottom = rc.top + screenSize.height;
 	pRenderTarget->DrawBitmap(m_pImage, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
 
+
+
+
+
+	//Present & tree
+	D2D1_RECT_F rct,rcp,rcp2;
+	rct.left = 1300;
+	rct.top = 400;
+	rct.right = rct.left + 600;
+	rct.bottom = rct.top + 600;
+	pRenderTarget->DrawBitmap(m_pImageBag, rct, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+	rcp.left = 1600;
+	rcp.top = 900;
+	rcp.right = rcp.left + 100;
+	rcp.bottom = rcp.top + 100;
+	pRenderTarget->DrawBitmap(m_pImagePresent1, rcp, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+	rcp2.left = 1700;
+	rcp2.top = 900;
+	rcp2.right = rcp2.left + 100;
+	rcp2.bottom = rcp2.top + 100;
+	pRenderTarget->DrawBitmap(m_pImagePresent2, rcp2, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
+
+
+
+	//ÉXÉRÉA
 	int val = GameData::TotalScoreResult;
 
 	D2D1_RECT_F rcd,drc;
