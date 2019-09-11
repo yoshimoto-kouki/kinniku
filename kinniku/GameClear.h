@@ -35,9 +35,13 @@ protected:
 	ID2D1Bitmap *m_pImageProtein;
 	ID2D1Bitmap *m_pImageSeiya;
 	ID2D1Bitmap *m_pImageThank;
+	ID2D1Bitmap *m_pImagemovielight;
+	ID2D1Bitmap *m_pImagepresent;
+	ID2D1Bitmap *m_pImagepresent2;
 	ID2D1SolidColorBrush *m_pBlack;
 	bool m_bFlag;
 	bool m_bSantaFlag;
+	bool m_bpush;
 	INT m_iTimer = 0;
 	INT m_iFadeTimer;
 	float m_fbord;

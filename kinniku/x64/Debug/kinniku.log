@@ -1,2 +1,5 @@
 ﻿  GameClear.cpp
+  Selecter.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\selecter.cpp(157): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+  コードを生成中...
   kinniku.vcxproj -> C:\Users\rtamura\source\repos\kinniku\x64\Debug\kinniku.exe
