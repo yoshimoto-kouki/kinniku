@@ -56,6 +56,7 @@ GameSceneResultCode    CGameOver::move() {
 
 		bool bDone = false;
 		++m_iTimer;
+<<<<<<< HEAD
 		m_fTime++;
 		if (100 < m_fTime) {
 			m_fTime = 0;
@@ -64,6 +65,9 @@ GameSceneResultCode    CGameOver::move() {
 
 
 		CSelector::a;
+=======
+		
+>>>>>>> origin/master
 
 		if (GetAsyncKeyState(VK_SPACE)) {
 			if (!m_bFlag) {

@@ -201,10 +201,20 @@ GameSceneResultCode    CStage::move() {
 		if (m_pBG)
 			m_pBG->move();
 		
+			
+		
+		
+
 		if (GameData::ProteinFlag) {//プロテインバースト中カウント
+			//mciSendString(L"open protein BGM.mp3 type mpegvideo alias protein BGM", NULL, 0, NULL);
+			//mciSendString(L"play protein BGM from 0 repeat", NULL, 0, NULL);
 			m_fProteinTimer++;
 			if (m_fProteinTimer > 150){//30FPSで更新されるだろうから＊5して出した。5秒用
 				GameData::ProteinFlag = !GameData::ProteinFlag;
+				//mciSendString(L"stop all", NULL, 0, NULL);
+				///mciSendString(L"open GameBGM.mp3 type mpegvideo alias GameBGM", NULL, 0, NULL);
+				//mciSendString(L"play GameBGM from 0 repeat", NULL, 0, NULL);
+
 				m_fProteinTimer = 0;
 				}
 		}
