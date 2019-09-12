@@ -14,3 +14,7 @@
 *.vs/
 *.v15/
 *.vs/kinniku/v15/Browse.VC.db
+.Debug/
+.vs/
+.v15/
+.vs/kinniku/v15/Browse.VC.db
