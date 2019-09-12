@@ -17,15 +17,19 @@ CGameOver::CGameOver(CSelector *pSystem)
 	m_pImage = NULL;
 	m_pSystem = pSystem;
 	m_pBlack = NULL;
-
-
+	m_fTime = 0;
+	m_iAdbise = 0;
 	pTarget = pSystem->GetRenderTaget();
 	if (pTarget) {
-		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\gameover.tga"), &m_pImage);
+		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\playgamen_sukoa.jpg"), &m_pImage);
+		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\fontprotein.png"), &m_pImageBonus);
+		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\power.png"), &m_pImagePower);
+		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\sasi.png"), &m_pImageSasi);
+		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\again.png"), &m_pImageAgain);
+
 		pTarget->CreateSolidColorBrush(D2D1::ColorF(0.0f, 0.0f, 0.0f), &m_pBlack);
 		pTarget->Release();
 		pTarget = NULL;
-
 	}
 
 }
@@ -34,6 +38,10 @@ CGameOver::CGameOver(CSelector *pSystem)
 CGameOver::~CGameOver()
 {
 	SAFE_RELEASE(m_pImage);
+	SAFE_RELEASE(m_pImageBonus);
+	SAFE_RELEASE(m_pImagePower);
+	SAFE_RELEASE(m_pImageSasi);
+	SAFE_RELEASE(m_pImageAgain);
 }
 
 GameSceneResultCode    CGameOver::move() {
@@ -48,6 +56,13 @@ GameSceneResultCode    CGameOver::move() {
 
 		bool bDone = false;
 		++m_iTimer;
+		m_fTime++;
+		if (100 < m_fTime) {
+			m_fTime = 0;
+			m_iAdbise++;
+		}
+
+
 		CSelector::a;
 
 		if (GetAsyncKeyState(VK_SPACE)) {
@@ -78,7 +93,7 @@ GameSceneResultCode    CGameOver::move() {
 }
 void    CGameOver::draw(ID2D1RenderTarget *pRenderTarget) {
 	int frc = 0;
-	D2D1_RECT_F rc, prc;
+	D2D1_RECT_F rc;
 	D2D1_SIZE_F screenSize, textureSize;
 	screenSize = pRenderTarget->GetSize();
 	textureSize = m_pImage->GetSize();
@@ -87,6 +102,42 @@ void    CGameOver::draw(ID2D1RenderTarget *pRenderTarget) {
 	rc.right = rc.left + textureSize.width;
 	rc.bottom = rc.top + textureSize.height;
 	pRenderTarget->DrawBitmap(m_pImage, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
+
+	rc.left = 0;
+	rc.top = 0;
+	rc.right = rc.left + 921*0.5;
+	rc.bottom = rc.top + 460*0.5;
+	pRenderTarget->DrawBitmap(m_pImageAgain, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
+
+	switch(m_iAdbise) {
+	case 0:
+		rc.left = 200;
+		rc.top = 250;
+		rc.right = rc.left + 1924 * 0.8;
+		rc.bottom = rc.top + 645 * 0.8;
+		pRenderTarget->DrawBitmap(m_pImageSasi, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
+		break;
+	case 1:
+		rc.left = 200;
+		rc.top = 250;
+		rc.right =  rc.left + 802*2;
+		rc.bottom = rc.top + 280*2;
+		pRenderTarget->DrawBitmap(m_pImageBonus, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
+		break;
+	case 2:
+		rc.left = 200;
+		rc.top = 250;
+		rc.right = rc.left + 1924 * 0.8;
+		rc.bottom = rc.top + 629 * 0.8;
+		pRenderTarget->DrawBitmap(m_pImagePower, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
+		break; 
+	case 3:
+		break;
+	case 4:
+		break;
+	}
+
+
 
 
 	switch (m_ePhase) {

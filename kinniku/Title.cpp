@@ -41,6 +41,7 @@ CTitle::CTitle(CSelector *pSystem)
 	m_fsize = 1;
 	m_ftitleX = 0;
 	m_btype = true;
+	
 
 	pTarget = pSystem->GetRenderTaget();
 	if (pTarget) {
@@ -57,7 +58,7 @@ CTitle::CTitle(CSelector *pSystem)
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\presentbag.png"), &m_pImagePresentBag);
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\fukuro.png"), &m_pImagePresentBagO);
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\start.png"), &m_pImageSTART);
-		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\push.png"), &m_pImagePUSH);
+		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\pushR.png"), &m_pImagePUSH);
 
 		pTarget->CreateSolidColorBrush(D2D1::ColorF(0.0f, 0.0f, 0.0f), &m_pBlack);
 		pTarget->Release();
@@ -110,7 +111,7 @@ GameSceneResultCode    CTitle::move() {
 		}
 		if (m_iTimer == 1 && !m_bSantaFlag)
 			m_bPresentFlag = false;
-
+		
 
 		if (!m_bPresentFlag) {
 			if (!m_bBound) {
@@ -345,7 +346,7 @@ void    CTitle::draw(ID2D1RenderTarget *pRenderTarget) {
 		D2D1_RECT_F rcpush;
 		rcpush.left = 1570;
 		rcpush.top = 950;
-		rcpush.right =  rcpush.left + 251;
+		rcpush.right =  rcpush.left + 248;
 		rcpush.bottom = rcpush.top + 32;
 		pRenderTarget->DrawBitmap(m_pImagePUSH, rcpush, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
 	}

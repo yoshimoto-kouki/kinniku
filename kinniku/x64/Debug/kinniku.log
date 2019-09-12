@@ -1,4 +1,8 @@
-﻿  GameClear.cpp
-c:\users\rtamura\source\repos\kinniku\kinniku\gameclear.cpp(229): warning C4244: '引数': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
-c:\users\rtamura\source\repos\kinniku\kinniku\gameclear.cpp(229): warning C4244: '引数': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
+﻿  Title.cpp
+c:\users\rtamura\source\repos\kinniku\kinniku\title.cpp(118): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
+c:\users\rtamura\source\repos\kinniku\kinniku\title.cpp(129): warning C4305: '-=': 'double' から 'float' へ切り詰めます。
+c:\users\rtamura\source\repos\kinniku\kinniku\title.cpp(130): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
+c:\users\rtamura\source\repos\kinniku\kinniku\title.cpp(208): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\title.cpp(209): warning C4244: '=': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\rtamura\source\repos\kinniku\kinniku\title.cpp(194): warning C4101: 'krc': ローカル変数は 1 度も使われていません。
   kinniku.vcxproj -> C:\Users\rtamura\source\repos\kinniku\x64\Debug\kinniku.exe

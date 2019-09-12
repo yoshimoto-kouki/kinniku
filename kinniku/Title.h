@@ -50,6 +50,7 @@ protected:
 	bool   m_bPresentFlag;
 	bool   m_bBound;
 	bool   m_btype;
+	
 	float  m_fsize;
 	float  m_fPresentmove_x;
 	float  m_fPresentmove_y;

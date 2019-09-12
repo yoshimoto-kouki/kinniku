@@ -26,6 +26,7 @@ CGameClear::CGameClear(CSelector *pSystem)
 	m_fbord = 0;
 	m_bpush = false;
 	m_itimer = 0;
+	m_fAX = 0;
 	pTarget = pSystem->GetRenderTaget();
 	if (pTarget) {
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\playgamen_sukoa.jpg"), &m_pImage);
@@ -41,6 +42,7 @@ CGameClear::CGameClear(CSelector *pSystem)
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\present1.png"), &m_pImagepresent2);
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\hosi.png"), &m_pImagehosi);
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\clear.png"), &m_pImageCLEAR);
+		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\houti.png"), &m_pImagehouti);
 		pTarget->CreateSolidColorBrush(D2D1::ColorF(0.0f, 0.0f, 0.0f), &m_pBlack);
 		pTarget->Release();
 		pTarget = NULL;
@@ -61,6 +63,7 @@ CGameClear::~CGameClear()
 	SAFE_RELEASE(m_pImagepresent2);
 	SAFE_RELEASE(m_pImagehosi);
 	SAFE_RELEASE(m_pImageCLEAR);
+	SAFE_RELEASE(m_pImagehouti);
 }
 
 GameSceneResultCode CGameClear::move() {
@@ -89,6 +92,10 @@ GameSceneResultCode CGameClear::move() {
 		
 		if (m_fbord <= 1)
 			m_fbord += 0.005f;
+		else {
+			if (m_fAX < 2600)
+			m_fAX+=30;
+		}
 		m_itimer++;
 		if (m_itimer == 360)
 			m_itimer = 0;
@@ -155,7 +162,7 @@ void    CGameClear::draw(ID2D1RenderTarget *pRenderTarget) {
 	pRenderTarget->DrawBitmap(m_pImageThank, rcT, m_fbord, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR);
 
 	
-	D2D1_RECT_F rcS,rcSw,rc_seiya, rcs_seiya,rclight, rcstar;
+	D2D1_RECT_F rcS,rcSw,rc_seiya, rcs_seiya,rclight, rcstar,rch;
 
 	//light
 	rclight.left = 237;
@@ -236,6 +243,13 @@ void    CGameClear::draw(ID2D1RenderTarget *pRenderTarget) {
 
 	pRenderTarget->DrawBitmap(m_pImageCLEAR, rcstar, m_fbord, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR);
 
+	rch.top = 0;
+	rch.bottom = rch.top + 471 * 0.4;
+	rch.left = 1920 - m_fAX;
+	rch.right = rch.left + 1585 * 0.4;
+
+	pRenderTarget->DrawBitmap(m_pImagehouti, rch, m_fbord, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR);
+	   
 	switch (m_ePhase) {
 	case GAMECLEAR_FADE:
 	case GAMECLEAR_DONE:

@@ -26,8 +26,14 @@ protected:
 	GameOverPhase m_ePhase;
 	ID2D1Bitmap *m_pImage;
 	ID2D1Bitmap *m_pImage2;
+	ID2D1Bitmap *m_pImageBonus;
+	ID2D1Bitmap *m_pImagePower;
+	ID2D1Bitmap *m_pImageSasi;
+	ID2D1Bitmap *m_pImageAgain;
 	ID2D1SolidColorBrush *m_pBlack;
 	bool	m_bFlag;
+	float   m_fTime;
+	int    m_iAdbise;
 	INT     m_iTimer = 0;
 	INT		m_iFadeTimer;
 };
