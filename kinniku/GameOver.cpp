@@ -56,18 +56,15 @@ GameSceneResultCode    CGameOver::move() {
 
 		bool bDone = false;
 		++m_iTimer;
-<<<<<<< HEAD
+
 		m_fTime++;
 		if (100 < m_fTime) {
 			m_fTime = 0;
 			m_iAdbise++;
+			if (2 < m_iAdbise)
+				m_iAdbise = 0;
 		}
 
-
-		CSelector::a;
-=======
-		
->>>>>>> origin/master
 
 		if (GetAsyncKeyState(VK_SPACE)) {
 			if (!m_bFlag) {
@@ -135,10 +132,6 @@ void    CGameOver::draw(ID2D1RenderTarget *pRenderTarget) {
 		rc.bottom = rc.top + 629 * 0.8;
 		pRenderTarget->DrawBitmap(m_pImagePower, rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
 		break; 
-	case 3:
-		break;
-	case 4:
-		break;
 	}
 
 
