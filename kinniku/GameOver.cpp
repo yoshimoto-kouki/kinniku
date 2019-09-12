@@ -48,7 +48,7 @@ GameSceneResultCode    CGameOver::move() {
 
 		bool bDone = false;
 		++m_iTimer;
-		CSelector::a;
+		
 
 		if (GetAsyncKeyState(VK_SPACE)) {
 			if (!m_bFlag) {

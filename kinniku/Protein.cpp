@@ -3,6 +3,9 @@
 #include "Protein.h"
 #include "TextureLoader.h"
 #include "GameData.h"
+#include <windows.h>
+#include <mmsystem.h>
+#pragma comment(lib,"winmm.lib")
 
 
 ID2D1Bitmap *CProtein::m_pTexture = NULL;
@@ -90,8 +93,10 @@ bool CProtein::collide(IGameObject *pObj) {//Žå‚ÉTama‚Æ‚Ì‚ ‚½‚è”»’è‚ÉŽg—p‚µ‚Ä‚¢‚
 void CProtein::hit(float amount) {
 	if (amount != 1.0f) {
 		m_bDamage = true;
+		sndPlaySound(L"protein.wav", SND_ASYNC);
 		GameData::ProteinFlag = true;
 	}
+
 }
 
 /*********************************************************
@@ -102,6 +107,7 @@ void CProtein::hit(float amount) {
 void CProtein::Restore(CStage *pStage, ID2D1RenderTarget *pRT){
 	SAFE_RELEASE(m_pTexture);
 	CTextureLoader::CreateD2D1BitmapFromFile(pRT, _T("res\\protein.png"), &m_pTexture);
+	
 	m_pParent = pStage;
 }
 
