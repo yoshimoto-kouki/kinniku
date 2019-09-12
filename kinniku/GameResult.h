@@ -40,6 +40,8 @@ protected:
 	float m_itimer;
 	float m_fY;
 	float m_fpY;
+	float m_fpX;
+	int m_iFTimer;
 	INT m_iTimer = 0;
 	INT m_iFadeTimer;
 

@@ -40,6 +40,7 @@ CGameClear::CGameClear(CSelector *pSystem)
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\present2.png"), &m_pImagepresent);
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\present1.png"), &m_pImagepresent2);
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\hosi.png"), &m_pImagehosi);
+		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\clear.png"), &m_pImageCLEAR);
 		pTarget->CreateSolidColorBrush(D2D1::ColorF(0.0f, 0.0f, 0.0f), &m_pBlack);
 		pTarget->Release();
 		pTarget = NULL;
@@ -59,6 +60,7 @@ CGameClear::~CGameClear()
 	SAFE_RELEASE(m_pImagepresent);
 	SAFE_RELEASE(m_pImagepresent2);
 	SAFE_RELEASE(m_pImagehosi);
+	SAFE_RELEASE(m_pImageCLEAR);
 }
 
 GameSceneResultCode CGameClear::move() {
@@ -218,7 +220,7 @@ void    CGameClear::draw(ID2D1RenderTarget *pRenderTarget) {
 	}
 	pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 
-
+	//¯
 	rcstar.top = 200;
 	rcstar.bottom = rcstar.top + 356;
 	rcstar.left = 1200;
@@ -227,7 +229,12 @@ void    CGameClear::draw(ID2D1RenderTarget *pRenderTarget) {
 	pRenderTarget->SetTransform(D2D1::Matrix3x2F::Rotation(m_itimer, D2D1::Point2F(rcstar.left + 356 * 0.5, rcstar.top + 356 * 0.5)));
 	pRenderTarget->DrawBitmap(m_pImagehosi, rcstar, m_fbord, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR);
 	pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+	rcstar.top = 300;
+	rcstar.bottom = rcstar.top + 146;
+	rcstar.left = 1300;
+	rcstar.right = rcstar.left + 156;
 
+	pRenderTarget->DrawBitmap(m_pImageCLEAR, rcstar, m_fbord, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR);
 
 	switch (m_ePhase) {
 	case GAMECLEAR_FADE:

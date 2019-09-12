@@ -39,6 +39,7 @@ protected:
 	ID2D1Bitmap *m_pImagepresent;
 	ID2D1Bitmap *m_pImagepresent2;
 	ID2D1Bitmap *m_pImagehosi;
+	ID2D1Bitmap *m_pImageCLEAR;
 	ID2D1SolidColorBrush *m_pBlack;
 	bool m_bFlag;
 	bool m_bSantaFlag;

@@ -57,7 +57,7 @@ CTitle::CTitle(CSelector *pSystem)
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\presentbag.png"), &m_pImagePresentBag);
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\fukuro.png"), &m_pImagePresentBagO);
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\start.png"), &m_pImageSTART);
-
+		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\push.png"), &m_pImagePUSH);
 
 		pTarget->CreateSolidColorBrush(D2D1::ColorF(0.0f, 0.0f, 0.0f), &m_pBlack);
 		pTarget->Release();
@@ -81,6 +81,7 @@ CTitle::~CTitle()
 	SAFE_RELEASE(m_pImagePresentBag);
 	SAFE_RELEASE(m_pImagePresentBagO);
 	SAFE_RELEASE(m_pImageSTART);
+	SAFE_RELEASE(m_pImagePUSH);
 }
 
 
@@ -141,6 +142,7 @@ GameSceneResultCode    CTitle::move() {
 				}
 			}
 		}
+		
 		if (0.65 < m_fPresentNum) {
 			m_ftitleX = -1000;
 		}
@@ -338,6 +340,14 @@ void    CTitle::draw(ID2D1RenderTarget *pRenderTarget) {
 		pRenderTarget->DrawBitmap(m_pImagePresentBagO, rcPresentBag, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
 	}else	{
 		pRenderTarget->DrawBitmap(m_pImagePresentBag, rcPresentBag, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
+	}
+	if (m_bPresentFlag && m_iFadeTimer == 0) {
+		D2D1_RECT_F rcpush;
+		rcpush.left = 1570;
+		rcpush.top = 950;
+		rcpush.right =  rcpush.left + 251;
+		rcpush.bottom = rcpush.top + 32;
+		pRenderTarget->DrawBitmap(m_pImagePUSH, rcpush, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, NULL);
 	}
 
 	//startÉçÉS

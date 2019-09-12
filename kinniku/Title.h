@@ -37,6 +37,7 @@ protected:
 	ID2D1Bitmap *m_pImagePresentBag;
 	ID2D1Bitmap *m_pImagePresentBagO;
 	ID2D1Bitmap *m_pImageSTART;
+	ID2D1Bitmap *m_pImagePUSH;
 
 	ID2D1SolidColorBrush *m_pBlack;
 	INT count = 0;

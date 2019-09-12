@@ -24,6 +24,8 @@ CGameResult::CGameResult(CSelector *pSystem)
 	m_itimer = 0;
 	m_fpY = 1;
 	m_fY = 0;
+	m_fpX = 0;
+	m_iFTimer = 0;
 	pTarget = pSystem->GetRenderTaget();
 	if (pTarget) {
 		CTextureLoader::CreateD2D1BitmapFromFile(pTarget, _T("res\\playgamen_sukoa.jpg"), &m_pImageBG);
@@ -99,6 +101,9 @@ GameSceneResultCode CGameResult::move() {
 	}
 	case GAMERESULT_FADE:
 		m_iFadeTimer++;
+		if (1300 < m_fpX) {
+			m_iFTimer++;
+		}
 		if (m_iFadeTimer < 40)
 			break;
 		m_ePhase = GAMERESULT_DONE;
@@ -190,28 +195,46 @@ void    CGameResult::draw(ID2D1RenderTarget *pRenderTarget) {
 		rcc.left -= 128;
 	}
 
-	//Present & tree
+	//Present & bag
+	
 	D2D1_RECT_F rct, rcp, rcp2;
 	rct.left = 1300;
 	rct.top = 400;
+	if (m_iFTimer != 0) {
+		rct.left = 1300 + ((1500 - m_fpY) / 10) * m_iFTimer;
+		rct.top = 400 + m_fY - m_iFTimer * 7;
+	}
 	rct.right = rct.left + 600;
 	rct.bottom = rct.top + 600;
 	pRenderTarget->DrawBitmap(m_pImageBag, rct, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 	rcp.left = 1600;
 	rcp.top = 900;
+	if (m_iFTimer != 0) {
+		rcp.left = 1600 + ((1500 - m_fpY) / 10) * m_iFTimer;
+		rcp.top = 900 + m_fY - m_iFTimer * 7;
+	}
 	rcp.right = rcp.left + 100;
 	rcp.bottom = rcp.top + 100;
 	pRenderTarget->DrawBitmap(m_pImagePresent1, rcp, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR);
 	
-	
-	rcp2.left = 1700 - m_fpY*1.5;
-	rcp2.top = 900 - m_iFadeTimer * 2 + m_fY;
-	if (m_iTimer < 930 && m_iFadeTimer != 0) {
-		rcp2.left = 1700 - m_fpY * 1.5 - ((1500 - m_fpY)/30)*m_iFadeTimer;
-		if (rcp2.left < 200)
-			rcp2.left = 200;
+	if (GameData::TotalScoreResult > GameData::CLEAR_LINE) {
+		rcp2.left = 1700 - m_fpY * 1.5;
+		rcp2.top = 900 - m_iFadeTimer * 2 + m_fY;
+		if (m_iTimer < 930 && m_iFadeTimer != 0) {
+			rcp2.left = 1700 - m_fpY * 1.5 - ((1500 - m_fpY) / 30)*m_iFadeTimer;
+			if (rcp2.left < 200)
+				rcp2.left = 200;
+		}
 	}
-	
+	else {
+		rcp2.left = 1700 - m_fpY * 1.5;
+		rcp2.top = 900 + m_fY;
+		if (m_iTimer < 930 && m_iFadeTimer != 0) {
+			rcp2.left = 1700 - m_fpY * 1.5 + ((1500 - m_fpY) / 10) * m_iFadeTimer;
+			rcp2.top = 900 + m_fY - m_iFadeTimer * 7;
+			m_fpX = rcp2.left;
+		}
+	}	
 	rcp2.right = rcp2.left + 170;
 	rcp2.bottom = rcp2.top + 100;
 
